@@ -18,7 +18,7 @@ const defaultTheme = createTheme({
   palette: {
     primary: {
       main: red,
-      light: white,
+      light: white[100],
     },
     // grey: {
     //   900: grey[900],

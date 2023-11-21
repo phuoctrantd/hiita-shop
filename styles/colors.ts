@@ -1,4 +1,7 @@
-  const white = "#FFFFFF"
+  const white = {
+    100: "#FFFFFF",
+    200: "#FDFBFB",
+  }
   
   const red = "#E51E41"
   
