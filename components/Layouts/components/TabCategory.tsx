@@ -5,7 +5,7 @@ import fruit_demo from "@/public/images/fruit_demo.png";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 import { Box, Typography, styled, Grid } from "@mui/material";
 import { white } from "@/styles";
 interface TabProps {
@@ -27,8 +27,12 @@ const TabCategory: React.FC<TabProps> = ({ fruitTab }) => {
             <Swiper
               navigation={true}
               slidesPerView={fruitTab ? 4 : 5}
-              modules={[Navigation]}
+              modules={[Navigation, Autoplay]}
               spaceBetween={8}
+              autoplay={{
+                delay: 2500,
+                disableOnInteraction: true,
+              }}
             >
               <SwiperSlide>
                 <Box position="relative">
