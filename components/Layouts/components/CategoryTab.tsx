@@ -18,8 +18,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
-import FruitTab from "./FruitTab";
-import GinsengTab from "./GinsengTab";
+import TabCategory from "./TabCategory";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -73,10 +72,16 @@ const CategoryTab = () => {
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
-          <FruitTab />
+          <TabCategory fruitTab />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          <GinsengTab />
+          <TabCategory />
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={2}>
+          <TabCategory />
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={3}>
+          <TabCategory />
         </CustomTabPanel>
       </Box>
     </>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import Image from "next/image";
 import fruit_category from "@/public/images/fruit_category.png";
 import fruit_demo from "@/public/images/fruit_demo.png";
@@ -8,18 +8,25 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import { Box, Typography, styled, Grid } from "@mui/material";
 import { white } from "@/styles";
-const FruitTab = () => {
+interface TabProps {
+  fruitTab?: boolean;
+}
+const TabCategory: React.FC<TabProps> = ({ fruitTab }) => {
   return (
     <>
       <Grid container>
-        <Grid item xs={3} sx={{ display: "flex", alignItems: "end" }}>
+        <Grid
+          item
+          xs={3}
+          sx={{ display: fruitTab ? "flex" : "none", alignItems: "end" }}
+        >
           <Image src={fruit_category} alt="fruit_category" width={287} />
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={fruitTab ? 9 : 12} px={fruitTab ? 0 : 7}>
           <SwiperStyled>
             <Swiper
               navigation={true}
-              slidesPerView={4}
+              slidesPerView={fruitTab ? 4 : 5}
               modules={[Navigation]}
               spaceBetween={8}
             >
@@ -221,7 +228,7 @@ const FruitTab = () => {
   );
 };
 
-export default FruitTab;
+export default TabCategory;
 export const SwiperStyled = styled("div")(() => ({
   " --swiper-navigation-color": white[100],
 }));
