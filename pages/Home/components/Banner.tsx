@@ -8,7 +8,7 @@ import { styled, Box } from "@mui/system";
 import { red, white } from "@/styles";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import BannerImage from "@/public/images/banner.svg";
+import BannerImage from "@/public/images/banners/banner.svg";
 
 const Banner = () => {
   const theme = useTheme();
@@ -33,7 +33,6 @@ const Banner = () => {
             sx={{
               borderRadius: isMobile ? 0 : "30px",
               maxWidth: "100%",
-              height: 450,
               overflow: "hidden",
               position: "relative",
             }}
@@ -41,9 +40,7 @@ const Banner = () => {
             <Image
               src={BannerImage}
               alt="banner"
-              layout="fill"
-              objectFit="cover"
-              objectPosition="center"
+              style={{ width: "100%", height: "100%" }}
             />
           </Box>
         </SwiperSlide>

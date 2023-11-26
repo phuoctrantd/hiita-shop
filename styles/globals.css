@@ -33,3 +33,10 @@
   html {
     scroll-behavior: smooth;
   }
+
+
+  body::-webkit-scrollbar-thumb, body {
+    background: #fff;
+    border-radius: 2px;
+  }
+  

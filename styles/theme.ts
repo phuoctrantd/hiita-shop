@@ -48,9 +48,8 @@ const defaultTheme = createTheme({
   },
   typography: {
     fontFamily: "Montserrat",
+    fontSize:14,
     h1: {
-      htmlFontSize: 16,
-
       fontWeight: 700,
       fontSize: "3rem", // 48px
     },
@@ -197,22 +196,6 @@ defaultTheme.typography.subtitle1 = {
   },
 }
 
-// Responsive Toolbar
-defaultTheme.mixins.toolbar = {
-  ...defaultTheme.mixins.toolbar,
-  [defaultTheme.breakpoints.down("sm")]: {
-    height: 64,
-    minHeight: 64,
-  },
-}
 
-defaultTheme.shadows[1] =
-  "0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 1px 5px rgba(0, 0, 0, 0.12)"
-defaultTheme.shadows[2] =
-  "0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12)"
-defaultTheme.shadows[3] =
-  "0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 5px 8px rgba(0, 0, 0, 0.14), 0px 1px 14px rgba(0, 0, 0, 0.12)"
-defaultTheme.shadows[3] =
-  "0px 7px 8px -4px rgba(0, 0, 0, 0.2), 0px 13px 19px 2px rgba(0, 0, 0, 0.14), 0px 5px 24px 4px rgba(0, 0, 0, 0.12)"
 
 export { defaultTheme }

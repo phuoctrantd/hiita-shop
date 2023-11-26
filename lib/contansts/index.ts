@@ -1,80 +1,83 @@
-import fruit_icon from "@/public/images/fruit_icon.png";
-import nhansam_icon from "@/public/images/nhansam_icon.png";
-import set_gift_icon from "@/public/images/set_gift_icon.png";
-import tet_gift_icon from "@/public/images/tet_gift_icon.png";
-export const MENU_DATA = [
+interface MenuItem {
+    id: number;
+    label: string;
+    link: string;
+    subMenu?: readonly MenuItem[]; // Use readonly here
+  }
+  
+  export const MENU_DATA: MenuItem[] = [
     {
-        id: 1,
-        label: "Trang chủ",
-        grid: 1,
-        link: "/",
+      id: 1,
+      label: "Trang chủ",
+      link: "/",
     },
     {
-        id: 2,
-        label: "Giới thiệu ",
-        grid: 1,
-        link: "/about",
+      id: 2,
+      label: "Giới thiệu ",
+      link: "/about",
     },
     {
-        id: 3,
-        label: "Nhân sâm",
-        grid: 1,
-        link: "/",
+      id: 3,
+      label: "Nhân sâm",
+      link: "/",
+      subMenu: [
+        {
+          id: 1,
+          label: "Nhân sâm Hàn Quốc",
+          link: "/",
+        },
+        {
+          id: 2,
+          label: "Cao ly",
+          link: "/",
+        },
+        {
+          id: 3,
+          label: "Nhân sâm Việt Nam",
+          link: "/",
+        },
+      ] as const, // Use as const to mark the array as readonly
     },
     {
-        id: 4,
-        label: "Trái cây nhập khẩu",
-        grid: 1.5,
-        link: "/",
+      id: 4,
+      label: "Trái cây nhập khẩu",
+      link: "/",
+      subMenu: [
+        {
+          id: 1,
+          label: "Táo",
+          link: "/",
+        },
+        {
+          id: 2,
+          label: "Nho",
+          link: "/",
+        },
+        {
+          id: 3,
+          label: "Kiwi",
+          link: "/",
+        },
+      ] as const, // Use as const to mark the array as readonly
     },
+
     {
-        id: 5,
-        label: "Tin tức",
-        grid: 1,
-        link: "/",
+      id: 5,
+      label: "Tin tức",
+      link: "/",
     },
     {
         id: 6,
         label: "Câu hỏi thường gặp",
-        grid: 1.5,
         link: "/",
-    },
+      },
     {
-        id: 7,
-        label: "Liên hệ",
-        grid: 1,
-        link: "/",
+      id: 6,
+      label: "Liên hệ",
+      link: "/",
     },
-    
-] as const;
+  ];
 
-export const MENU_DATA_CATEGORY = [
-    {
-        id: 1,
-        label: "Nhân sâm",
-        link: "/",
-        icon:nhansam_icon
-    },
-    {
-        id: 2,
-        label: "Trái cây nhập khẩu",
-        link: "/",
-        icon:fruit_icon
-    },
-    {
-        id: 3,
-        label: "Set quà tặng cao cấp",
-        link: "/",
-        icon:set_gift_icon
-    },
-    {
-        id: 4,
-        label: "Set quà tết",
-        link: "/",
-        icon:tet_gift_icon
-    },
-    
-] as const;
 
 export const MENU_DATA_FOOTER = [
 {

@@ -8,7 +8,6 @@ import "swiper/css/navigation";
 import { Navigation, Autoplay } from "swiper/modules";
 import { Box, Typography, styled, Grid } from "@mui/material";
 import { white } from "@/styles";
-import BannerImage from "@/public/images/banner.svg";
 
 interface TabProps {
   fruitTab?: boolean;

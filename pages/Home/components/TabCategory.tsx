@@ -1,23 +1,10 @@
 import * as React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import {
-  Box,
-  Typography,
-  styled,
-  Stack,
-  Button,
-  ButtonProps,
-  Grid,
-} from "@mui/material";
-import { black, red, white } from "@/styles";
-import Image from "next/image";
-import fruit_category from "@/public/images/fruit_category.svg";
-import fruit_demo from "@/public/images/fruit_demo.svg";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Box, styled, Stack } from "@mui/material";
+import { red, white } from "@/styles";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation } from "swiper/modules";
 import TabContainer from "./TabContainer";
 
 interface TabPanelProps {
