@@ -3,7 +3,10 @@
     200: "#FDFBFB",
   }
   
-  const red = "#E51E41"
+  const red = {
+  100:"#E51E41",
+  200:"#FF7070",
+}
   
   const black ="#000000"
 

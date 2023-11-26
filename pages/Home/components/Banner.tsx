@@ -1,18 +1,19 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination, Autoplay } from "swiper/modules";
 import Image from "next/image";
-import BannerImage from "@/public/images/banner.svg";
-import { styled } from "@mui/material";
+import { styled, Box } from "@mui/system";
 import { red, white } from "@/styles";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import BannerImage from "@/public/images/banner.svg";
 
 const Banner = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
     <BannerStyled sx={{ mb: 3.6 }}>
       <Swiper
@@ -28,32 +29,34 @@ const Banner = () => {
         }}
       >
         <SwiperSlide>
-          <Image
-            style={{
-              borderRadius: isMobile ? 0 : 30,
-              width: "100%",
-              height: "auto",
+          <Box
+            sx={{
+              borderRadius: isMobile ? 0 : "30px",
+              maxWidth: "100%",
+              height: 450,
+              overflow: "hidden",
+              position: "relative",
             }}
-            src={BannerImage}
-            alt="banner"
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-          <Image
-            style={{ borderRadius: 30, width: "100%", height: "auto" }}
-            src={BannerImage}
-            alt="banner"
-          />
+          >
+            <Image
+              src={BannerImage}
+              alt="banner"
+              layout="fill"
+              objectFit="cover"
+              objectPosition="center"
+            />
+          </Box>
         </SwiperSlide>
       </Swiper>
     </BannerStyled>
   );
 };
 
-export default Banner;
 const BannerStyled = styled("div")(() => ({
-  "--swiper-pagination-color": red,
+  "--swiper-pagination-color": red[100],
   "--swiper-pagination-bullet-inactive-color": white[100],
   "--swiper-pagination-bullet-size": "9px",
   "--swiper-pagination-bullet-inactive-opacity": "1",
 }));
+
+export default Banner;

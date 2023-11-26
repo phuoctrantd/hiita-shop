@@ -16,7 +16,7 @@ const Footer = () => {
     <Box
       style={{
         width: "100%",
-        backgroundColor: red,
+        backgroundColor: red[100],
       }}
     >
       <Container maxWidth="xl" sx={{ padding: "34px 0 20px 0 !important" }}>
