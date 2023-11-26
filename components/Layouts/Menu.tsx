@@ -26,7 +26,7 @@ const Menu = () => {
                   {...bindHover(popupState)}
                 >
                   <DragHandleOutlinedIcon
-                    sx={{ fontSize: 35, color: red, cursor: "pointer" }}
+                    sx={{ fontSize: 35, color: red[100], cursor: "pointer" }}
                   />
                   <TextMenu>Danh mục sản phẩm</TextMenu>
                 </Stack>
@@ -50,9 +50,9 @@ const Menu = () => {
                           p={2}
                           sx={{
                             cursor: "pointer",
-                            color: red,
+                            color: red[100],
                             "&:hover": {
-                              backgroundColor: red,
+                              backgroundColor: red[100],
                               color: white[100],
                             },
                           }}
@@ -101,7 +101,7 @@ export default Menu;
 const TextMenu = styled(Typography)(({ theme }) => ({
   fontSize: 15,
   fontWeight: 600,
-  color: red,
+  color: red[100],
   cursor: "pointer",
   "&:hover": {
     textShadow: "0px 0px 5px #E51E41",

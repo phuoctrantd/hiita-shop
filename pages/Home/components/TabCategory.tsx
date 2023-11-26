@@ -18,7 +18,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
-import TabCategory from "./TabCategory";
+import TabContainer from "./TabContainer";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -41,7 +41,7 @@ const CategoryTab = () => {
         direction="row"
         sx={{
           py: 1.6,
-          backgroundColor: red,
+          backgroundColor: red[100],
           borderRadius: "0 0 20px 20px",
           width: "100%",
         }}
@@ -72,16 +72,16 @@ const CategoryTab = () => {
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
-          <TabCategory fruitTab />
+          <TabContainer fruitTab />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          <TabCategory />
+          <TabContainer />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
-          <TabCategory />
+          <TabContainer />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={3}>
-          <TabCategory />
+          <TabContainer />
         </CustomTabPanel>
       </Box>
     </>
@@ -90,14 +90,14 @@ const CategoryTab = () => {
 
 export default CategoryTab;
 const TabCustom = styled(Tab)(({ theme }) => ({
-  color: red,
+  color: red[100],
   width: "25%",
   fontWeight: 700,
   py: 1.25,
   fontSize: 14,
   "&.Mui-selected": {
     color: white[100],
-    backgroundColor: red,
+    backgroundColor: red[100],
     borderRadius: "20px 20px 0 0",
   },
 }));

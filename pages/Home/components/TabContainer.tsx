@@ -8,21 +8,23 @@ import "swiper/css/navigation";
 import { Navigation, Autoplay } from "swiper/modules";
 import { Box, Typography, styled, Grid } from "@mui/material";
 import { white } from "@/styles";
+import BannerImage from "@/public/images/banner.svg";
+
 interface TabProps {
   fruitTab?: boolean;
 }
-const TabCategory: React.FC<TabProps> = ({ fruitTab }) => {
+const TabContainer: React.FC<TabProps> = ({ fruitTab }) => {
   return (
     <>
-      <Grid container>
+      <Grid container sx={{ textAlign: "center" }}>
         <Grid
           item
-          xs={3}
+          xs={2.9}
           sx={{ display: fruitTab ? "flex" : "none", alignItems: "end" }}
         >
-          <Image src={fruit_category} alt="fruit_category" width={287} />
+          <Image src={fruit_category} alt="fruit_category" width={270} />
         </Grid>
-        <Grid item xs={fruitTab ? 9 : 12} px={fruitTab ? 0 : 7}>
+        <Grid item xs={fruitTab ? 9 : 12}>
           <SwiperStyled>
             <Swiper
               navigation={true}
@@ -35,8 +37,22 @@ const TabCategory: React.FC<TabProps> = ({ fruitTab }) => {
               }}
             >
               <SwiperSlide>
-                <Box position="relative">
-                  <Image src={fruit_demo} alt="fruit_demo" />
+                <Box
+                  position="relative"
+                  sx={{
+                    cursor: "pointer",
+                    transition: "transform 0.3s",
+                    "&:hover": {
+                      transform: "scale(1.02)",
+                    },
+                  }}
+                >
+                  <Image
+                    src={fruit_demo}
+                    alt="fruit_demo"
+                    height={221}
+                    width={192}
+                  />
                   <Box
                     sx={{
                       backgroundColor: "rgba(229, 30, 65, 0.60);",
@@ -73,8 +89,22 @@ const TabCategory: React.FC<TabProps> = ({ fruitTab }) => {
                 </Box>
               </SwiperSlide>
               <SwiperSlide>
-                <Box position="relative">
-                  <Image src={fruit_demo} alt="fruit_demo" />
+                <Box
+                  position="relative"
+                  sx={{
+                    cursor: "pointer",
+                    transition: "transform 0.3s",
+                    "&:hover": {
+                      transform: "scale(1.02)",
+                    },
+                  }}
+                >
+                  <Image
+                    src={fruit_demo}
+                    alt="fruit_demo"
+                    height={221}
+                    width={192}
+                  />
                   <Box
                     sx={{
                       backgroundColor: "rgba(229, 30, 65, 0.60);",
@@ -111,8 +141,22 @@ const TabCategory: React.FC<TabProps> = ({ fruitTab }) => {
                 </Box>
               </SwiperSlide>
               <SwiperSlide>
-                <Box position="relative">
-                  <Image src={fruit_demo} alt="fruit_demo" />
+                <Box
+                  position="relative"
+                  sx={{
+                    cursor: "pointer",
+                    transition: "transform 0.3s",
+                    "&:hover": {
+                      transform: "scale(1.02)",
+                    },
+                  }}
+                >
+                  <Image
+                    src={fruit_demo}
+                    alt="fruit_demo"
+                    height={221}
+                    width={192}
+                  />
                   <Box
                     sx={{
                       backgroundColor: "rgba(229, 30, 65, 0.60);",
@@ -149,8 +193,22 @@ const TabCategory: React.FC<TabProps> = ({ fruitTab }) => {
                 </Box>
               </SwiperSlide>
               <SwiperSlide>
-                <Box position="relative">
-                  <Image src={fruit_demo} alt="fruit_demo" />
+                <Box
+                  position="relative"
+                  sx={{
+                    cursor: "pointer",
+                    transition: "transform 0.3s",
+                    "&:hover": {
+                      transform: "scale(1.02)",
+                    },
+                  }}
+                >
+                  <Image
+                    src={fruit_demo}
+                    alt="fruit_demo"
+                    height={221}
+                    width={192}
+                  />
                   <Box
                     sx={{
                       backgroundColor: "rgba(229, 30, 65, 0.60);",
@@ -187,8 +245,74 @@ const TabCategory: React.FC<TabProps> = ({ fruitTab }) => {
                 </Box>
               </SwiperSlide>
               <SwiperSlide>
-                <Box position="relative">
-                  <Image src={fruit_demo} alt="fruit_demo" />
+                <Box
+                  position="relative"
+                  sx={{
+                    cursor: "pointer",
+                    transition: "transform 0.3s",
+                    "&:hover": {
+                      transform: "scale(1.02)",
+                    },
+                  }}
+                >
+                  <Image
+                    src={fruit_demo}
+                    alt="fruit_demo"
+                    height={221}
+                    width={192}
+                  />
+                  <Box
+                    sx={{
+                      backgroundColor: "rgba(229, 30, 65, 0.60);",
+                      position: "absolute",
+                      bottom: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "25%",
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        color: white[100],
+                        fontSize: 14,
+                        fontWeight: 500,
+                        textAlign: "center",
+                        pt: 0.6,
+                      }}
+                    >
+                      Cam Osaka
+                    </Typography>
+
+                    <Typography
+                      sx={{
+                        color: white[100],
+                        fontSize: 14,
+                        fontWeight: 500,
+                        textAlign: "center",
+                      }}
+                    >
+                      1.399.000 VNĐ
+                    </Typography>
+                  </Box>
+                </Box>
+              </SwiperSlide>
+              <SwiperSlide>
+                <Box
+                  position="relative"
+                  sx={{
+                    cursor: "pointer",
+                    transition: "transform 0.3s",
+                    "&:hover": {
+                      transform: "scale(1.02)",
+                    },
+                  }}
+                >
+                  <Image
+                    src={fruit_demo}
+                    alt="fruit_demo"
+                    height={221}
+                    width={192}
+                  />
                   <Box
                     sx={{
                       backgroundColor: "rgba(229, 30, 65, 0.60);",
@@ -232,7 +356,7 @@ const TabCategory: React.FC<TabProps> = ({ fruitTab }) => {
   );
 };
 
-export default TabCategory;
+export default TabContainer;
 export const SwiperStyled = styled("div")(() => ({
   " --swiper-navigation-color": white[100],
 }));
