@@ -24,8 +24,10 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const firstRow = dataProductFeatured.slice(0, fruit ? 4 : 3);
-  const secondRow = dataProductFeatured.slice(fruit ? 4 : 3, 8);
+  const firstRow =
+    dataProductFeatured && dataProductFeatured.slice(0, fruit ? 4 : 3);
+  const secondRow =
+    dataProductFeatured && dataProductFeatured.slice(fruit ? 4 : 3, 8);
 
   return (
     <Grid container alignItems="stretch" spacing={3}>
@@ -38,7 +40,7 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
           />
         </Grid>
       )}
-      {firstRow.map((item, index) => (
+      {firstRow?.map((item, index) => (
         <Grid item xs={isMobile ? 6 : 2.4} key={index}>
           <Box
             sx={{
@@ -94,7 +96,7 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
           />
         </Grid>
       )}
-      {secondRow.map((item, index) => (
+      {secondRow?.map((item, index) => (
         <Grid item xs={isMobile ? 6 : 2.4} key={index}>
           <Box
             sx={{
