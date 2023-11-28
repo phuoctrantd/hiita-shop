@@ -93,7 +93,7 @@ const News = () => {
                     {item.title}
                   </Typography>
                   <Typography fontSize={11} fontWeight={500}>
-                    {item.description.slice(0, 200) + "..."}
+                    {item.description && item.description.slice(0, 200) + "..."}
                   </Typography>
                 </Box>
               </Box>
