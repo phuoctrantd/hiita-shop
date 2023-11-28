@@ -6,29 +6,40 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation, Autoplay } from "swiper/modules";
-import { Box, Typography, styled, Grid } from "@mui/material";
+import {
+  Box,
+  Typography,
+  styled,
+  Grid,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import { white } from "@/styles";
-import BannerImage from "@/public/images/banner.svg";
-
+import BannerImage from "@/public/images/banners/banner.svg";
 interface TabProps {
   fruitTab?: boolean;
 }
 const TabContainer: React.FC<TabProps> = ({ fruitTab }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <>
       <Grid container sx={{ textAlign: "center" }}>
         <Grid
           item
           xs={2.9}
-          sx={{ display: fruitTab ? "flex" : "none", alignItems: "end" }}
+          sx={{
+            display: fruitTab && !isMobile ? "flex" : "none",
+            alignItems: "end",
+          }}
         >
           <Image src={fruit_category} alt="fruit_category" width={270} />
         </Grid>
-        <Grid item xs={fruitTab ? 9 : 12}>
+        <Grid item xs={fruitTab && !isMobile ? 9 : 12} px={1}>
           <SwiperStyled>
             <Swiper
               navigation={true}
-              slidesPerView={fruitTab ? 4 : 5}
+              slidesPerView={fruitTab && !isMobile ? 4 : isMobile ? 2 : 5}
               modules={[Navigation, Autoplay]}
               spaceBetween={8}
               autoplay={{
@@ -50,8 +61,7 @@ const TabContainer: React.FC<TabProps> = ({ fruitTab }) => {
                   <Image
                     src={fruit_demo}
                     alt="fruit_demo"
-                    height={221}
-                    width={192}
+                    style={{ width: "100%", height: "auto" }}
                   />
                   <Box
                     sx={{
@@ -69,7 +79,7 @@ const TabContainer: React.FC<TabProps> = ({ fruitTab }) => {
                         fontSize: 14,
                         fontWeight: 500,
                         textAlign: "center",
-                        pt: 0.6,
+                        pt: isMobile ? 0 : 0.6,
                       }}
                     >
                       Cam Osaka
@@ -102,8 +112,7 @@ const TabContainer: React.FC<TabProps> = ({ fruitTab }) => {
                   <Image
                     src={fruit_demo}
                     alt="fruit_demo"
-                    height={221}
-                    width={192}
+                    style={{ width: "100%", height: "auto" }}
                   />
                   <Box
                     sx={{
@@ -121,7 +130,7 @@ const TabContainer: React.FC<TabProps> = ({ fruitTab }) => {
                         fontSize: 14,
                         fontWeight: 500,
                         textAlign: "center",
-                        pt: 0.6,
+                        pt: isMobile ? 0 : 0.6,
                       }}
                     >
                       Cam Osaka
@@ -154,8 +163,7 @@ const TabContainer: React.FC<TabProps> = ({ fruitTab }) => {
                   <Image
                     src={fruit_demo}
                     alt="fruit_demo"
-                    height={221}
-                    width={192}
+                    style={{ width: "100%", height: "auto" }}
                   />
                   <Box
                     sx={{
@@ -173,7 +181,7 @@ const TabContainer: React.FC<TabProps> = ({ fruitTab }) => {
                         fontSize: 14,
                         fontWeight: 500,
                         textAlign: "center",
-                        pt: 0.6,
+                        pt: isMobile ? 0 : 0.6,
                       }}
                     >
                       Cam Osaka
@@ -206,8 +214,7 @@ const TabContainer: React.FC<TabProps> = ({ fruitTab }) => {
                   <Image
                     src={fruit_demo}
                     alt="fruit_demo"
-                    height={221}
-                    width={192}
+                    style={{ width: "100%", height: "auto" }}
                   />
                   <Box
                     sx={{
@@ -225,7 +232,7 @@ const TabContainer: React.FC<TabProps> = ({ fruitTab }) => {
                         fontSize: 14,
                         fontWeight: 500,
                         textAlign: "center",
-                        pt: 0.6,
+                        pt: isMobile ? 0 : 0.6,
                       }}
                     >
                       Cam Osaka
@@ -258,8 +265,7 @@ const TabContainer: React.FC<TabProps> = ({ fruitTab }) => {
                   <Image
                     src={fruit_demo}
                     alt="fruit_demo"
-                    height={221}
-                    width={192}
+                    style={{ width: "100%", height: "auto" }}
                   />
                   <Box
                     sx={{
@@ -277,7 +283,7 @@ const TabContainer: React.FC<TabProps> = ({ fruitTab }) => {
                         fontSize: 14,
                         fontWeight: 500,
                         textAlign: "center",
-                        pt: 0.6,
+                        pt: isMobile ? 0 : 0.6,
                       }}
                     >
                       Cam Osaka
@@ -310,8 +316,7 @@ const TabContainer: React.FC<TabProps> = ({ fruitTab }) => {
                   <Image
                     src={fruit_demo}
                     alt="fruit_demo"
-                    height={221}
-                    width={192}
+                    style={{ width: "100%", height: "auto" }}
                   />
                   <Box
                     sx={{
@@ -329,7 +334,7 @@ const TabContainer: React.FC<TabProps> = ({ fruitTab }) => {
                         fontSize: 14,
                         fontWeight: 500,
                         textAlign: "center",
-                        pt: 0.6,
+                        pt: isMobile ? 0 : 0.6,
                       }}
                     >
                       Cam Osaka

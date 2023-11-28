@@ -1,13 +1,22 @@
 import React from "react";
-import DragHandleOutlinedIcon from "@mui/icons-material/DragHandleOutlined";
-import { Grid, Typography, styled, Stack, Box } from "@mui/material";
+import {
+  Grid,
+  Typography,
+  styled,
+  Stack,
+  Box,
+  Menu as MuiMenu,
+  MenuItem,
+  Divider,
+  makeStyles,
+} from "@mui/material";
 import { red, white } from "@/styles";
-import { MENU_DATA, MENU_DATA_CATEGORY } from "@/lib/contansts";
+import { MENU_DATA } from "@/lib/contansts";
 import Link from "next/link";
-import HoverPopover from "material-ui-popup-state/HoverPopover";
-import PopupState, { bindPopover, bindHover } from "material-ui-popup-state";
-import Image from "next/image";
+
 import { useRouter } from "next/router";
+import PopupState, { bindHover, bindPopover } from "material-ui-popup-state";
+import HoverPopover from "material-ui-popup-state/HoverPopover";
 
 const Menu = () => {
   const router = useRouter();
@@ -15,80 +24,74 @@ const Menu = () => {
   console.log(pathname);
   return (
     <>
-      <Grid container spacing={4}>
-        <Grid item xs={3}>
-          <PopupState variant="popover" popupId="demo-popup-popover">
-            {(popupState) => (
-              <div>
-                <Stack
-                  direction="row"
-                  sx={{ alignItems: "center", gap: "10px" }}
-                  {...bindHover(popupState)}
-                >
-                  <DragHandleOutlinedIcon
-                    sx={{ fontSize: 35, color: red[100], cursor: "pointer" }}
-                  />
-                  <TextMenu>Danh mục sản phẩm</TextMenu>
-                </Stack>
-                <HoverPopover
-                  {...bindPopover(popupState)}
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "left",
-                  }}
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "left",
-                  }}
-                >
-                  <Box width={250}>
-                    {MENU_DATA_CATEGORY.map((item, index) => (
-                      <Link key={index} href={item.link}>
-                        <Stack
-                          direction={"row"}
-                          spacing={2}
-                          p={2}
-                          sx={{
-                            cursor: "pointer",
-                            color: red[100],
-                            "&:hover": {
-                              backgroundColor: red[100],
-                              color: white[100],
-                            },
-                          }}
-                        >
-                          <Image
-                            src={item.icon}
-                            alt="icon"
-                            width="20"
-                            height="20"
-                          />
-                          <Typography sx={{ fontSize: 15, fontWeight: 600 }}>
-                            {item.label}
-                          </Typography>
-                        </Stack>
-                      </Link>
-                    ))}
-                  </Box>
-                </HoverPopover>
-              </div>
-            )}
-          </PopupState>
-        </Grid>
+      <Grid container sx={{ textAlign: "center" }}>
         {MENU_DATA.map((item, index) => (
-          <Grid
-            item
-            xs={item.grid}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: item.id === 7 ? "flex-end" : "flex-start",
-            }}
-            key={index}
-          >
-            <Link href={item.link}>
-              <TextMenu>{item.label}</TextMenu>
-            </Link>
+          <Grid item xs={1.7} key={index}>
+            <PopupState variant="popover" popupId="demo-popup-popover">
+              {(popupState) => (
+                <div>
+                  <Link href={item.link} {...bindHover(popupState)}>
+                    <TextMenu>{item.label}</TextMenu>
+                  </Link>
+                  {item.subMenu && (
+                    <HoverPopover
+                      {...bindPopover(popupState)}
+                      anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "left",
+                      }}
+                      transformOrigin={{
+                        vertical: "top",
+                        horizontal: "left",
+                      }}
+                    >
+                      <Box p={1.25}>
+                        {item.subMenu.map((item, indexSubitem) => (
+                          <React.Fragment key={indexSubitem}>
+                            <Box
+                              sx={{
+                                cursor: "pointer",
+                                color: red[100],
+                                position: "relative",
+                                "&:before": {
+                                  content: "''",
+                                  position: "absolute",
+                                  width: "0",
+                                  height: "1px",
+                                  bottom: "-1px",
+                                  left: "0",
+                                  transform: "translate(0%,0%)",
+                                  backgroundColor: red[100],
+                                  transformOrigin: "center",
+                                  visibility: "hidden",
+                                  transition: "all 0.3s ease-in-out",
+                                },
+                                "&:hover:before": {
+                                  visibility: "visible",
+                                  width: "100%",
+                                },
+                              }}
+                              width={200}
+                              color={red[100]}
+                              p={0.8}
+                            >
+                              <Typography fontSize={15} fontWeight={600}>
+                                {item.label}
+                              </Typography>
+                            </Box>
+                            <Divider
+                              sx={{
+                                backgroundColor: "#f1eaea",
+                              }}
+                            />
+                          </React.Fragment>
+                        ))}
+                      </Box>
+                    </HoverPopover>
+                  )}
+                </div>
+              )}
+            </PopupState>
           </Grid>
         ))}
       </Grid>

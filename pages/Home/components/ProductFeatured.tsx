@@ -1,14 +1,15 @@
 import React from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Image, { StaticImageData } from "next/image";
-import BannerFruit1 from "@/public/images/banner1.png";
-import BannerFruit2 from "@/public/images/banner2.png";
-
+import BannerFruit1 from "@/public/images/banners/banner1.png";
+import BannerGinseng from "@/public/images/banners/banner_ginseng.png";
 import { black, red } from "@/styles";
+
 interface ProductFeaturedProps {
   fruit?: boolean;
   dataProductFeatured: Array<dataProductFeaturedProps>;
 }
+
 interface dataProductFeaturedProps {
   id: number;
   name: string;
@@ -16,26 +17,34 @@ interface dataProductFeaturedProps {
   priceSale: string;
   image: StaticImageData;
 }
+
 const ProductFeatured: React.FC<ProductFeaturedProps> = ({
   dataProductFeatured,
   fruit,
 }) => {
-  const firstRow = dataProductFeatured.slice(0, 4);
-  const secondRow = dataProductFeatured.slice(4, 8);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const firstRow = dataProductFeatured.slice(0, fruit ? 4 : 3);
+  const secondRow = dataProductFeatured.slice(fruit ? 4 : 3, 8);
+
   return (
-    <Grid container alignItems={"end"} spacing={3}>
-      <Grid item xs={2.4}>
-        <Image
-          src={BannerFruit1}
-          alt="banner"
-          style={{ width: "100%" }}
-          height={356}
-        />
-      </Grid>
+    <Grid container alignItems="stretch" spacing={3}>
+      {!isMobile && (
+        <Grid item xs={fruit ? 2.4 : 4.8}>
+          <Image
+            src={fruit ? BannerFruit1 : BannerGinseng}
+            alt="banner"
+            style={{ width: "100%", height: "100%" }}
+          />
+        </Grid>
+      )}
       {firstRow.map((item, index) => (
-        <Grid item xs={2.4} key={index}>
+        <Grid item xs={isMobile ? 6 : 2.4} key={index}>
           <Box
             sx={{
+              display: "flex",
+              flexDirection: "column",
+              height: "100%",
               cursor: "pointer",
               transition: "transform 0.3s",
               "&:hover": {
@@ -49,13 +58,15 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
               style={{
                 width: "100%",
               }}
-              height={252}
+              height={isMobile ? 200 : 252}
             />
 
-            <Box textAlign={"center"} mt={1.8} mb={1}>
-              <Typography fontSize={14} fontWeight={700} color={black} mb={2.8}>
-                {item.name}
-              </Typography>
+            <Box textAlign="center" mt={1.8} mb={1}>
+              <Box mb={isMobile ? 1.5 : 2.8} px={2}>
+                <Typography fontSize={14} fontWeight={700} color={black}>
+                  {item.name}
+                </Typography>
+              </Box>
               <Typography
                 fontSize={12}
                 fontWeight={700}
@@ -74,18 +85,22 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
           </Box>
         </Grid>
       ))}
-      <Grid item xs={2.4}>
-        <Image
-          src={BannerFruit1}
-          alt="banner"
-          style={{ width: "100%" }}
-          height={356}
-        />
-      </Grid>
+      {fruit && !isMobile && (
+        <Grid item xs={2.4}>
+          <Image
+            src={BannerFruit1}
+            alt="banner"
+            style={{ width: "100%", height: "100%" }}
+          />
+        </Grid>
+      )}
       {secondRow.map((item, index) => (
-        <Grid item xs={2.4} key={index}>
+        <Grid item xs={isMobile ? 6 : 2.4} key={index}>
           <Box
             sx={{
+              display: "flex",
+              flexDirection: "column",
+              height: "100%",
               cursor: "pointer",
               transition: "transform 0.3s",
               "&:hover": {
@@ -99,13 +114,15 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
               style={{
                 width: "100%",
               }}
-              height={252}
+              height={isMobile ? 200 : 252}
             />
 
-            <Box textAlign={"center"} mt={1.8} mb={1}>
-              <Typography fontSize={14} fontWeight={700} color={black} mb={2.8}>
-                {item.name}
-              </Typography>
+            <Box textAlign="center" mt={1.8} mb={1}>
+              <Box mb={isMobile ? 1.5 : 2.8} px={2}>
+                <Typography fontSize={14} fontWeight={700} color={black}>
+                  {item.name}
+                </Typography>
+              </Box>
               <Typography
                 fontSize={12}
                 fontWeight={700}

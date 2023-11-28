@@ -1,23 +1,10 @@
 import * as React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import {
-  Box,
-  Typography,
-  styled,
-  Stack,
-  Button,
-  ButtonProps,
-  Grid,
-} from "@mui/material";
-import { black, red, white } from "@/styles";
-import Image from "next/image";
-import fruit_category from "@/public/images/fruit_category.svg";
-import fruit_demo from "@/public/images/fruit_demo.svg";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Box, styled, Stack, useTheme, useMediaQuery } from "@mui/material";
+import { red, white } from "@/styles";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation } from "swiper/modules";
 import TabContainer from "./TabContainer";
 
 interface TabPanelProps {
@@ -25,7 +12,9 @@ interface TabPanelProps {
   index: number;
   value: number;
 }
-const CategoryTab = () => {
+const TabCategory = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -52,6 +41,19 @@ const CategoryTab = () => {
     );
   }
 
+  const TabCustom = styled(Tab)(({ theme }) => ({
+    color: red[100],
+    width: isMobile ? "auto" : "25%",
+    fontWeight: 700,
+    py: 1.25,
+    fontSize: 14,
+    "&.Mui-selected": {
+      color: white[100],
+      backgroundColor: red[100],
+      borderRadius: "20px 20px 0 0",
+    },
+  }));
+
   return (
     <>
       <Box sx={{ width: "100%", mb: 3.75 }}>
@@ -59,6 +61,8 @@ const CategoryTab = () => {
           <Tabs
             value={value}
             onChange={handleChange}
+            variant="scrollable"
+            scrollButtons="auto"
             sx={{
               ".MuiTabs-indicator": {
                 backgroundColor: "transparent",
@@ -88,16 +92,4 @@ const CategoryTab = () => {
   );
 };
 
-export default CategoryTab;
-const TabCustom = styled(Tab)(({ theme }) => ({
-  color: red[100],
-  width: "25%",
-  fontWeight: 700,
-  py: 1.25,
-  fontSize: 14,
-  "&.Mui-selected": {
-    color: white[100],
-    backgroundColor: red[100],
-    borderRadius: "20px 20px 0 0",
-  },
-}));
+export default TabCategory;
