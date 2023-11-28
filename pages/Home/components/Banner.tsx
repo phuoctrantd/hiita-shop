@@ -15,7 +15,7 @@ const Banner = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <BannerStyled sx={{ mb: 3.6 }}>
+    <BannerStyled sx={{ mb: 3.6, mt: isMobile ? 3 : 0 }}>
       <Swiper
         slidesPerView={1}
         loop={true}
@@ -28,6 +28,38 @@ const Banner = () => {
           disableOnInteraction: false,
         }}
       >
+        <SwiperSlide>
+          <Box
+            sx={{
+              borderRadius: isMobile ? 0 : "30px",
+              maxWidth: "100%",
+              overflow: "hidden",
+              position: "relative",
+            }}
+          >
+            <Image
+              src={BannerImage}
+              alt="banner"
+              style={{ width: "100%", height: "100%" }}
+            />
+          </Box>
+        </SwiperSlide>
+        <SwiperSlide>
+          <Box
+            sx={{
+              borderRadius: isMobile ? 0 : "30px",
+              maxWidth: "100%",
+              overflow: "hidden",
+              position: "relative",
+            }}
+          >
+            <Image
+              src={BannerImage}
+              alt="banner"
+              style={{ width: "100%", height: "100%" }}
+            />
+          </Box>
+        </SwiperSlide>
         <SwiperSlide>
           <Box
             sx={{

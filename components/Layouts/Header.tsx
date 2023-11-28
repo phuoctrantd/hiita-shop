@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import React from "react";
-import Logo from "@/public/images/logo.svg";
+import Logo from "@/public/images/logo.png";
 import PhoneIcon from "@/public/images/phone_icon_1.svg";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import CartIcon from "@/public/images/cart_icon.svg";
@@ -36,6 +36,7 @@ const Header = () => {
         style={{
           width: "100%",
           backgroundColor: red[100],
+          borderRadius: isMobile ? "15px 15px 0 0" : 0,
         }}
       >
         <Container maxWidth="xl" sx={{ padding: "20px 10px !important" }}>
@@ -53,8 +54,8 @@ const Header = () => {
               <Image
                 src={Logo}
                 alt="logo"
-                width={isMobile ? "130" : "170"}
-                height="73"
+                width={isMobile ? "170" : "190"}
+                height="60"
               />
             </Grid>
             <Grid

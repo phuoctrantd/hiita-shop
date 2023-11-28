@@ -1,6 +1,12 @@
 import React from "react";
 import Title from "./Title";
-import { Box, Typography, styled } from "@mui/material";
+import {
+  Box,
+  Typography,
+  styled,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import Image from "next/image";
 import ImageNews1 from "@/public/images/news/news1.png";
 import ImageNews2 from "@/public/images/news/news2.png";
@@ -12,6 +18,8 @@ import "swiper/css/navigation";
 import { Navigation, Autoplay } from "swiper/modules";
 import { red, white } from "@/styles";
 const News = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const dataNews = [
     {
       id: 1,
@@ -55,27 +63,31 @@ const News = () => {
       <SwiperStyled>
         <Swiper
           navigation={true}
-          slidesPerView={4}
+          slidesPerView={isMobile ? 1 : 4}
           modules={[Navigation, Autoplay]}
-          spaceBetween={1}
-          //   autoplay={{
-          //     delay: 2500,
-          //     disableOnInteraction: true,
-          //   }}
+          spaceBetween={20}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: true,
+          }}
         >
           {dataNews.map((item, index) => (
             <SwiperSlide key={index}>
               <Box
-                px={1}
                 sx={{
                   transition: "transform 0.3s",
                   cursor: "pointer",
                   "&:hover": {
                     transform: "scale(1.02)",
                   },
+                  width: "100%",
                 }}
               >
-                <Image src={item.image} alt="banner" height={260} width={270} />
+                <Image
+                  src={item.image}
+                  alt="banner"
+                  style={{ width: "100%", height: "auto" }}
+                />
                 <Box mt={1.6}>
                   <Typography fontSize={14} fontWeight={700} mb={1}>
                     {item.title}

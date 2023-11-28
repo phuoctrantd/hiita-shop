@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Image, { StaticImageData } from "next/image";
 import BannerFruit1 from "@/public/images/banners/banner1.png";
 import BannerGinseng from "@/public/images/banners/banner_ginseng.png";
@@ -22,20 +22,24 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
   dataProductFeatured,
   fruit,
 }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const firstRow = dataProductFeatured.slice(0, fruit ? 4 : 3);
   const secondRow = dataProductFeatured.slice(fruit ? 4 : 3, 8);
 
   return (
     <Grid container alignItems="stretch" spacing={3}>
-      <Grid item xs={fruit ? 2.4 : 4.8}>
-        <Image
-          src={fruit ? BannerFruit1 : BannerGinseng}
-          alt="banner"
-          style={{ width: "100%", height: "100%" }}
-        />
-      </Grid>
+      {!isMobile && (
+        <Grid item xs={fruit ? 2.4 : 4.8}>
+          <Image
+            src={fruit ? BannerFruit1 : BannerGinseng}
+            alt="banner"
+            style={{ width: "100%", height: "100%" }}
+          />
+        </Grid>
+      )}
       {firstRow.map((item, index) => (
-        <Grid item xs={2.4} key={index}>
+        <Grid item xs={isMobile ? 6 : 2.4} key={index}>
           <Box
             sx={{
               display: "flex",
@@ -54,11 +58,11 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
               style={{
                 width: "100%",
               }}
-              height={252}
+              height={isMobile ? 200 : 252}
             />
 
             <Box textAlign="center" mt={1.8} mb={1}>
-              <Box mb={2.8} px={2}>
+              <Box mb={isMobile ? 1.5 : 2.8} px={2}>
                 <Typography fontSize={14} fontWeight={700} color={black}>
                   {item.name}
                 </Typography>
@@ -81,7 +85,7 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
           </Box>
         </Grid>
       ))}
-      {fruit && (
+      {fruit && !isMobile && (
         <Grid item xs={2.4}>
           <Image
             src={BannerFruit1}
@@ -91,7 +95,7 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
         </Grid>
       )}
       {secondRow.map((item, index) => (
-        <Grid item xs={2.4} key={index}>
+        <Grid item xs={isMobile ? 6 : 2.4} key={index}>
           <Box
             sx={{
               display: "flex",
@@ -110,11 +114,11 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
               style={{
                 width: "100%",
               }}
-              height={252}
+              height={isMobile ? 200 : 252}
             />
 
             <Box textAlign="center" mt={1.8} mb={1}>
-              <Box mb={2.8} px={2}>
+              <Box mb={isMobile ? 1.5 : 2.8} px={2}>
                 <Typography fontSize={14} fontWeight={700} color={black}>
                   {item.name}
                 </Typography>

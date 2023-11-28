@@ -7,6 +7,8 @@ import {
   Box,
   Menu as MuiMenu,
   MenuItem,
+  Divider,
+  makeStyles,
 } from "@mui/material";
 import { red, white } from "@/styles";
 import { MENU_DATA } from "@/lib/contansts";
@@ -20,16 +22,6 @@ const Menu = () => {
   const router = useRouter();
   const { pathname } = router;
   console.log(pathname);
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
   return (
     <>
       <Grid container sx={{ textAlign: "center" }}>
@@ -53,7 +45,48 @@ const Menu = () => {
                         horizontal: "left",
                       }}
                     >
-                      {<Box width={250}>123</Box>}
+                      <Box p={1.25}>
+                        {item.subMenu.map((item, indexSubitem) => (
+                          <React.Fragment key={indexSubitem}>
+                            <Box
+                              sx={{
+                                cursor: "pointer",
+                                color: red[100],
+                                position: "relative",
+                                "&:before": {
+                                  content: "''",
+                                  position: "absolute",
+                                  width: "0",
+                                  height: "1px",
+                                  bottom: "-1px",
+                                  left: "0",
+                                  transform: "translate(0%,0%)",
+                                  backgroundColor: red[100],
+                                  transformOrigin: "center",
+                                  visibility: "hidden",
+                                  transition: "all 0.3s ease-in-out",
+                                },
+                                "&:hover:before": {
+                                  visibility: "visible",
+                                  width: "100%",
+                                },
+                              }}
+                              width={200}
+                              color={red[100]}
+                              p={0.8}
+                            >
+                              <Typography fontSize={15} fontWeight={600}>
+                                {item.label}
+                              </Typography>
+                            </Box>
+                            <Divider
+                              sx={{
+                                backgroundColor: "#f1eaea",
+                              }}
+                            />
+                          </React.Fragment>
+                        ))}
+                      </Box>
                     </HoverPopover>
                   )}
                 </div>
