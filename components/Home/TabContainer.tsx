@@ -15,7 +15,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { white } from "@/styles";
-import BannerImage from "@/public/images/banners/banner.svg";
+
 interface TabProps {
   fruitTab?: boolean;
 }
