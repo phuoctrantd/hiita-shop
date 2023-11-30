@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import HomeContainer from "./Home/HomeContainer";
+import HomeContainer from "../components/Home/HomeContainer";
 import Logo from "@/public/images/hiita-logo.png";
 
 export default function Home() {

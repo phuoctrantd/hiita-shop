@@ -1,10 +1,10 @@
 import React from "react";
 import { Box, Container, useMediaQuery, useTheme } from "@mui/material";
-import Banner from "./components/Banner";
-import TabCategory from "./components/TabCategory";
-import FruitCategory from "./components/FruitCategory";
-import GinsengCategory from "./components/GinsengCategory";
-import News from "./components/News";
+import Banner from "./Banner";
+import TabCategory from "./TabCategory";
+import FruitCategory from "./FruitCategory";
+import GinsengCategory from "./GinsengCategory";
+import News from "./News";
 const HomeContainer = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));

@@ -164,3 +164,8 @@ export const MENU_DATA_FOOTER = [
 
     
 ] as const;
+
+export const formatPrice = (price: string) => {
+return  price.replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " VNĐ";
+
+}

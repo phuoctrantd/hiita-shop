@@ -10,7 +10,12 @@
   
   const black ="#000000"
 
+  const orange = "#E24242"
+
+  const blue = "#0FA80F"
+
+  const yellow = "#FFB416"
 
 
-  export { red, white,black }
+  export { red, white,black,orange,blue,yellow }
   
