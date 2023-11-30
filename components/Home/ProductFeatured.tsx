@@ -4,6 +4,7 @@ import Image, { StaticImageData } from "next/image";
 import BannerFruit1 from "@/public/images/banners/banner1.png";
 import BannerGinseng from "@/public/images/banners/banner_ginseng.png";
 import { black, red } from "@/styles";
+import Link from "next/link";
 
 interface ProductFeaturedProps {
   fruit?: boolean;
@@ -42,49 +43,51 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
       )}
       {firstRow?.map((item, index) => (
         <Grid item xs={isMobile ? 6 : 2.4} key={index}>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              height: "100%",
-              cursor: "pointer",
-              transition: "transform 0.3s",
-              "&:hover": {
-                transform: "scale(1.02)",
-              },
-            }}
-          >
-            <Image
-              src={item.image}
-              alt="product"
-              style={{
-                width: "100%",
+          <Link href={`/product/${item.name}-i.${item.id}`}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                height: "100%",
+                cursor: "pointer",
+                transition: "transform 0.3s",
+                "&:hover": {
+                  transform: "scale(1.02)",
+                },
               }}
-              height={isMobile ? 200 : 252}
-            />
+            >
+              <Image
+                src={item.image}
+                alt="product"
+                style={{
+                  width: "100%",
+                }}
+                height={isMobile ? 200 : 252}
+              />
 
-            <Box textAlign="center" mt={1.8} mb={1}>
-              <Box mb={isMobile ? 1.5 : 2.8} px={2}>
-                <Typography fontSize={14} fontWeight={700} color={black}>
-                  {item.name}
+              <Box textAlign="center" mt={1.8} mb={1}>
+                <Box mb={isMobile ? 1.5 : 2.8} px={2}>
+                  <Typography fontSize={14} fontWeight={700} color={black}>
+                    {item.name}
+                  </Typography>
+                </Box>
+                <Typography
+                  fontSize={12}
+                  fontWeight={700}
+                  color={red[200]}
+                  sx={{
+                    textDecoration: "line-through",
+                    textDecorationColor: black,
+                  }}
+                >
+                  {item.price}
+                </Typography>
+                <Typography fontSize={14} fontWeight={800} color={red[100]}>
+                  {item.priceSale}
                 </Typography>
               </Box>
-              <Typography
-                fontSize={12}
-                fontWeight={700}
-                color={red[200]}
-                sx={{
-                  textDecoration: "line-through",
-                  textDecorationColor: black,
-                }}
-              >
-                {item.price}
-              </Typography>
-              <Typography fontSize={14} fontWeight={800} color={red[100]}>
-                {item.priceSale}
-              </Typography>
             </Box>
-          </Box>
+          </Link>
         </Grid>
       ))}
       {fruit && !isMobile && (
@@ -98,49 +101,51 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
       )}
       {secondRow?.map((item, index) => (
         <Grid item xs={isMobile ? 6 : 2.4} key={index}>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              height: "100%",
-              cursor: "pointer",
-              transition: "transform 0.3s",
-              "&:hover": {
-                transform: "scale(1.02)",
-              },
-            }}
-          >
-            <Image
-              src={item.image}
-              alt="product"
-              style={{
-                width: "100%",
+          <Link href={`/product/${item.name}-i.${item.id}`}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                height: "100%",
+                cursor: "pointer",
+                transition: "transform 0.3s",
+                "&:hover": {
+                  transform: "scale(1.02)",
+                },
               }}
-              height={isMobile ? 200 : 252}
-            />
+            >
+              <Image
+                src={item.image}
+                alt="product"
+                style={{
+                  width: "100%",
+                }}
+                height={isMobile ? 200 : 252}
+              />
 
-            <Box textAlign="center" mt={1.8} mb={1}>
-              <Box mb={isMobile ? 1.5 : 2.8} px={2}>
-                <Typography fontSize={14} fontWeight={700} color={black}>
-                  {item.name}
+              <Box textAlign="center" mt={1.8} mb={1}>
+                <Box mb={isMobile ? 1.5 : 2.8} px={2}>
+                  <Typography fontSize={14} fontWeight={700} color={black}>
+                    {item.name}
+                  </Typography>
+                </Box>
+                <Typography
+                  fontSize={12}
+                  fontWeight={700}
+                  color={red[200]}
+                  sx={{
+                    textDecoration: "line-through",
+                    textDecorationColor: black,
+                  }}
+                >
+                  {item.price}
+                </Typography>
+                <Typography fontSize={14} fontWeight={800} color={red[100]}>
+                  {item.priceSale}
                 </Typography>
               </Box>
-              <Typography
-                fontSize={12}
-                fontWeight={700}
-                color={red[200]}
-                sx={{
-                  textDecoration: "line-through",
-                  textDecorationColor: black,
-                }}
-              >
-                {item.price}
-              </Typography>
-              <Typography fontSize={14} fontWeight={800} color={red[100]}>
-                {item.priceSale}
-              </Typography>
             </Box>
-          </Box>
+          </Link>
         </Grid>
       ))}
     </Grid>

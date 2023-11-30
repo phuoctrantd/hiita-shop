@@ -19,6 +19,7 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import DragHandleOutlinedIcon from "@mui/icons-material/DragHandleOutlined";
 import DrawerContainer from "./components/DrawerContainer";
+import Link from "next/link";
 
 const Header = () => {
   const theme = useTheme();
@@ -51,12 +52,14 @@ const Header = () => {
                 alignItems: "center",
               }}
             >
-              <Image
-                src={Logo}
-                alt="logo"
-                width={isMobile ? "170" : "190"}
-                height="60"
-              />
+              <Link href="/">
+                <Image
+                  src={Logo}
+                  alt="logo"
+                  width={isMobile ? "170" : "190"}
+                  height="60"
+                />
+              </Link>
             </Grid>
             <Grid
               order={isMobile ? 5 : 2}

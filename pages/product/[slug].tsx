@@ -30,6 +30,7 @@ const Product = () => {
     images: [Ginseng1, Ginseng2, Ginseng3, Ginseng4, Ginseng5],
     category: "Nhân sâm",
     brand: "Hiita",
+    quantity: 1,
     description:
       "Tinh chất hồng sâm nhung hươu Wongi hộp 10 chai x 100ml là sản phẩm cao cấp có hiệu quả trong việc hỗ trợ tăng hệ miễn dịch nhờ hàm lượng cao của tính chất chiết xuất từ hồng sâm 6 tuổi và nhung hươu, giúp bổ sung năng lượng cho mọi lứa tuổi, giúp cơ thể phục hồi nhanh sau quá trình học tập và làm việc ở cường độ cao.",
     variants: [

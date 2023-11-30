@@ -15,6 +15,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { white } from "@/styles";
+import Link from "next/link";
 
 interface TabProps {
   fruitTab?: boolean;
@@ -48,310 +49,57 @@ const TabContainer: React.FC<TabProps> = ({ fruitTab }) => {
               }}
             >
               <SwiperSlide>
-                <Box
-                  position="relative"
-                  sx={{
-                    cursor: "pointer",
-                    transition: "transform 0.3s",
-                    "&:hover": {
-                      transform: "scale(1.02)",
-                    },
-                  }}
-                >
-                  <Image
-                    src={fruit_demo}
-                    alt="fruit_demo"
-                    style={{ width: "100%", height: "auto" }}
-                  />
+                <Link href={`/product/san-pham`}>
                   <Box
+                    position="relative"
                     sx={{
-                      backgroundColor: "rgba(229, 30, 65, 0.60);",
-                      position: "absolute",
-                      bottom: 0,
-                      left: 0,
-                      width: "100%",
-                      height: "25%",
+                      cursor: "pointer",
+                      transition: "transform 0.3s",
+                      "&:hover": {
+                        transform: "scale(1.02)",
+                      },
                     }}
                   >
-                    <Typography
+                    <Image
+                      src={fruit_demo}
+                      alt="fruit_demo"
+                      style={{ width: "100%", height: "auto" }}
+                    />
+                    <Box
                       sx={{
-                        color: white[100],
-                        fontSize: 14,
-                        fontWeight: 500,
-                        textAlign: "center",
-                        pt: isMobile ? 0 : 0.6,
+                        backgroundColor: "rgba(229, 30, 65, 0.60);",
+                        position: "absolute",
+                        bottom: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "25%",
                       }}
                     >
-                      Cam Osaka
-                    </Typography>
+                      <Typography
+                        sx={{
+                          color: white[100],
+                          fontSize: 14,
+                          fontWeight: 500,
+                          textAlign: "center",
+                          pt: isMobile ? 0 : 0.6,
+                        }}
+                      >
+                        Cam Osaka
+                      </Typography>
 
-                    <Typography
-                      sx={{
-                        color: white[100],
-                        fontSize: 14,
-                        fontWeight: 500,
-                        textAlign: "center",
-                      }}
-                    >
-                      1.399.000 VNĐ
-                    </Typography>
+                      <Typography
+                        sx={{
+                          color: white[100],
+                          fontSize: 14,
+                          fontWeight: 500,
+                          textAlign: "center",
+                        }}
+                      >
+                        1.399.000 VNĐ
+                      </Typography>
+                    </Box>
                   </Box>
-                </Box>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Box
-                  position="relative"
-                  sx={{
-                    cursor: "pointer",
-                    transition: "transform 0.3s",
-                    "&:hover": {
-                      transform: "scale(1.02)",
-                    },
-                  }}
-                >
-                  <Image
-                    src={fruit_demo}
-                    alt="fruit_demo"
-                    style={{ width: "100%", height: "auto" }}
-                  />
-                  <Box
-                    sx={{
-                      backgroundColor: "rgba(229, 30, 65, 0.60);",
-                      position: "absolute",
-                      bottom: 0,
-                      left: 0,
-                      width: "100%",
-                      height: "25%",
-                    }}
-                  >
-                    <Typography
-                      sx={{
-                        color: white[100],
-                        fontSize: 14,
-                        fontWeight: 500,
-                        textAlign: "center",
-                        pt: isMobile ? 0 : 0.6,
-                      }}
-                    >
-                      Cam Osaka
-                    </Typography>
-
-                    <Typography
-                      sx={{
-                        color: white[100],
-                        fontSize: 14,
-                        fontWeight: 500,
-                        textAlign: "center",
-                      }}
-                    >
-                      1.399.000 VNĐ
-                    </Typography>
-                  </Box>
-                </Box>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Box
-                  position="relative"
-                  sx={{
-                    cursor: "pointer",
-                    transition: "transform 0.3s",
-                    "&:hover": {
-                      transform: "scale(1.02)",
-                    },
-                  }}
-                >
-                  <Image
-                    src={fruit_demo}
-                    alt="fruit_demo"
-                    style={{ width: "100%", height: "auto" }}
-                  />
-                  <Box
-                    sx={{
-                      backgroundColor: "rgba(229, 30, 65, 0.60);",
-                      position: "absolute",
-                      bottom: 0,
-                      left: 0,
-                      width: "100%",
-                      height: "25%",
-                    }}
-                  >
-                    <Typography
-                      sx={{
-                        color: white[100],
-                        fontSize: 14,
-                        fontWeight: 500,
-                        textAlign: "center",
-                        pt: isMobile ? 0 : 0.6,
-                      }}
-                    >
-                      Cam Osaka
-                    </Typography>
-
-                    <Typography
-                      sx={{
-                        color: white[100],
-                        fontSize: 14,
-                        fontWeight: 500,
-                        textAlign: "center",
-                      }}
-                    >
-                      1.399.000 VNĐ
-                    </Typography>
-                  </Box>
-                </Box>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Box
-                  position="relative"
-                  sx={{
-                    cursor: "pointer",
-                    transition: "transform 0.3s",
-                    "&:hover": {
-                      transform: "scale(1.02)",
-                    },
-                  }}
-                >
-                  <Image
-                    src={fruit_demo}
-                    alt="fruit_demo"
-                    style={{ width: "100%", height: "auto" }}
-                  />
-                  <Box
-                    sx={{
-                      backgroundColor: "rgba(229, 30, 65, 0.60);",
-                      position: "absolute",
-                      bottom: 0,
-                      left: 0,
-                      width: "100%",
-                      height: "25%",
-                    }}
-                  >
-                    <Typography
-                      sx={{
-                        color: white[100],
-                        fontSize: 14,
-                        fontWeight: 500,
-                        textAlign: "center",
-                        pt: isMobile ? 0 : 0.6,
-                      }}
-                    >
-                      Cam Osaka
-                    </Typography>
-
-                    <Typography
-                      sx={{
-                        color: white[100],
-                        fontSize: 14,
-                        fontWeight: 500,
-                        textAlign: "center",
-                      }}
-                    >
-                      1.399.000 VNĐ
-                    </Typography>
-                  </Box>
-                </Box>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Box
-                  position="relative"
-                  sx={{
-                    cursor: "pointer",
-                    transition: "transform 0.3s",
-                    "&:hover": {
-                      transform: "scale(1.02)",
-                    },
-                  }}
-                >
-                  <Image
-                    src={fruit_demo}
-                    alt="fruit_demo"
-                    style={{ width: "100%", height: "auto" }}
-                  />
-                  <Box
-                    sx={{
-                      backgroundColor: "rgba(229, 30, 65, 0.60);",
-                      position: "absolute",
-                      bottom: 0,
-                      left: 0,
-                      width: "100%",
-                      height: "25%",
-                    }}
-                  >
-                    <Typography
-                      sx={{
-                        color: white[100],
-                        fontSize: 14,
-                        fontWeight: 500,
-                        textAlign: "center",
-                        pt: isMobile ? 0 : 0.6,
-                      }}
-                    >
-                      Cam Osaka
-                    </Typography>
-
-                    <Typography
-                      sx={{
-                        color: white[100],
-                        fontSize: 14,
-                        fontWeight: 500,
-                        textAlign: "center",
-                      }}
-                    >
-                      1.399.000 VNĐ
-                    </Typography>
-                  </Box>
-                </Box>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Box
-                  position="relative"
-                  sx={{
-                    cursor: "pointer",
-                    transition: "transform 0.3s",
-                    "&:hover": {
-                      transform: "scale(1.02)",
-                    },
-                  }}
-                >
-                  <Image
-                    src={fruit_demo}
-                    alt="fruit_demo"
-                    style={{ width: "100%", height: "auto" }}
-                  />
-                  <Box
-                    sx={{
-                      backgroundColor: "rgba(229, 30, 65, 0.60);",
-                      position: "absolute",
-                      bottom: 0,
-                      left: 0,
-                      width: "100%",
-                      height: "25%",
-                    }}
-                  >
-                    <Typography
-                      sx={{
-                        color: white[100],
-                        fontSize: 14,
-                        fontWeight: 500,
-                        textAlign: "center",
-                        pt: isMobile ? 0 : 0.6,
-                      }}
-                    >
-                      Cam Osaka
-                    </Typography>
-
-                    <Typography
-                      sx={{
-                        color: white[100],
-                        fontSize: 14,
-                        fontWeight: 500,
-                        textAlign: "center",
-                      }}
-                    >
-                      1.399.000 VNĐ
-                    </Typography>
-                  </Box>
-                </Box>
+                </Link>
               </SwiperSlide>
             </Swiper>
           </SwiperStyled>

@@ -66,6 +66,7 @@ const SlideImage: React.FC<SlideImageProps> = ({ images }) => {
         <Stack
           direction={"row"}
           spacing={1}
+          justifyContent={"center"}
           sx={{
             overflow: "auto",
             mt: 2,
@@ -83,7 +84,7 @@ const SlideImage: React.FC<SlideImageProps> = ({ images }) => {
               alt="product"
               style={{
                 cursor: "pointer",
-                width: "100%",
+                width: "91px",
                 height: "100px",
                 border:
                   index === currentIndex ? `2px solid  ${red[100]}` : "none",
