@@ -9,6 +9,8 @@ import {
   Button,
   TextField,
   Box,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { black, blue, orange, red, white, yellow } from "@/styles";
 import Ginseng1 from "@/public/images/products/ginseng1.png";
@@ -20,14 +22,28 @@ import { formatPrice } from "@/lib/contansts";
 import ProductPrice from "@/components/Product/ProductPrice";
 import News from "@/components/Home/News";
 import ProductDescription from "@/components/Product/ProductDescription";
+import ProductRelated from "@/components/Product/ProductRelated";
 
 const Product = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const dataProduct = {
     id: 1,
     name: "Sâm Ngọc Linh Thượng phẩm loại 5 củ",
     price: "1000000",
     priceSale: "800000",
-    images: [Ginseng1, Ginseng2, Ginseng3, Ginseng4, Ginseng5],
+    images: [
+      Ginseng1,
+      Ginseng2,
+      Ginseng3,
+      Ginseng4,
+      Ginseng5,
+      Ginseng1,
+      Ginseng2,
+      Ginseng3,
+      Ginseng4,
+      Ginseng5,
+    ],
     category: "Nhân sâm",
     brand: "Hiita",
     quantity: 1,
@@ -50,6 +66,48 @@ const Product = () => {
             name: "Size 2",
             price: "1000000",
             priceSale: "800022200",
+            quantity: 1,
+          },
+          {
+            id: 3,
+            name: "Size 3",
+            price: "1000000",
+            priceSale: "800333000",
+            quantity: 1,
+          },
+          {
+            id: 3,
+            name: "Size 3",
+            price: "1000000",
+            priceSale: "800333000",
+            quantity: 1,
+          },
+          {
+            id: 3,
+            name: "Size 3",
+            price: "1000000",
+            priceSale: "800333000",
+            quantity: 1,
+          },
+          {
+            id: 3,
+            name: "Size 3",
+            price: "1000000",
+            priceSale: "800333000",
+            quantity: 1,
+          },
+          {
+            id: 3,
+            name: "Size 3",
+            price: "1000000",
+            priceSale: "800333000",
+            quantity: 1,
+          },
+          {
+            id: 3,
+            name: "Size 3",
+            price: "1000000",
+            priceSale: "800333000",
             quantity: 1,
           },
           {
@@ -147,17 +205,20 @@ const Product = () => {
 
   return (
     <Page title={dataProduct.name} category={dataProduct.category}>
-      <Grid container spacing={10} mb={5}>
-        <Grid item xs={6}>
+      <Grid container spacing={isMobile ? 5 : 10} mb={5}>
+        <Grid item xs={isMobile ? 12 : 6}>
           <SlideImage images={dataProduct.images} />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={isMobile ? 12 : 6}>
           <ProductPrice dataProduct={dataProduct} />
         </Grid>
       </Grid>
-      <Grid container mb={7}>
-        <Grid item xs={9}>
-          <ProductDescription />
+      <Grid container mb={7} spacing={5}>
+        <Grid item xs={isMobile ? 12 : 8.5}>
+          <ProductDescription description={dataProduct.description} />
+        </Grid>
+        <Grid item xs={isMobile ? 12 : 3.5}>
+          <ProductRelated />
         </Grid>
       </Grid>
       <News />

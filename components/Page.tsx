@@ -1,4 +1,11 @@
-import { Breadcrumbs, Container, Typography, styled } from "@mui/material";
+import {
+  Breadcrumbs,
+  Container,
+  Typography,
+  styled,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import Head from "next/head";
 import React, { Children } from "react";
 import Logo from "@/public/images/hiita-logo.png";
@@ -13,6 +20,8 @@ interface PageProps {
 }
 
 const Page: React.FC<PageProps> = ({ children, title, category }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <>
       <Head>
@@ -28,8 +37,19 @@ const Page: React.FC<PageProps> = ({ children, title, category }) => {
         <meta name="keywords" content="nhan sam, trai cay" />
         <meta property="og:image" content={Logo.src} />
       </Head>
-      <Container maxWidth={"lg"} sx={{ padding: "0 !important" }}>
-        <Breadcrumbs aria-label="breadcrumb" sx={{ my: 3 }}>
+      <Container
+        maxWidth={"lg"}
+        sx={{ padding: "0 !important", position: "relative", zIndex: 2 }}
+      >
+        <Breadcrumbs
+          aria-label="breadcrumb"
+          sx={{
+            my: 3,
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+        >
           <Link href="/">
             <TypographyBreadcrumb>Trang chủ</TypographyBreadcrumb>
           </Link>
@@ -39,12 +59,18 @@ const Page: React.FC<PageProps> = ({ children, title, category }) => {
             </Link>
           )}
           <TypographyBreadcrumb sx={{ color: red[100] }}>
-            {title}
+            {title && title.length > 20 && isMobile
+              ? title.slice(0, 20) + "..."
+              : title}
           </TypographyBreadcrumb>
         </Breadcrumbs>
+      </Container>
+      <Container
+        maxWidth={"lg"}
+        sx={{ padding: "0 !important", position: "relative", zIndex: 1 }}
+      >
         {children}
       </Container>
-      ;
     </>
   );
 };

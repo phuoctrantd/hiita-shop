@@ -167,5 +167,7 @@ export const MENU_DATA_FOOTER = [
 
 export const formatPrice = (price: string) => {
 return  price.replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " VNĐ";
-
+}
+export const generateSlug = (name:string,id:number) => {
+return name.replace(/\s+/g, '-').toLowerCase() + "-i." + id;
 }
