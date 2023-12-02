@@ -187,7 +187,9 @@ const Header = () => {
                 alignItems: "center",
               }}
             >
-              <Image src={CartIcon} alt="logo" width="28" height="28" />
+              <Link href={"/cart"}>
+                <Image src={CartIcon} alt="logo" width="28" height="28" />
+              </Link>
             </Grid>
           </Grid>
         </Container>

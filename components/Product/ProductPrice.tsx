@@ -1,6 +1,6 @@
 import { formatPrice } from "@/lib/contansts";
 import { Product } from "@/lib/types/product";
-import { black, blue, orange, red, white, yellow } from "@/styles";
+import { black, blue, gray, orange, red, white, yellow } from "@/styles";
 import {
   Box,
   Button,
@@ -273,7 +273,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
                 },
                 "& .MuiOutlinedInput-root.Mui-focused": {
                   "& > fieldset": {
-                    border: "1px solid #A4AAAF",
+                    border: `1px solid ${gray}`,
                   },
                 },
                 borderRadius: "0",
@@ -344,10 +344,10 @@ const ButtonStyled = styled(Button)(({ theme }) => ({
   borderRadius: "10px",
 }));
 
-const BoxStyled = styled(Stack)(({ theme }) => ({
+export const BoxStyled = styled(Stack)(({ theme }) => ({
   cursor: "pointer",
   color: "#A4AAAF",
-  border: "1px solid #A4AAAF",
+  border: `1px solid ${gray}`,
   padding: "0px 13px",
 
   justifyContent: "center",
