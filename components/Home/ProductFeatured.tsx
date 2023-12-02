@@ -5,6 +5,7 @@ import BannerFruit1 from "@/public/images/banners/banner1.png";
 import BannerGinseng from "@/public/images/banners/banner_ginseng.png";
 import { black, red } from "@/styles";
 import Link from "next/link";
+import { generateSlug } from "@/lib/contansts";
 
 interface ProductFeaturedProps {
   fruit?: boolean;
@@ -43,7 +44,7 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
       )}
       {firstRow?.map((item, index) => (
         <Grid item xs={isMobile ? 6 : 2.4} key={index}>
-          <Link href={`/product/${item.name}-i.${item.id}`}>
+          <Link href={`/product/${generateSlug(item.name, item.id)}`}>
             <Box
               sx={{
                 display: "flex",
@@ -101,7 +102,7 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
       )}
       {secondRow?.map((item, index) => (
         <Grid item xs={isMobile ? 6 : 2.4} key={index}>
-          <Link href={`/product/${item.name}-i.${item.id}`}>
+          <Link href={`/product/${generateSlug(item.name, item.id)}`}>
             <Box
               sx={{
                 display: "flex",

@@ -1,109 +1,81 @@
-import { Box, Stack, IconButton } from "@mui/material";
+import { Box, Stack, IconButton, useTheme, useMediaQuery } from "@mui/material";
 import Image, { StaticImageData } from "next/image";
 import React, { useState } from "react";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { red } from "@/styles";
+import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
+import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+import { SwiperStyled } from "../Home/TabContainer";
 
 interface SlideImageProps {
   images: Array<StaticImageData>;
 }
 
 const SlideImage: React.FC<SlideImageProps> = ({ images }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const handleChooseImage = (index: number) => {
-    setCurrentIndex(index);
-    scrollIntoView(index);
+  const handleSlideChange = (swiper: SwiperClass) => {
+    setActiveIndex(swiper.activeIndex);
   };
-
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    scrollIntoView((currentIndex + 1) % images.length);
-  };
-
-  const handlePrev = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + images.length) % images.length
-    );
-    scrollIntoView((currentIndex - 1 + images.length) % images.length);
-  };
-
-  const scrollIntoView = (index: number) => {
-    const imageElement = document.getElementById(`image-${index}`);
-    if (imageElement) {
-      imageElement.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-      });
-    }
-  };
-
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <>
-      <Box sx={{ width: "100%", height: "auto", position: "relative" }}>
-        <Image
-          src={images[currentIndex]}
-          alt="product"
-          style={{
-            width: "100%",
-            height: "500px",
+      <SwiperStyled>
+        <Swiper
+          spaceBetween={10}
+          navigation={true}
+          thumbs={{
+            swiper:
+              thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
           }}
-        />
-      </Box>
-      <Box position={"relative"}>
-        <IconButton
-          onClick={handlePrev}
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: 0,
-            transform: "translateY(-50%)",
-          }}
+          modules={[FreeMode, Navigation, Thumbs]}
+          className="mySwiper2"
+          onSlideChange={handleSlideChange}
         >
-          <ArrowBackIcon sx={{ fontSize: 30, color: red[100] }} />
-        </IconButton>
-        <Stack
-          direction={"row"}
-          spacing={1}
-          justifyContent={"center"}
-          sx={{
-            overflow: "auto",
-            mt: 2,
-            "&::-webkit-scrollbar": {
-              width: 0,
-            },
-          }}
-        >
-          {images.map((image, index) => (
-            <Image
-              id={`image-${index}`}
-              onClick={() => handleChooseImage(index)}
-              key={index}
-              src={image}
-              alt="product"
-              style={{
-                cursor: "pointer",
-                width: "91px",
-                height: "100px",
-                border:
-                  index === currentIndex ? `2px solid  ${red[100]}` : "none",
-              }}
-            />
+          {images?.map((item, index) => (
+            <SwiperSlide key={index}>
+              <Image
+                src={item}
+                alt="banner"
+                style={{
+                  width: "100%",
+                  height: "500px",
+                }}
+              />
+            </SwiperSlide>
           ))}
-        </Stack>
-        <IconButton
-          onClick={handleNext}
-          sx={{
-            position: "absolute",
-            top: "50%",
-            right: 0,
-            transform: "translateY(-50%)",
-          }}
+        </Swiper>
+        <Swiper
+          onSwiper={setThumbsSwiper}
+          spaceBetween={1}
+          slidesPerView={isMobile ? 4 : 5}
+          freeMode={true}
+          watchSlidesProgress={true}
+          modules={[FreeMode, Navigation, Thumbs]}
+          className="mySwiper"
         >
-          <ArrowForwardIcon sx={{ fontSize: 30, color: red[100] }} />
-        </IconButton>
-      </Box>
+          {images?.map((item, index) => (
+            <SwiperSlide key={index}>
+              <Image
+                src={item}
+                alt="banner"
+                style={{
+                  width: "91px",
+                  height: "100px",
+                  border: activeIndex === index ? "2px solid red" : "none",
+                }}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </SwiperStyled>
     </>
   );
 };
