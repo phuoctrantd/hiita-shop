@@ -6,7 +6,11 @@ import { red, white } from "@/styles";
 import "swiper/css";
 import "swiper/css/navigation";
 import TabContainer from "./TabContainer";
-
+import ProductFruit1 from "@/public/images/products/product1.png";
+import ProductFruit8 from "@/public/images/products/product8.png";
+import ProductFruit5 from "@/public/images/products/product5.png";
+import ProductFruit6 from "@/public/images/products/product6.png";
+import fruit_demo from "@/public/images/fruit_demo.png";
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -53,6 +57,38 @@ const TabCategory = () => {
       borderRadius: "20px 20px 0 0",
     },
   }));
+  const dataProductCategory = [
+    {
+      id: 1,
+      name: "Cam Osaka",
+      image: fruit_demo,
+      price: "1000000",
+    },
+    {
+      id: 2,
+      name: "Chuối Úc ",
+      image: ProductFruit5,
+      price: "1000000",
+    },
+    {
+      id: 3,
+      name: "Dâu tây Kyoto",
+      image: ProductFruit1,
+      price: "1000000",
+    },
+    {
+      id: 4,
+      name: "Nho sữa Hà Lan",
+      image: ProductFruit8,
+      price: "1000000",
+    },
+    {
+      id: 5,
+      name: "Việt Quất Hà Lan",
+      image: ProductFruit6,
+      price: "1000000",
+    },
+  ];
 
   return (
     <>
@@ -76,16 +112,16 @@ const TabCategory = () => {
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
-          <TabContainer fruitTab />
+          <TabContainer fruitTab dataProductCategory={dataProductCategory} />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          <TabContainer />
+          <TabContainer dataProductCategory={dataProductCategory} />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
-          <TabContainer />
+          <TabContainer dataProductCategory={dataProductCategory} />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={3}>
-          <TabContainer />
+          <TabContainer dataProductCategory={dataProductCategory} />
         </CustomTabPanel>
       </Box>
     </>

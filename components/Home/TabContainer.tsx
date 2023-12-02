@@ -16,11 +16,16 @@ import {
 } from "@mui/material";
 import { white } from "@/styles";
 import Link from "next/link";
+import { formatPrice, generateSlug } from "@/lib/contansts";
 
 interface TabProps {
   fruitTab?: boolean;
+  dataProductCategory: Array<any>;
 }
-const TabContainer: React.FC<TabProps> = ({ fruitTab }) => {
+const TabContainer: React.FC<TabProps> = ({
+  fruitTab,
+  dataProductCategory,
+}) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   return (
@@ -48,59 +53,61 @@ const TabContainer: React.FC<TabProps> = ({ fruitTab }) => {
                 disableOnInteraction: true,
               }}
             >
-              <SwiperSlide>
-                <Link href={`/product/san-pham`}>
-                  <Box
-                    position="relative"
-                    sx={{
-                      cursor: "pointer",
-                      transition: "transform 0.3s",
-                      "&:hover": {
-                        transform: "scale(1.02)",
-                      },
-                    }}
-                  >
-                    <Image
-                      src={fruit_demo}
-                      alt="fruit_demo"
-                      style={{ width: "100%", height: "auto" }}
-                    />
+              {dataProductCategory?.map((item, index) => (
+                <SwiperSlide key={index}>
+                  <Link href={`/product/${generateSlug(item.name, item.id)}`}>
                     <Box
+                      position="relative"
                       sx={{
-                        backgroundColor: "rgba(229, 30, 65, 0.60);",
-                        position: "absolute",
-                        bottom: 0,
-                        left: 0,
-                        width: "100%",
-                        height: "25%",
+                        cursor: "pointer",
+                        transition: "transform 0.3s",
+                        "&:hover": {
+                          transform: "scale(1.02)",
+                        },
                       }}
                     >
-                      <Typography
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        style={{ width: "100%", height: "221px" }}
+                      />
+                      <Box
                         sx={{
-                          color: white[100],
-                          fontSize: 14,
-                          fontWeight: 500,
-                          textAlign: "center",
-                          pt: isMobile ? 0 : 0.6,
+                          backgroundColor: "rgba(229, 30, 65, 0.60);",
+                          position: "absolute",
+                          bottom: 0,
+                          left: 0,
+                          width: "100%",
+                          height: "25%",
                         }}
                       >
-                        Cam Osaka
-                      </Typography>
+                        <Typography
+                          sx={{
+                            color: white[100],
+                            fontSize: 14,
+                            fontWeight: 500,
+                            textAlign: "center",
+                            pt: isMobile ? 0 : 0.6,
+                          }}
+                        >
+                          {item.name}
+                        </Typography>
 
-                      <Typography
-                        sx={{
-                          color: white[100],
-                          fontSize: 14,
-                          fontWeight: 500,
-                          textAlign: "center",
-                        }}
-                      >
-                        1.399.000 VNĐ
-                      </Typography>
+                        <Typography
+                          sx={{
+                            color: white[100],
+                            fontSize: 14,
+                            fontWeight: 500,
+                            textAlign: "center",
+                          }}
+                        >
+                          {formatPrice(item.price)}
+                        </Typography>
+                      </Box>
                     </Box>
-                  </Box>
-                </Link>
-              </SwiperSlide>
+                  </Link>
+                </SwiperSlide>
+              ))}
             </Swiper>
           </SwiperStyled>
         </Grid>
