@@ -1,6 +1,6 @@
 import { formatPrice } from "@/lib/contansts";
-import { Product } from "@/lib/types/product";
-import { black, blue, orange, red, white, yellow } from "@/styles";
+import { ProductType, ProductsVariant } from "@/lib/types/product";
+import { black, blue, gray, orange, red, white, yellow } from "@/styles";
 import {
   Box,
   Button,
@@ -13,34 +13,31 @@ import {
   useTheme,
 } from "@mui/material";
 import React from "react";
-
+import { useAtom } from "jotai";
+import { cartAtom } from "../../lib/hooks/cart";
+import { set } from "zod";
+import toast from "react-hot-toast";
 interface ProductPriceProps {
-  dataProduct: Product;
+  dataProduct: ProductType;
 }
 
 const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
-  const [selectedBoxSize, setSelectedBoxSize] = React.useState(0);
-  const [selectedSize, setSelectedSize] = React.useState(0);
-  const selectedBoxSizeData =
-    dataProduct.variants && dataProduct.variants[selectedBoxSize];
-  const selectedSizeData = selectedBoxSizeData?.sizes[selectedSize];
-
-  const savePrice = () => {
-    const price = Number(selectedSizeData?.price);
-    const priceSale = Number(selectedSizeData?.priceSale);
-    const savePrice = price - priceSale;
-    return formatPrice(String(savePrice));
+  const [selectedVariant, setSelectedVariant] = React.useState(
+    dataProduct.product_variants ? dataProduct.product_variants[0] : null
+  );
+  const price = selectedVariant
+    ? selectedVariant.promotional_price || selectedVariant.price
+    : dataProduct.promotional_price || dataProduct.price;
+  const savePrice = selectedVariant
+    ? selectedVariant.price - price
+    : dataProduct.price - price;
+  const fixedPrice = selectedVariant
+    ? selectedVariant.price
+    : dataProduct.price;
+  const handleVariantClick = (variant: ProductsVariant) => {
+    setSelectedVariant(variant);
+    setQuantity(1);
   };
-
-  const handleBoxSizeChange = (index: number) => {
-    setSelectedBoxSize(index);
-    setSelectedSize(0);
-  };
-
-  const handleSizeChange = (index: number) => {
-    setSelectedSize(index);
-  };
-
   const [quantity, setQuantity] = React.useState(1);
 
   const handleIncrement = () => {
@@ -54,6 +51,36 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
   };
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const allVariantsNull = dataProduct.product_variants?.every(
+    (variant) => variant.box_size === null
+  );
+  const [cart, setCart] = useAtom(cartAtom);
+  const addToCart = () => {
+    const existingItemIndex = cart.findIndex(
+      (item) =>
+        item.id === dataProduct.id &&
+        item.variant &&
+        selectedVariant &&
+        item.variant.id === selectedVariant.id
+    );
+
+    if (existingItemIndex !== -1) {
+      const newCartItems = [...cart];
+      newCartItems[existingItemIndex] = {
+        ...newCartItems[existingItemIndex],
+        quantity: newCartItems[existingItemIndex].quantity + quantity,
+      };
+      setCart(newCartItems);
+    } else {
+      setCart([
+        ...cart,
+        { ...dataProduct, quantity, variant: selectedVariant },
+      ]);
+    }
+    toast.success("Thêm sản phẩm vào giỏ hàng thành công");
+  };
+  console.log(cart);
+
   return (
     <>
       <Typography variant="h4" sx={{ fontWeight: 600 }} mb={3}>
@@ -98,7 +125,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
             }}
           >
             <Typography fontSize={20} fontWeight={700} color={red[100]}>
-              {selectedSizeData && formatPrice(selectedSizeData.priceSale)}
+              {formatPrice(price)}
             </Typography>
           </Grid>
           <Grid
@@ -121,7 +148,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
                 textDecorationColor: black,
               }}
             >
-              {selectedSizeData && formatPrice(selectedSizeData.price)}
+              {formatPrice(fixedPrice)}
             </TypographyDes>
           </Grid>
         </Grid>
@@ -154,7 +181,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
                 fontWeight: 700,
               }}
             >
-              {savePrice()}
+              {formatPrice(savePrice)}
             </TypographyDes>
             <TypographyDes
               sx={{
@@ -165,90 +192,126 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
             </TypographyDes>
           </Grid>
         </Grid>
-        {dataProduct.variants && dataProduct.variants.length > 0 && (
-          <>
-            <Grid container spacing={isMobile ? 1 : 2} mb={isMobile ? 1 : 2}>
-              <Grid
-                item
-                xs={isMobile ? 3 : 2}
-                display={"flex"}
-                alignItems={"center"}
-              >
-                <TypographyDes>Size hộp:</TypographyDes>
-              </Grid>
-              <Grid
-                item
-                xs={isMobile ? 9 : 10}
-                display={"flex"}
-                sx={{ flexWrap: "wrap", gap: 0.5 }}
-              >
-                {dataProduct.variants.map((variant, index) => (
-                  <Box
-                    key={index}
-                    onClick={() => handleBoxSizeChange(index)}
-                    sx={{
-                      border: `1px solid ${red[100]}`,
-                      cursor: "pointer",
-                      borderRadius: "5px",
-                      backgroundColor:
-                        index === selectedBoxSize ? red[100] : white[100],
-                    }}
-                    p={1}
-                  >
-                    <TypographyDes
-                      sx={{
-                        color:
-                          index === selectedBoxSize ? white[100] : red[100],
-                      }}
-                    >
-                      {variant.box_size}
-                    </TypographyDes>
-                  </Box>
-                ))}
-              </Grid>
-
-              <Grid
-                item
-                xs={isMobile ? 3 : 2}
-                display={"flex"}
-                alignItems={"center"}
-              >
-                <TypographyDes>Kích thước:</TypographyDes>
-              </Grid>
-              <Grid
-                item
-                xs={isMobile ? 9 : 10}
-                display={"flex"}
-                sx={{ flexWrap: "wrap", gap: 0.5 }}
-              >
-                {selectedBoxSizeData &&
-                  selectedBoxSizeData.sizes.map((size, index) => (
-                    <Box
+        {dataProduct.product_variants &&
+          dataProduct.product_variants.length > 0 && (
+            <>
+              <Grid container spacing={isMobile ? 1 : 2} mb={isMobile ? 1 : 2}>
+                <Grid
+                  item
+                  xs={isMobile ? 3 : 2}
+                  display={"flex"}
+                  alignItems={"center"}
+                >
+                  <TypographyDes>
+                    {dataProduct.variant_type && dataProduct.variant_type.name}:
+                  </TypographyDes>
+                </Grid>
+                <Grid
+                  item
+                  xs={isMobile ? 9 : 10}
+                  display={"flex"}
+                  sx={{ flexWrap: "wrap", gap: 0.5 }}
+                >
+                  {dataProduct.product_variants.map((variant, index) => (
+                    <Button
                       key={index}
-                      onClick={() => handleSizeChange(index)}
                       sx={{
                         border: `1px solid ${red[100]}`,
                         cursor: "pointer",
                         borderRadius: "5px",
-
                         backgroundColor:
-                          index === selectedSize ? red[100] : white[100],
+                          variant.id === selectedVariant?.id
+                            ? red[100]
+                            : white[100],
+                        p: 1,
+                        "&:hover": {
+                          backgroundColor:
+                            variant.id === selectedVariant?.id
+                              ? red[100]
+                              : white[100],
+                        },
+                        textTransform: "none",
                       }}
-                      p={1}
+                      onClick={() => handleVariantClick(variant)}
                     >
                       <TypographyDes
                         sx={{
-                          color: index === selectedSize ? white[100] : red[100],
+                          color:
+                            variant.id === selectedVariant?.id
+                              ? white[100]
+                              : red[100],
                         }}
                       >
-                        {size.name}
+                        {variant.name}
                       </TypographyDes>
-                    </Box>
+                    </Button>
                   ))}
+                </Grid>
+                {!allVariantsNull && (
+                  <>
+                    <Grid
+                      item
+                      xs={isMobile ? 3 : 2}
+                      display={"flex"}
+                      alignItems={"center"}
+                    >
+                      <TypographyDes>Kích thước:</TypographyDes>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={isMobile ? 9 : 10}
+                      display={"flex"}
+                      sx={{ flexWrap: "wrap", gap: 0.5 }}
+                    >
+                      {dataProduct.product_variants
+                        .filter((item) => item.box_size !== null)
+                        .map((item, index) => (
+                          <Button
+                            key={index}
+                            sx={{
+                              border:
+                                item.id === selectedVariant?.id
+                                  ? `1px solid ${red[100]}`
+                                  : `1px solid ${gray}`,
+                              cursor:
+                                item.id !== selectedVariant?.id
+                                  ? "not-allowed"
+                                  : "pointer",
+                              borderRadius: "5px",
+                              backgroundColor:
+                                item.id === selectedVariant?.id
+                                  ? red[100]
+                                  : white[100],
+                              p: 1,
+                              "&:hover": {
+                                backgroundColor:
+                                  item.id === selectedVariant?.id
+                                    ? red[100]
+                                    : white[100],
+                              },
+                              textTransform: "none",
+                            }}
+                            onClick={() => handleVariantClick(item)}
+                            disabled={item.id !== selectedVariant?.id}
+                          >
+                            <TypographyDes
+                              sx={{
+                                color:
+                                  item.id === selectedVariant?.id
+                                    ? white[100]
+                                    : gray,
+                              }}
+                            >
+                              {item.box_size}
+                            </TypographyDes>
+                          </Button>
+                        ))}
+                    </Grid>
+                  </>
+                )}
               </Grid>
-            </Grid>
-          </>
-        )}
+            </>
+          )}
         <Grid item xs={isMobile ? 3 : 2} display={"flex"} alignItems={"center"}>
           <TypographyDes>Số lượng :</TypographyDes>
         </Grid>
@@ -273,7 +336,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
                 },
                 "& .MuiOutlinedInput-root.Mui-focused": {
                   "& > fieldset": {
-                    border: "1px solid #A4AAAF",
+                    border: `1px solid ${gray}`,
                   },
                 },
                 borderRadius: "0",
@@ -296,6 +359,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
                 boxShadow: `0 0 10px ${orange}`,
               },
             }}
+            onClick={() => addToCart()}
           >
             Thêm vào giỏ hàng
           </ButtonStyled>
@@ -344,10 +408,10 @@ const ButtonStyled = styled(Button)(({ theme }) => ({
   borderRadius: "10px",
 }));
 
-const BoxStyled = styled(Stack)(({ theme }) => ({
+export const BoxStyled = styled(Stack)(({ theme }) => ({
   cursor: "pointer",
   color: "#A4AAAF",
-  border: "1px solid #A4AAAF",
+  border: `1px solid ${gray}`,
   padding: "0px 13px",
 
   justifyContent: "center",

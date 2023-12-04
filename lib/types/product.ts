@@ -1,26 +1,42 @@
 import { StaticImageData } from "next/image";
-
-export type Product = {
+export type ProductType = {
     id: number;
     name: string;
-    price: string;
-    priceSale: string;
-    images: StaticImageData[];
+    price: number;
+    promotional_price?: number;
+    code: string;
+    status: number;
+    is_publish: number;
+    type: number;
+    category_id: number;
+    country_id: number;
+    variant_type_id: number;
+    image_url: StaticImageData[];
     description: string;
-    category: string;
-    brand: string;
-    variants?: Variant[]
+    created_at: string | null;
+    updated_at: string | null;
+    category: {
+      id: number;
+      name: string;
     };
-export type Variant = {
-    id: number;
-    box_size: string;
-    sizes: Size[];
+    country: {
+      id: number;
+      name: string;
+    };
+    variant_type?: {
+      id: number;
+      name: string;
+    };
+    product_variants?: ProductsVariant[];
+    };
+    export type ProductsVariant = {
+      id: number;
+      product_id: number;
+      name: string;
+      price: number;
+      promotional_price?: number;
+      status: number;
+      box_size: string;
+      code: string;
     };
 
-export type Size = {
-    id: number;
-    name: string;
-    price: string;
-    priceSale: string;
-    quantity: number;
-}
