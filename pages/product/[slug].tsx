@@ -1,24 +1,13 @@
 import React, { useState } from "react";
 import Page from "@/components/Page";
 import SlideImage from "@/components/Product/SlideImage";
-import {
-  Grid,
-  Stack,
-  Typography,
-  styled,
-  Button,
-  TextField,
-  Box,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+import { Grid, useMediaQuery, useTheme } from "@mui/material";
 import { black, blue, orange, red, white, yellow } from "@/styles";
 import Ginseng1 from "@/public/images/products/ginseng1.png";
 import Ginseng2 from "@/public/images/products/ginseng2.png";
 import Ginseng3 from "@/public/images/products/ginseng3.png";
 import Ginseng4 from "@/public/images/products/ginseng4.png";
 import Ginseng5 from "@/public/images/products/ginseng5.png";
-import { formatPrice } from "@/lib/contansts";
 import ProductPrice from "@/components/Product/ProductPrice";
 import News from "@/components/Home/News";
 import ProductDescription from "@/components/Product/ProductDescription";

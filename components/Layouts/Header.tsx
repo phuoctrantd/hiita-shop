@@ -1,5 +1,6 @@
 import { black, red, white } from "@/styles";
 import {
+  Badge,
   Box,
   Container,
   Grid,
@@ -20,6 +21,8 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import DragHandleOutlinedIcon from "@mui/icons-material/DragHandleOutlined";
 import DrawerContainer from "./components/DrawerContainer";
 import Link from "next/link";
+import { useAtom } from "jotai";
+import { cartAtom } from "@/lib/hooks/cart";
 
 const Header = () => {
   const theme = useTheme();
@@ -31,6 +34,8 @@ const Header = () => {
   const handleCloseMenu = () => {
     setOpenMenu(false);
   };
+  const [cart] = useAtom(cartAtom);
+  const cartLength = cart?.length;
   return (
     <>
       <Box
@@ -183,12 +188,22 @@ const Header = () => {
               xs={isMobile ? 2 : 1}
               sx={{
                 display: "flex",
-                justifyContent: "end",
+                justifyContent: "center",
                 alignItems: "center",
               }}
             >
               <Link href={"/cart"}>
-                <Image src={CartIcon} alt="logo" width="28" height="28" />
+                <Badge
+                  sx={{
+                    "& .MuiBadge-badge": {
+                      color: red[100],
+                      backgroundColor: white[100],
+                    },
+                  }}
+                  badgeContent={cartLength}
+                >
+                  <Image src={CartIcon} alt="logo" width="28" height="28" />
+                </Badge>
               </Link>
             </Grid>
           </Grid>

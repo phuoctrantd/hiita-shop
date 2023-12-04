@@ -1,5 +1,5 @@
 import { formatPrice } from "@/lib/contansts";
-import { Product, ProductsVariant } from "@/lib/types/product";
+import { ProductType, ProductsVariant } from "@/lib/types/product";
 import { black, blue, gray, orange, red, white, yellow } from "@/styles";
 import {
   Box,
@@ -13,9 +13,12 @@ import {
   useTheme,
 } from "@mui/material";
 import React from "react";
-
+import { useAtom } from "jotai";
+import { cartAtom } from "../../lib/hooks/cart";
+import { set } from "zod";
+import toast from "react-hot-toast";
 interface ProductPriceProps {
-  dataProduct: Product;
+  dataProduct: ProductType;
 }
 
 const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
@@ -33,6 +36,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
     : dataProduct.price;
   const handleVariantClick = (variant: ProductsVariant) => {
     setSelectedVariant(variant);
+    setQuantity(1);
   };
   const [quantity, setQuantity] = React.useState(1);
 
@@ -50,6 +54,33 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
   const allVariantsNull = dataProduct.product_variants?.every(
     (variant) => variant.box_size === null
   );
+  const [cart, setCart] = useAtom(cartAtom);
+  const addToCart = () => {
+    const existingItemIndex = cart.findIndex(
+      (item) =>
+        item.id === dataProduct.id &&
+        item.variant &&
+        selectedVariant &&
+        item.variant.id === selectedVariant.id
+    );
+
+    if (existingItemIndex !== -1) {
+      const newCartItems = [...cart];
+      newCartItems[existingItemIndex] = {
+        ...newCartItems[existingItemIndex],
+        quantity: newCartItems[existingItemIndex].quantity + quantity,
+      };
+      setCart(newCartItems);
+    } else {
+      setCart([
+        ...cart,
+        { ...dataProduct, quantity, variant: selectedVariant },
+      ]);
+    }
+    toast.success("Thêm sản phẩm vào giỏ hàng thành công");
+  };
+  console.log(cart);
+
   return (
     <>
       <Typography variant="h4" sx={{ fontWeight: 600 }} mb={3}>
@@ -328,6 +359,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
                 boxShadow: `0 0 10px ${orange}`,
               },
             }}
+            onClick={() => addToCart()}
           >
             Thêm vào giỏ hàng
           </ButtonStyled>
