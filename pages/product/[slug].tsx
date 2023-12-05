@@ -3,11 +3,13 @@ import Page from "@/components/Page";
 import SlideImage from "@/components/Product/SlideImage";
 import { Grid, useMediaQuery, useTheme } from "@mui/material";
 import { black, blue, orange, red, white, yellow } from "@/styles";
-import Ginseng1 from "@/public/images/products/ginseng1.png";
-import Ginseng2 from "@/public/images/products/ginseng2.png";
-import Ginseng3 from "@/public/images/products/ginseng3.png";
-import Ginseng4 from "@/public/images/products/ginseng4.png";
-import Ginseng5 from "@/public/images/products/ginseng5.png";
+import ProductFruit1 from "@/public/images/products/product1.png";
+import ProductFruit2 from "@/public/images/products/product2.png";
+import ProductFruit3 from "@/public/images/products/product3.png";
+import ProductFruit4 from "@/public/images/products/product4.png";
+import ProductFruit5 from "@/public/images/products/product5.png";
+import ProductFruit6 from "@/public/images/products/product6.png";
+import ProductFruit7 from "@/public/images/products/product7.png";
 import ProductPrice from "@/components/Product/ProductPrice";
 import News from "@/components/Home/News";
 import ProductDescription from "@/components/Product/ProductDescription";
@@ -28,7 +30,15 @@ const Product = () => {
     category_id: 1,
     country_id: 1,
     variant_type_id: 1,
-    image_url: [Ginseng1, Ginseng2, Ginseng3, Ginseng4, Ginseng5],
+    image_url: [
+      ProductFruit1,
+      ProductFruit2,
+      ProductFruit3,
+      ProductFruit4,
+      ProductFruit5,
+      ProductFruit6,
+      ProductFruit7,
+    ],
     description: "abc hehe",
     created_at: null,
     updated_at: null,
