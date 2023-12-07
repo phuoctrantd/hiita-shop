@@ -211,6 +211,9 @@ const Cart = () => {
                         {item.name}
                       </Typography>
                     </Link>
+                    <Typography fontSize={12} fontWeight={400}>
+                      {item.variant && item.variant.name}
+                    </Typography>
                     {isMobile && (
                       <Stack direction={"row"}>
                         <BoxStyled
@@ -345,7 +348,7 @@ const Cart = () => {
                   />
                 </Grid>
               </Grid>
-              <Divider sx={{ mt: 2, mb: isMobile ? 3 : "unset" }} />
+              <Divider sx={{ mt: 2, mb: isMobile ? 3 : 2 }} />
             </React.Fragment>
           ))}
 
@@ -382,7 +385,7 @@ const Cart = () => {
                     </TypographyHeader>
                   </Grid>
                 </Grid>
-                <Grid container justifyContent={"flex-end"}>
+                {/* <Grid container justifyContent={"flex-end"}>
                   <Grid item xs={6}>
                     <TypographyHeader sx={{ fontWeight: 400 }}>
                       Giảm giá sản phẩm
@@ -393,7 +396,7 @@ const Cart = () => {
                       {formatPrice(totalPromotionalCart())}
                     </TypographyPrice>
                   </Grid>
-                </Grid>
+                </Grid> */}
                 <Divider sx={{ my: 2 }} />
                 <Grid container justifyContent={"flex-end"}>
                   <Grid item xs={6}>
