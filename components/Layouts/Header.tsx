@@ -106,6 +106,7 @@ const Header = () => {
                   "& .MuiOutlinedInput-input": {
                     padding: "13px 20px 6px 20px",
                     color: black,
+                    fontSize: "16px !important",
                   },
                 }}
                 placeholder="Tìm kiếm sản phẩm....."
