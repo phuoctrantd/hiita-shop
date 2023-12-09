@@ -16,7 +16,10 @@
 
   const yellow = "#FFB416"
 
-  const gray = "#A4AAAF"
+  const gray = {
+    100:"#A4AAAF",
+    200:"#F2F2F2"
+  }
 
   export { red, white,black,orange,blue,yellow,gray }
   

@@ -79,7 +79,6 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
     }
     toast.success("Thêm sản phẩm vào giỏ hàng thành công");
   };
-  console.log(cart);
 
   return (
     <>
@@ -272,7 +271,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
                               border:
                                 item.id === selectedVariant?.id
                                   ? `1px solid ${red[100]}`
-                                  : `1px solid ${gray}`,
+                                  : `1px solid ${gray[100]}`,
                               cursor:
                                 item.id !== selectedVariant?.id
                                   ? "not-allowed"
@@ -299,7 +298,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
                                 color:
                                   item.id === selectedVariant?.id
                                     ? white[100]
-                                    : gray,
+                                    : gray[100],
                               }}
                             >
                               {item.box_size}
@@ -336,7 +335,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
                 },
                 "& .MuiOutlinedInput-root.Mui-focused": {
                   "& > fieldset": {
-                    border: `1px solid ${gray}`,
+                    border: `1px solid ${gray[100]}`,
                   },
                 },
                 borderRadius: "0",
@@ -411,7 +410,7 @@ const ButtonStyled = styled(Button)(({ theme }) => ({
 export const BoxStyled = styled(Stack)(({ theme }) => ({
   cursor: "pointer",
   color: "#A4AAAF",
-  border: `1px solid ${gray}`,
+  border: `1px solid ${gray[100]}`,
   padding: "0px 13px",
 
   justifyContent: "center",

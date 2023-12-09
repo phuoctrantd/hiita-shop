@@ -15,8 +15,8 @@ interface ProductFeaturedProps {
 interface dataProductFeaturedProps {
   id: number;
   name: string;
-  price: string;
-  priceSale: string;
+  price: number;
+  priceSale: number;
   image: StaticImageData;
 }
 

@@ -19,44 +19,44 @@ interface MenuItem {
     {
       id: 3,
       label: "Nhân sâm",
-      link: "/",
+      link: "/collections/nhan-sam",
       subMenu: [
         {
           id: 1,
           label: "Nhân sâm Hàn Quốc",
-          link: "/",
+          link: "/collections/nhan-sam-han-quoc",
         },
         {
           id: 2,
           label: "Cao ly",
-          link: "/",
+          link: "/collections/cao-ly",
         },
         {
           id: 3,
           label: "Nhân sâm Việt Nam",
-          link: "/",
+          link: "/collections/nhan-sam-viet-nam",
         },
       ] as const, // Use as const to mark the array as readonly
     },
     {
       id: 4,
       label: "Trái cây nhập khẩu",
-      link: "/",
+      link: "/collections/trai-cay-nhap-khau",
       subMenu: [
         {
           id: 1,
           label: "Táo",
-          link: "/",
+          link: "/collections/tao",
         },
         {
           id: 2,
           label: "Nho",
-          link: "/",
+          link: "/collections/nho",
         },
         {
           id: 3,
           label: "Kiwi",
-          link: "/",
+          link: "/collections/kiwi",
         },
       ] as const, // Use as const to mark the array as readonly
     },
@@ -171,3 +171,63 @@ return  price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " VND";
 export const generateSlug = (name:string,id:number) => {
 return name.replace(/\s+/g, '-').toLowerCase() + "-i." + id;
 }
+export const generateNameFromSlug = (slug:string) => {
+  switch(slug){
+    case "nhan-sam"
+    : return "Nhân sâm";
+    case "nhan-sam-han-quoc"
+    : return "Nhân sâm Hàn Quốc";
+    case "cao-ly"
+    : return "Cao ly";
+    case "nhan-sam-viet-nam"
+    : return "Nhân sâm Việt Nam";
+    case "trai-cay-nhap-khau"
+    : return "Trái cây nhập khẩu";
+    case "tao"
+    : return "Táo";
+    case "nho"
+    : return "Nho";
+    case "kiwi"
+    : return "Kiwi";
+    default: return "";
+}
+}
+
+export const priceRange = [
+  {
+    id:1,
+    label:"Dưới 500.000đ",
+    min:0,
+    max:500000
+  },
+  {
+    id:2,
+    label:"500.000đ - 1.000.000đ",
+    min:500000,
+    max:1000000
+  },
+  {
+    id:3,
+    label:"1.000.000đ - 2.000.000đ",
+    min:1000000,
+    max:2000000
+  },
+  {
+    id:4,
+    label:"2.000.000đ - 3.000.000đ",
+    min:2000000,
+    max:3000000
+  },
+  {
+    id:5,
+    label:"3.000.000đ - 5.000.000đ",
+    min:3000000,
+    max:5000000
+  },
+  {
+    id:6,
+    label:"Trên 5.000.000đ",
+    min:5000000,
+    max:1000000000
+  },
+]

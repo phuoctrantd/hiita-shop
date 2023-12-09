@@ -15,6 +15,7 @@ import { red } from "@/styles";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import { MENU_DATA } from "@/lib/contansts";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Link from "next/link";
 interface DrawerContainerProps {
   openMenu: boolean;
   handleCloseMenu: () => void;
@@ -94,27 +95,29 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({
                       }}
                     />
                     {item.subMenu.map((item, index) => (
-                      <Box key={index} pl={2}>
-                        <Typography fontSize={13} color={red[100]}>
-                          {item.label}
-                        </Typography>
-                        <Divider
-                          sx={{
-                            my: "5px",
-                            backgroundColor: red[100],
-                            height: "1px",
-                          }}
-                        />
+                      <Box key={index} pl={2} onClick={handleCloseMenu}>
+                        <Link href={item.link}>
+                          <Typography fontSize={13} color={red[100]}>
+                            {item.label}
+                          </Typography>
+                          <Divider
+                            sx={{
+                              my: "5px",
+                              backgroundColor: red[100],
+                              height: "1px",
+                            }}
+                          />
+                        </Link>
                       </Box>
                     ))}
                   </AccordionDetails>
                 </Accordion>
               ) : (
-                <Box>
+                <Link href={item.link} onClick={handleCloseMenu}>
                   <Typography fontSize={14} color={red[100]}>
                     {item.label}
                   </Typography>
-                </Box>
+                </Link>
               )}
 
               <Divider
