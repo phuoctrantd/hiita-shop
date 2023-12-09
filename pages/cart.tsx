@@ -235,17 +235,17 @@ const Cart = () => {
                             },
                             "& .MuiOutlinedInput-root.Mui-focused": {
                               "& > fieldset": {
-                                border: `1px solid ${gray}`,
+                                border: `1px solid ${gray[100]}`,
                               },
                             },
                             "& .MuiOutlinedInput-notchedOutline": {
                               border: "none",
-                              borderTop: `1px solid ${gray}`,
-                              borderBottom: `1px solid ${gray}`,
+                              borderTop: `1px solid ${gray[100]}`,
+                              borderBottom: `1px solid ${gray[100]}`,
                             },
                             "& .MuiOutlinedInput-root:hover": {
                               "& > fieldset": {
-                                borderColor: gray,
+                                borderColor: gray[100],
                               },
                             },
                             borderRadius: "0",
@@ -295,17 +295,17 @@ const Cart = () => {
                           },
                           "& .MuiOutlinedInput-root.Mui-focused": {
                             "& > fieldset": {
-                              border: `1px solid ${gray}`,
+                              border: `1px solid ${gray[100]}`,
                             },
                           },
                           "& .MuiOutlinedInput-notchedOutline": {
                             border: "none",
-                            borderTop: `1px solid ${gray}`,
-                            borderBottom: `1px solid ${gray}`,
+                            borderTop: `1px solid ${gray[100]}`,
+                            borderBottom: `1px solid ${gray[100]}`,
                           },
                           "& .MuiOutlinedInput-root:hover": {
                             "& > fieldset": {
-                              borderColor: gray,
+                              borderColor: gray[100],
                             },
                           },
                           borderRadius: "0",
@@ -368,7 +368,7 @@ const Cart = () => {
                 item
                 xs={isMobile ? 12 : 5}
                 sx={{
-                  border: `1px solid ${gray}`,
+                  border: `1px solid ${gray[100]}`,
                   borderRadius: "6px",
                   p: "24px 20px",
                 }}

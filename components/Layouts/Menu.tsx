@@ -48,37 +48,39 @@ const Menu = () => {
                       <Box p={1.25}>
                         {item.subMenu.map((item, indexSubitem) => (
                           <React.Fragment key={indexSubitem}>
-                            <Box
-                              sx={{
-                                cursor: "pointer",
-                                color: red[100],
-                                position: "relative",
-                                "&:before": {
-                                  content: "''",
-                                  position: "absolute",
-                                  width: "0",
-                                  height: "1px",
-                                  bottom: "-1px",
-                                  left: "0",
-                                  transform: "translate(0%,0%)",
-                                  backgroundColor: red[100],
-                                  transformOrigin: "center",
-                                  visibility: "hidden",
-                                  transition: "all 0.3s ease-in-out",
-                                },
-                                "&:hover:before": {
-                                  visibility: "visible",
-                                  width: "100%",
-                                },
-                              }}
-                              width={200}
-                              color={red[100]}
-                              p={0.8}
-                            >
-                              <Typography fontSize={15} fontWeight={600}>
-                                {item.label}
-                              </Typography>
-                            </Box>
+                            <Link href={item.link}>
+                              <Box
+                                sx={{
+                                  cursor: "pointer",
+                                  color: red[100],
+                                  position: "relative",
+                                  "&:before": {
+                                    content: "''",
+                                    position: "absolute",
+                                    width: "0",
+                                    height: "1px",
+                                    bottom: "-1px",
+                                    left: "0",
+                                    transform: "translate(0%,0%)",
+                                    backgroundColor: red[100],
+                                    transformOrigin: "center",
+                                    visibility: "hidden",
+                                    transition: "all 0.3s ease-in-out",
+                                  },
+                                  "&:hover:before": {
+                                    visibility: "visible",
+                                    width: "100%",
+                                  },
+                                }}
+                                width={200}
+                                color={red[100]}
+                                p={0.8}
+                              >
+                                <Typography fontSize={15} fontWeight={600}>
+                                  {item.label}
+                                </Typography>
+                              </Box>
+                            </Link>
                             <Divider
                               sx={{
                                 backgroundColor: "#f1eaea",
