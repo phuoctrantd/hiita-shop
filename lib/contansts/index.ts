@@ -64,7 +64,7 @@ interface MenuItem {
     {
       id: 5,
       label: "Tin tức",
-      link: "/",
+      link: "/news",
     },
     {
         id: 6,

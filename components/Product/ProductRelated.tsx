@@ -18,7 +18,6 @@ const ProductRelated = () => {
       id: 1,
       name: "Dâu tây Osaka",
       price: 399000,
-
       image: ProductFruit1,
     },
     {
@@ -91,7 +90,7 @@ const ProductRelated = () => {
     <>
       <Stack>
         {isMobile ? (
-          <Title title="    Sản phẩm liên quan" />
+          <Title title="Sản phẩm liên quan" />
         ) : (
           <Typography
             color={red[100]}
