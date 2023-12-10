@@ -104,9 +104,9 @@ const Header = () => {
                     },
                   },
                   "& .MuiOutlinedInput-input": {
-                    padding: "13px 20px 6px 20px",
+                    padding: "15px 20px 6px 20px",
                     color: black,
-                    fontSize: "16px !important",
+                    fontSize: "14px !important",
                   },
                 }}
                 placeholder="Tìm kiếm sản phẩm....."
@@ -130,12 +130,12 @@ const Header = () => {
                   <Image
                     src={PhoneIcon}
                     alt="icon_phone"
-                    width="40"
-                    height="40"
+                    width="35"
+                    height="35"
                   />
                   <Box>
                     <TextHeader>Tư vấn hỗ trợ</TextHeader>
-                    <TextHeader sx={{ fontSize: 17, fontWeight: 700 }}>
+                    <TextHeader sx={{ fontSize: 13, fontWeight: 700 }}>
                       19006633
                     </TextHeader>
                   </Box>
@@ -157,14 +157,14 @@ const Header = () => {
                 spacing={0.6}
               >
                 <AccountCircleOutlinedIcon
-                  sx={{ color: white[100], fontSize: 40 }}
+                  sx={{ color: white[100], fontSize: 35 }}
                 />
                 <Box>
                   <TextHeader
                     sx={{
                       fontSize: isMobile
                         ? "13px !important"
-                        : "15px !important",
+                        : "12px !important",
                     }}
                   >
                     Xin chào
@@ -232,7 +232,7 @@ const Header = () => {
 export default Header;
 
 const TextHeader = styled(Typography)(({ theme }) => ({
-  fontSize: 15,
+  fontSize: 12,
   color: white[100],
   fontWeight: 400,
 }));

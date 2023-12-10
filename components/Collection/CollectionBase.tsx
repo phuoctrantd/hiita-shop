@@ -298,7 +298,7 @@ const CollectionBase = () => {
               sx={{
                 borderRadius: "6px",
                 border: `1px solid ${gray[200]}`,
-                p: 3,
+                p: "20px 0px 20px 20px",
               }}
             >
               <Box>
