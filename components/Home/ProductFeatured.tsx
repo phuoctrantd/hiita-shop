@@ -27,14 +27,14 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const firstRow =
-    dataProductFeatured && dataProductFeatured.slice(0, fruit ? 4 : 3);
+    dataProductFeatured && dataProductFeatured.slice(0, fruit ? 5 : 3);
   const secondRow =
-    dataProductFeatured && dataProductFeatured.slice(fruit ? 4 : 3, 8);
+    dataProductFeatured && dataProductFeatured.slice(fruit ? 5 : 3, 10);
 
   return (
-    <Grid container alignItems="stretch" spacing={3}>
+    <Grid container alignItems="stretch" spacing={2}>
       {!isMobile && (
-        <Grid item xs={fruit ? 2.4 : 4.8}>
+        <Grid item xs={fruit ? 2 : 4}>
           <Image
             src={fruit ? BannerFruit1 : BannerGinseng}
             alt="banner"
@@ -43,7 +43,7 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
         </Grid>
       )}
       {firstRow?.map((item, index) => (
-        <Grid item xs={isMobile ? 6 : 2.4} key={index}>
+        <Grid item xs={isMobile ? 6 : 2} key={index}>
           <Link href={`/product/${generateSlug(item.name, item.id)}`}>
             <Box
               sx={{
@@ -92,7 +92,7 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
         </Grid>
       ))}
       {fruit && !isMobile && (
-        <Grid item xs={2.4}>
+        <Grid item xs={2}>
           <Image
             src={BannerFruit1}
             alt="banner"
@@ -101,7 +101,7 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
         </Grid>
       )}
       {secondRow?.map((item, index) => (
-        <Grid item xs={isMobile ? 6 : 2.4} key={index}>
+        <Grid item xs={isMobile ? 6 : 2} key={index}>
           <Link href={`/product/${generateSlug(item.name, item.id)}`}>
             <Box
               sx={{
@@ -139,10 +139,10 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
                     textDecorationColor: black,
                   }}
                 >
-                  {item.price}
+                  {formatPrice(item.price)}
                 </Typography>
                 <Typography fontSize={14} fontWeight={800} color={red[100]}>
-                  {item.priceSale}
+                  {formatPrice(item.priceSale)}
                 </Typography>
               </Box>
             </Box>

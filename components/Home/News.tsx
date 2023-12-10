@@ -59,7 +59,7 @@ const News = () => {
   ];
   return (
     <Box my={5.6}>
-      <Title title="Tin tức" />
+      <Title title="Tin tức" link="/news" />
       <SwiperStyled>
         <Swiper
           navigation={true}

@@ -99,10 +99,10 @@ const Product = () => {
         </Grid>
       </Grid>
       <Grid container mb={7} spacing={5}>
-        <Grid item xs={isMobile ? 12 : 8.5}>
+        <Grid item xs={12}>
           <ProductDescription description={dataProduct.description} />
         </Grid>
-        <Grid item xs={isMobile ? 12 : 3.5}>
+        <Grid item xs={12}>
           <ProductRelated />
         </Grid>
       </Grid>

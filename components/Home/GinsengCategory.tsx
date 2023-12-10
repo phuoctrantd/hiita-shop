@@ -83,7 +83,7 @@ export const dataProductFeatured = [
 const GinsengCategory = () => {
   return (
     <Box my={5.6}>
-      <Title title="Nhân sâm" />
+      <Title title="Nhân sâm" link="/collections/nhan-sam" />
       <ProductFeatured dataProductFeatured={dataProductFeatured} />
     </Box>
   );

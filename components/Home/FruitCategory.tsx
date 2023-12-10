@@ -85,7 +85,10 @@ const FruitCategory = () => {
   ];
   return (
     <Box my={5.6}>
-      <Title title="TRÁI CÂY NHẬP KHẨU" />
+      <Title
+        title="TRÁI CÂY NHẬP KHẨU"
+        link="/collections/trai-cay-nhap-khau"
+      />
       <ProductFeatured dataProductFeatured={dataProductFeatured} fruit />
     </Box>
   );

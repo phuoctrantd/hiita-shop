@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import React from "react";
-import Logo from "@/public/images/logo.png";
+import Logo from "@/public/images/hiita-logo.png";
 import { MENU_DATA_FOOTER } from "@/lib/contansts";
 const Footer = () => {
   const theme = useTheme();
@@ -21,7 +21,7 @@ const Footer = () => {
     <Box
       style={{
         width: "100%",
-        backgroundColor: red[100],
+        backgroundColor: white[100],
         borderRadius: isMobile ? "0 0 15px 15px" : 0,
       }}
     >
@@ -108,7 +108,7 @@ export default Footer;
 
 const TextTitle = styled(Typography)(({ theme }) => ({
   fontSize: 15,
-  color: white[100],
+  color: red[100],
   fontWeight: 700,
   textTransform: "uppercase",
   marginBottom: 12,
@@ -116,7 +116,7 @@ const TextTitle = styled(Typography)(({ theme }) => ({
 const TextMenu = styled(Typography)(({ theme }) => ({
   fontSize: 15,
   fontWeight: 600,
-  color: white[100],
+  color: red[100],
   cursor: "pointer",
   marginBottom: 10,
   "&:hover": {

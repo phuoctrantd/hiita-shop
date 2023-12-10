@@ -1,5 +1,5 @@
 import { black, red } from "@/styles";
-import { Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 import ProductFruit1 from "@/public/images/products/product1.png";
@@ -12,6 +12,11 @@ import ProductFruit7 from "@/public/images/products/product7.png";
 import { formatPrice, generateSlug } from "@/lib/contansts";
 import Link from "next/link";
 import Title from "../Home/Title";
+import { SwiperStyled } from "../Home/News";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Navigation, Autoplay } from "swiper/modules";
 const ProductRelated = () => {
   const dataProductRelated = [
     {
@@ -88,55 +93,45 @@ const ProductRelated = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <>
-      <Stack>
-        {isMobile ? (
-          <Title title="Sản phẩm liên quan" />
-        ) : (
-          <Typography
-            color={red[100]}
-            fontSize={16}
-            fontWeight={800}
-            textAlign={"center"}
-            mb={3}
-            sx={{ textTransform: "uppercase" }}
+      <Box>
+        <Title title="Sản phẩm liên quan" />
+        <SwiperStyled>
+          <Swiper
+            navigation={true}
+            slidesPerView={isMobile ? 1 : 4}
+            modules={[Navigation, Autoplay]}
+            spaceBetween={20}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: true,
+            }}
           >
-            Sản phẩm liên quan
-          </Typography>
-        )}
-
-        <Stack
-          spacing={1}
-          direction={isMobile ? "row" : "column"}
-          sx={{ overflow: "auto" }}
-        >
-          {dataProductRelated.slice(0, 5).map((item) => (
-            <Link
-              href={`/product/${generateSlug(item.name, item.id)}`}
-              key={item.id}
-            >
-              <Stack
-                direction={"row"}
-                spacing={2}
-                sx={{
-                  "&:hover": {
-                    transform: "scale(1.02)",
-                  },
-                  width: isMobile ? "250px" : "100%",
-                }}
-              >
-                <Image
-                  src={item.image}
-                  width={100}
-                  height={100}
-                  alt={item.name}
-                />
-                <Stack>
-                  <Typography fontSize={16} fontWeight={700}>
-                    {item.name}
-                  </Typography>
-                  {item.priceSale && (
+            {dataProductRelated.map((item, index) => (
+              <SwiperSlide key={index}>
+                <Box
+                  sx={{
+                    transition: "transform 0.3s",
+                    cursor: "pointer",
+                    "&:hover": {
+                      transform: "scale(1.02)",
+                    },
+                    width: "100%",
+                  }}
+                >
+                  <Image
+                    src={item.image}
+                    alt="banner"
+                    style={{
+                      width: "100%",
+                      height: isMobile ? "320px" : "250px",
+                    }}
+                  />
+                  <Box mt={1.6}>
+                    <Typography fontSize={14} fontWeight={700} mb={1}>
+                      {item.name}
+                    </Typography>
                     <Typography
-                      fontSize={14}
+                      fontSize={12}
                       fontWeight={700}
                       color={red[200]}
                       sx={{
@@ -144,18 +139,18 @@ const ProductRelated = () => {
                         textDecorationColor: black,
                       }}
                     >
-                      {formatPrice(item.priceSale)}
+                      {formatPrice(item.price)}
                     </Typography>
-                  )}
-                  <Typography fontSize={16} fontWeight={800} color={red[100]}>
-                    {formatPrice(item.price)}
-                  </Typography>
-                </Stack>
-              </Stack>
-            </Link>
-          ))}
-        </Stack>
-      </Stack>
+                    <Typography fontSize={14} fontWeight={800} color={red[100]}>
+                      {item.priceSale && formatPrice(item.priceSale)}
+                    </Typography>
+                  </Box>
+                </Box>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </SwiperStyled>
+      </Box>
     </>
   );
 };
