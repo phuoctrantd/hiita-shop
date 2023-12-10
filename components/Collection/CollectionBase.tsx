@@ -30,6 +30,7 @@ import { dataProductFeatured } from "../Home/GinsengCategory";
 import Image from "next/image";
 import Link from "next/link";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
+import { usePagination } from "@/lib/hooks/pagination";
 const CollectionBase = () => {
   const params = useParams();
   const [sort, setSort] = React.useState("latest");
@@ -78,12 +79,7 @@ const CollectionBase = () => {
       color: red[100],
     },
   }));
-  const handleChangePagination = (
-    event: React.ChangeEvent<unknown>,
-    value: number
-  ) => {
-    console.log(value);
-  };
+  const { page, handleChangePagination } = usePagination();
 
   const [selectedItems, setSelectedItems] = React.useState<{
     [key: number]: boolean;
@@ -180,10 +176,9 @@ const CollectionBase = () => {
               sx={{ display: "flex", justifyContent: "center" }}
             >
               <Pagination
-                onChange={(event, value) =>
-                  handleChangePagination(event, value)
-                }
                 count={3}
+                page={page}
+                onChange={handleChangePagination}
                 variant="outlined"
                 shape="rounded"
                 sx={{

@@ -5,7 +5,7 @@ import BannerFruit1 from "@/public/images/banners/banner1.png";
 import BannerGinseng from "@/public/images/banners/banner_ginseng.png";
 import { black, red } from "@/styles";
 import Link from "next/link";
-import { generateSlug } from "@/lib/contansts";
+import { formatPrice, generateSlug } from "@/lib/contansts";
 
 interface ProductFeaturedProps {
   fruit?: boolean;
@@ -81,10 +81,10 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
                     textDecorationColor: black,
                   }}
                 >
-                  {item.price}
+                  {formatPrice(item.price)}
                 </Typography>
                 <Typography fontSize={14} fontWeight={800} color={red[100]}>
-                  {item.priceSale}
+                  {formatPrice(item.priceSale)}
                 </Typography>
               </Box>
             </Box>
