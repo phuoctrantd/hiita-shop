@@ -151,7 +151,11 @@ const NewsList = () => {
             {!isMobile && (
               <Grid item xs={3}>
                 <Stack direction={"column"} spacing={4}>
-                  <ProductRelated />
+                  <Image
+                    src={Banner3}
+                    alt="news"
+                    style={{ width: "100%", height: "400px" }}
+                  />
                   <Image
                     src={Banner3}
                     alt="news"

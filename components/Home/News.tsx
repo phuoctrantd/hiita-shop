@@ -17,6 +17,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation, Autoplay } from "swiper/modules";
 import { red, white } from "@/styles";
+import Link from "next/link";
+import { generateSlug } from "@/lib/contansts";
 const News = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -73,30 +75,33 @@ const News = () => {
         >
           {dataNews.map((item, index) => (
             <SwiperSlide key={index}>
-              <Box
-                sx={{
-                  transition: "transform 0.3s",
-                  cursor: "pointer",
-                  "&:hover": {
-                    transform: "scale(1.02)",
-                  },
-                  width: "100%",
-                }}
-              >
-                <Image
-                  src={item.image}
-                  alt="banner"
-                  style={{ width: "100%", height: "auto" }}
-                />
-                <Box mt={1.6}>
-                  <Typography fontSize={14} fontWeight={700} mb={1}>
-                    {item.title}
-                  </Typography>
-                  <Typography fontSize={11} fontWeight={500}>
-                    {item.description && item.description.slice(0, 200) + "..."}
-                  </Typography>
+              <Link href={`/news/${generateSlug(item.title, item.id)}`}>
+                <Box
+                  sx={{
+                    transition: "transform 0.3s",
+                    cursor: "pointer",
+                    "&:hover": {
+                      transform: "scale(1.02)",
+                    },
+                    width: "100%",
+                  }}
+                >
+                  <Image
+                    src={item.image}
+                    alt="banner"
+                    style={{ width: "100%", height: "auto" }}
+                  />
+                  <Box mt={1.6}>
+                    <Typography fontSize={14} fontWeight={700} mb={1}>
+                      {item.title}
+                    </Typography>
+                    <Typography fontSize={11} fontWeight={500}>
+                      {item.description &&
+                        item.description.slice(0, 200) + "..."}
+                    </Typography>
+                  </Box>
                 </Box>
-              </Box>
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>
