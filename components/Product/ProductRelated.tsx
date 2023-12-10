@@ -108,44 +108,50 @@ const ProductRelated = () => {
           >
             {dataProductRelated.map((item, index) => (
               <SwiperSlide key={index}>
-                <Box
-                  sx={{
-                    transition: "transform 0.3s",
-                    cursor: "pointer",
-                    "&:hover": {
-                      transform: "scale(1.02)",
-                    },
-                    width: "100%",
-                  }}
-                >
-                  <Image
-                    src={item.image}
-                    alt="banner"
-                    style={{
+                <Link href={`/product/${generateSlug(item.name, item.id)}`}>
+                  <Box
+                    sx={{
+                      transition: "transform 0.3s",
+                      cursor: "pointer",
+                      "&:hover": {
+                        transform: "scale(1.02)",
+                      },
                       width: "100%",
-                      height: isMobile ? "320px" : "250px",
                     }}
-                  />
-                  <Box mt={1.6}>
-                    <Typography fontSize={14} fontWeight={700} mb={1}>
-                      {item.name}
-                    </Typography>
-                    <Typography
-                      fontSize={12}
-                      fontWeight={700}
-                      color={red[200]}
-                      sx={{
-                        textDecoration: "line-through",
-                        textDecorationColor: black,
+                  >
+                    <Image
+                      src={item.image}
+                      alt="banner"
+                      style={{
+                        width: "100%",
+                        height: isMobile ? "320px" : "250px",
                       }}
-                    >
-                      {formatPrice(item.price)}
-                    </Typography>
-                    <Typography fontSize={14} fontWeight={800} color={red[100]}>
-                      {item.priceSale && formatPrice(item.priceSale)}
-                    </Typography>
+                    />
+                    <Box mt={1.6}>
+                      <Typography fontSize={14} fontWeight={700} mb={1}>
+                        {item.name}
+                      </Typography>
+                      <Typography
+                        fontSize={12}
+                        fontWeight={700}
+                        color={red[200]}
+                        sx={{
+                          textDecoration: "line-through",
+                          textDecorationColor: black,
+                        }}
+                      >
+                        {formatPrice(item.price)}
+                      </Typography>
+                      <Typography
+                        fontSize={14}
+                        fontWeight={800}
+                        color={red[100]}
+                      >
+                        {item.priceSale && formatPrice(item.priceSale)}
+                      </Typography>
+                    </Box>
                   </Box>
-                </Box>
+                </Link>
               </SwiperSlide>
             ))}
           </Swiper>
