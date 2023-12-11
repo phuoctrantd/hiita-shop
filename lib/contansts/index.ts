@@ -231,3 +231,8 @@ export const priceRange = [
     max:1000000000
   },
 ]
+
+
+export const getIdFromSlug = (slug:string) => {
+return slug.split("-i.")[1];
+}

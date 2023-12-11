@@ -11,9 +11,9 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import { SwiperStyled } from "../Home/TabContainer";
-
+import ProductFruit1 from "@/public/images/products/product1.png";
 interface SlideImageProps {
-  images: Array<StaticImageData>;
+  images: Array<string>;
 }
 
 const SlideImage: React.FC<SlideImageProps> = ({ images }) => {
@@ -42,7 +42,7 @@ const SlideImage: React.FC<SlideImageProps> = ({ images }) => {
           {images?.map((item, index) => (
             <SwiperSlide key={index}>
               <Image
-                src={item}
+                src={item || ProductFruit1}
                 alt="banner"
                 style={{
                   width: "100%",

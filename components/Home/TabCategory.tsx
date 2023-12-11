@@ -11,6 +11,10 @@ import ProductFruit8 from "@/public/images/products/product8.png";
 import ProductFruit5 from "@/public/images/products/product5.png";
 import ProductFruit6 from "@/public/images/products/product6.png";
 import fruit_demo from "@/public/images/fruit_demo.png";
+import { ProductType } from "@/lib/types/product";
+import { useQuery } from "react-query";
+import { ProductResponse } from "@/lib/types/response";
+import { useCategoryProducts } from "@/lib/hooks/useCategoryProducts";
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -19,7 +23,8 @@ interface TabPanelProps {
 const TabCategory = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(1);
+  const data = useCategoryProducts(value, 1, 30);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -57,38 +62,6 @@ const TabCategory = () => {
       borderRadius: "20px 20px 0 0",
     },
   }));
-  const dataProductCategory = [
-    {
-      id: 1,
-      name: "Cam Osaka",
-      image: fruit_demo,
-      price: "1000000",
-    },
-    {
-      id: 2,
-      name: "Chuối Úc ",
-      image: ProductFruit5,
-      price: "1000000",
-    },
-    {
-      id: 3,
-      name: "Dâu tây Kyoto",
-      image: ProductFruit1,
-      price: "1000000",
-    },
-    {
-      id: 4,
-      name: "Nho sữa Hà Lan",
-      image: ProductFruit8,
-      price: "1000000",
-    },
-    {
-      id: 5,
-      name: "Việt Quất Hà Lan",
-      image: ProductFruit6,
-      price: "1000000",
-    },
-  ];
 
   return (
     <>
@@ -103,25 +76,31 @@ const TabCategory = () => {
               ".MuiTabs-indicator": {
                 backgroundColor: "transparent",
               },
+              "& .MuiTabScrollButton-root": {
+                display: "none",
+              },
             }}
           >
-            <TabCustom label="Trái Cây nhập khẩu" />
-            <TabCustom label="Nhân sâm" />
-            <TabCustom label="Quà tặng" />
-            <TabCustom label="Danh mục khác" />
+            <TabCustom label="Trái Cây nhập khẩu" value={1} />
+            <TabCustom label="Nhân sâm" value={2} />
+            <TabCustom label="Quà tặng" value={3} />
+            <TabCustom label="Danh mục khác" value={4} />
           </Tabs>
         </Box>
-        <CustomTabPanel value={value} index={0}>
-          <TabContainer fruitTab dataProductCategory={dataProductCategory} />
-        </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          <TabContainer dataProductCategory={dataProductCategory} />
+          <TabContainer
+            fruitTab
+            dataProductCategory={(data && data.data) || []}
+          />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
-          <TabContainer dataProductCategory={dataProductCategory} />
+          <TabContainer dataProductCategory={(data && data.data) || []} />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={3}>
-          <TabContainer dataProductCategory={dataProductCategory} />
+          <TabContainer dataProductCategory={(data && data.data) || []} />
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={4}>
+          <TabContainer dataProductCategory={(data && data.data) || []} />
         </CustomTabPanel>
       </Box>
     </>

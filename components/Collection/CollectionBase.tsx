@@ -26,11 +26,10 @@ import {
   useTheme,
 } from "@mui/material";
 import { black, gray, red, white } from "@/styles";
-import { dataProductFeatured } from "../Home/GinsengCategory";
 import Image from "next/image";
 import Link from "next/link";
 import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
-import { usePagination } from "@/lib/hooks/pagination";
+import { usePagination } from "@/lib/hooks/usePagination";
 const CollectionBase = () => {
   const params = useParams();
   const [sort, setSort] = React.useState("latest");

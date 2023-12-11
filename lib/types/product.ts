@@ -11,7 +11,7 @@ export type ProductType = {
     category_id: number;
     country_id: number;
     variant_type_id: number;
-    image_url: StaticImageData[];
+    image_url: string[];
     description: string;
     created_at: string | null;
     updated_at: string | null;

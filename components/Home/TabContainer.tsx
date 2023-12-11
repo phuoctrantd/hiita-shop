@@ -17,10 +17,11 @@ import {
 import { white } from "@/styles";
 import Link from "next/link";
 import { formatPrice, generateSlug } from "@/lib/contansts";
+import { ProductType } from "@/lib/types/product";
 
 interface TabProps {
   fruitTab?: boolean;
-  dataProductCategory: Array<any>;
+  dataProductCategory: Array<ProductType>;
 }
 const TabContainer: React.FC<TabProps> = ({
   fruitTab,
@@ -67,7 +68,7 @@ const TabContainer: React.FC<TabProps> = ({
                       }}
                     >
                       <Image
-                        src={item.image}
+                        src={item.image_url ? item.image_url[0] : fruit_demo}
                         alt={item.name}
                         style={{ width: "100%", height: "221px" }}
                       />

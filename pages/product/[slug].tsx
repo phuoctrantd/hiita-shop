@@ -15,100 +15,48 @@ import News from "@/components/Home/News";
 import ProductDescription from "@/components/Product/ProductDescription";
 import ProductRelated from "@/components/Product/ProductRelated";
 import { NextPage } from "next";
+import { useParams } from "next/navigation";
+import { getIdFromSlug } from "@/lib/contansts";
+import { ProductType } from "@/lib/types/product";
+import { useQuery } from "react-query";
 
 const Product: NextPage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const dataProduct = {
-    id: 1,
-    name: "cherry nhap khau ngon",
-    price: 100000,
-    promotional_price: 90000,
-    code: "xcxvxc",
-    status: 1,
-    is_publish: 1,
-    type: 1,
-    category_id: 1,
-    country_id: 1,
-    variant_type_id: 1,
-    image_url: [
-      ProductFruit1,
-      ProductFruit2,
-      ProductFruit3,
-      ProductFruit4,
-      ProductFruit5,
-      ProductFruit6,
-      ProductFruit7,
-    ],
-    description: "abc hehe",
-    created_at: null,
-    updated_at: null,
-    category: {
-      id: 1,
-      name: "Nhân sâm",
-    },
-    country: {
-      id: 1,
-      name: "Nhật",
-    },
-    variant_type: {
-      id: 1,
-      name: "Size hộp",
-    },
-    product_variants: [
-      {
-        id: 1,
-        product_id: 1,
-        name: "Mini ~0.6kg",
-        price: 520000,
-        promotional_price: 500000,
-        status: 1,
-        box_size: "14*15*5(cm)",
-        code: "1",
-      },
-      {
-        id: 2,
-        product_id: 1,
-        name: "Medium ~1kg",
-        price: 1000000,
-        promotional_price: 900000,
-        status: 1,
-        box_size: "20*15*5(cm)",
-        code: "1",
-      },
-      {
-        id: 3,
-        product_id: 1,
-        name: "Medium ~2kg",
-        price: 2000000,
-        promotional_price: 1900000,
-        status: 1,
-        box_size: "30*25*5(cm)",
-        code: "1",
-      },
-    ],
-  };
+  const params = useParams();
+  const slug = params?.slug;
+  const { data } = useQuery<ProductType>(
+    `products/${getIdFromSlug(String(slug))}`,
+    {
+      keepPreviousData: true,
+      enabled: !!slug,
+    }
+  );
 
   return (
-    <Page title={dataProduct.name} category={dataProduct.category.name}>
-      <Grid container spacing={isMobile ? 5 : 10} mb={5}>
-        <Grid item xs={isMobile ? 12 : 6}>
-          <SlideImage images={dataProduct.image_url} />
-        </Grid>
-        <Grid item xs={isMobile ? 12 : 6}>
-          <ProductPrice dataProduct={dataProduct} />
-        </Grid>
-      </Grid>
-      <Grid container mb={7} spacing={5}>
-        <Grid item xs={12}>
-          <ProductDescription description={dataProduct.description} />
-        </Grid>
-        <Grid item xs={12}>
-          <ProductRelated />
-        </Grid>
-      </Grid>
-      <News />
-    </Page>
+    <>
+      {data && (
+        <Page title={data.name} category={data.category.name}>
+          <Grid container spacing={isMobile ? 5 : 10} mb={5}>
+            <Grid item xs={isMobile ? 12 : 6}>
+              <SlideImage images={data.image_url} />
+            </Grid>
+            <Grid item xs={isMobile ? 12 : 6}>
+              <ProductPrice dataProduct={data} />
+            </Grid>
+          </Grid>
+          <Grid container mb={7} spacing={5}>
+            <Grid item xs={12}>
+              <ProductDescription description={data.description} />
+            </Grid>
+            <Grid item xs={12}>
+              <ProductRelated />
+            </Grid>
+          </Grid>
+          <News />
+        </Page>
+      )}
+    </>
   );
 };
 
