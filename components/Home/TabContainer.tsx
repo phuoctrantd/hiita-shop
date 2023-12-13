@@ -54,7 +54,7 @@ const TabContainer: React.FC<TabProps> = ({
                 disableOnInteraction: true,
               }}
             >
-              {dataProductCategory?.map((item, index) => (
+              {dataProductCategory.map((item, index) => (
                 <SwiperSlide key={index}>
                   <Link href={`/product/${generateSlug(item.name, item.id)}`}>
                     <Box

@@ -59,7 +59,7 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
               }}
             >
               <Image
-                src={item.image_url || ProductFruit1}
+                src={item.image_url ? item.image_url[0] : ProductFruit1}
                 alt="product"
                 style={{
                   width: "100%",
@@ -119,7 +119,7 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
               }}
             >
               <Image
-                src={item.image_url || ProductFruit1}
+                src={item.image_url ? item.image_url[0] : ProductFruit1}
                 alt="product"
                 style={{
                   width: "100%",

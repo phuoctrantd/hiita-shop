@@ -10,7 +10,7 @@ import Ginseng5 from "@/public/images/products/ginseng5.png";
 import { useCategoryProducts } from "@/lib/hooks/useCategoryProducts";
 
 const GinsengCategory = () => {
-  const data = useCategoryProducts(1, 1, 30);
+  const { data, isLoading } = useCategoryProducts(1);
   return (
     <Box my={5.6}>
       <Title title="Nhân sâm" link="/collections/nhan-sam" />

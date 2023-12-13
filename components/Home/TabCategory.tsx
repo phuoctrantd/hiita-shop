@@ -1,7 +1,14 @@
 import * as React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { Box, styled, Stack, useTheme, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  styled,
+  Stack,
+  useTheme,
+  useMediaQuery,
+  Typography,
+} from "@mui/material";
 import { red, white } from "@/styles";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -23,8 +30,8 @@ interface TabPanelProps {
 const TabCategory = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const [value, setValue] = React.useState(1);
-  const data = useCategoryProducts(value, 1, 30);
+  const [value, setValue] = React.useState(5);
+  const { data, isLoading } = useCategoryProducts(value, 1, 30);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -44,6 +51,7 @@ const TabCategory = () => {
           width: "100%",
         }}
         alignItems={"end"}
+        justifyContent={"center"}
       >
         {value === index && <>{children}</>}
       </Stack>
@@ -63,6 +71,23 @@ const TabCategory = () => {
     },
   }));
 
+  const EmptyData = () => {
+    return (
+      <Box
+        sx={{
+          height: "225px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Typography fontSize={18} fontWeight={500} color={white[100]}>
+          Không có sản phẩm
+        </Typography>
+      </Box>
+    );
+  };
+
   return (
     <>
       <Box sx={{ width: "100%", mb: 3.75 }}>
@@ -81,26 +106,39 @@ const TabCategory = () => {
               },
             }}
           >
-            <TabCustom label="Trái Cây nhập khẩu" value={1} />
-            <TabCustom label="Nhân sâm" value={2} />
-            <TabCustom label="Quà tặng" value={3} />
-            <TabCustom label="Danh mục khác" value={4} />
+            <TabCustom label="Trái Cây nhập khẩu" value={5} />
+            <TabCustom label="Nhân sâm" value={1} />
+            <TabCustom label="Quà tặng" value={9} />
+            <TabCustom label="Danh mục khác" value={10} />
           </Tabs>
         </Box>
+        <CustomTabPanel value={value} index={5}>
+          {!!data?.data.length ? (
+            <TabContainer fruitTab dataProductCategory={data.data} />
+          ) : (
+            <EmptyData />
+          )}
+        </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          <TabContainer
-            fruitTab
-            dataProductCategory={(data && data.data) || []}
-          />
+          {!!data?.data.length ? (
+            <TabContainer dataProductCategory={data.data} />
+          ) : (
+            <EmptyData />
+          )}
         </CustomTabPanel>
-        <CustomTabPanel value={value} index={2}>
-          <TabContainer dataProductCategory={(data && data.data) || []} />
+        <CustomTabPanel value={value} index={9}>
+          {!!data?.data.length ? (
+            <TabContainer dataProductCategory={data.data} />
+          ) : (
+            <EmptyData />
+          )}
         </CustomTabPanel>
-        <CustomTabPanel value={value} index={3}>
-          <TabContainer dataProductCategory={(data && data.data) || []} />
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={4}>
-          <TabContainer dataProductCategory={(data && data.data) || []} />
+        <CustomTabPanel value={value} index={10}>
+          {!!data?.data.length ? (
+            <TabContainer dataProductCategory={data.data} />
+          ) : (
+            <EmptyData />
+          )}
         </CustomTabPanel>
       </Box>
     </>

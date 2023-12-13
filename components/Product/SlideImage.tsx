@@ -42,7 +42,7 @@ const SlideImage: React.FC<SlideImageProps> = ({ images }) => {
           {images?.map((item, index) => (
             <SwiperSlide key={index}>
               <Image
-                src={item || ProductFruit1}
+                src={item ? item : ProductFruit1}
                 alt="banner"
                 style={{
                   width: "100%",
@@ -64,7 +64,7 @@ const SlideImage: React.FC<SlideImageProps> = ({ images }) => {
           {images?.map((item, index) => (
             <SwiperSlide key={index}>
               <Image
-                src={item}
+                src={item ? item : ProductFruit1}
                 alt="banner"
                 style={{
                   width: "91px",
