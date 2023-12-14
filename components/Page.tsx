@@ -1,6 +1,7 @@
 import {
   Breadcrumbs,
   Container,
+  SxProps,
   Typography,
   styled,
   useMediaQuery,
@@ -17,9 +18,10 @@ interface PageProps {
   children: ReactNode;
   title?: string;
   category?: string;
+  sx?: SxProps;
 }
 
-const Page: React.FC<PageProps> = ({ children, title, category }) => {
+const Page: React.FC<PageProps> = ({ children, title, category, sx }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   return (
@@ -67,7 +69,7 @@ const Page: React.FC<PageProps> = ({ children, title, category }) => {
       </Container>
       <Container
         maxWidth={"lg"}
-        sx={{ padding: "0 !important", position: "relative", zIndex: 1 }}
+        sx={{ padding: "0 !important", position: "relative", zIndex: 1, ...sx }}
       >
         {children}
       </Container>
