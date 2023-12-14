@@ -39,7 +39,7 @@ const About = () => {
               aspernatur aut odit aut fugit.
             </Typography>
             <Stack direction={"column"} my={3.75} spacing={2.25}>
-              <Stack direction={"row"}>
+              <Stack direction={"row"} spacing={1}>
                 <Box>
                   <Image src={IconVery} alt="about" layout={"fixed"} />
                 </Box>
@@ -47,7 +47,7 @@ const About = () => {
                   Trái cây nhập khẩu
                 </Typography>
               </Stack>
-              <Stack direction={"row"}>
+              <Stack direction={"row"} spacing={1}>
                 <Box>
                   <Image src={IconVery} alt="about" layout={"fixed"} />
                 </Box>
@@ -55,7 +55,7 @@ const About = () => {
                   Sâm tươi thượng hạng Hàn Quốc
                 </Typography>
               </Stack>
-              <Stack direction={"row"}>
+              <Stack direction={"row"} spacing={1}>
                 <Box>
                   <Image src={IconVery} alt="about" layout={"fixed"} />
                 </Box>
