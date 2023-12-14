@@ -19,7 +19,8 @@
   const gray = {
     100:"#A4AAAF",
     200:"#F2F2F2",
-    300:"#4F4F4F"
+    300:"#4F4F4F",
+    400:"#454D55"
   }
 
   export { red, white,black,orange,blue,yellow,gray }
