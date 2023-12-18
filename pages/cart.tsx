@@ -22,6 +22,22 @@ import toast, { Toaster } from "react-hot-toast";
 import { useAtom } from "jotai";
 import { CartItem, cartAtom } from "@/lib/hooks/cart";
 import Link from "next/link";
+import { checkoutAtom } from "@/lib/hooks/checkout";
+import { useRouter } from "next/navigation";
+export const price = (cartItem: CartItem) => {
+  if (cartItem.product_variants && cartItem.product_variants.length > 0) {
+    if (cartItem.variant && cartItem.variant.promotional_price) {
+      return cartItem.variant.promotional_price * cartItem.quantity;
+    } else if (cartItem.variant && cartItem.variant.price) {
+      return cartItem.variant.price * cartItem.quantity;
+    }
+  } else {
+    if (cartItem.promotional_price) {
+      return cartItem.promotional_price * cartItem.quantity;
+    }
+  }
+  return cartItem.price * cartItem.quantity;
+};
 const Cart = () => {
   const [cart, setCart] = useAtom(cartAtom);
 
@@ -112,20 +128,7 @@ const Cart = () => {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const price = (cartItem: CartItem) => {
-    if (cartItem.product_variants && cartItem.product_variants.length > 0) {
-      if (cartItem.variant && cartItem.variant.promotional_price) {
-        return cartItem.variant.promotional_price * cartItem.quantity;
-      } else if (cartItem.variant && cartItem.variant.price) {
-        return cartItem.variant.price * cartItem.quantity;
-      }
-    } else {
-      if (cartItem.promotional_price) {
-        return cartItem.promotional_price * cartItem.quantity;
-      }
-    }
-    return cartItem.price * cartItem.quantity;
-  };
+
   const totalCart = () => {
     return cart.reduce((acc, item) => acc + price(item), 0);
   };
@@ -156,6 +159,14 @@ const Cart = () => {
     }
     return cartItem.price;
   };
+
+  const [checkoutProducts, setCheckoutProducts] = useAtom(checkoutAtom);
+  const { push } = useRouter();
+  const handleCheckout = () => {
+    setCheckoutProducts(cart);
+    push("/checkout");
+  };
+
   return (
     <Page title="Giỏ hàng">
       {cart.length > 0 ? (
@@ -419,6 +430,7 @@ const Cart = () => {
             >
               <Grid item xs={isMobile ? 12 : 5}>
                 <Button
+                  onClick={handleCheckout}
                   sx={{
                     fontSize: 16,
                     fontWeight: 400,
