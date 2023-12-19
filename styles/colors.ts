@@ -21,7 +21,8 @@
     100:"#A4AAAF",
     200:"#F2F2F2",
     300:"#4F4F4F",
-    400:"#454D55"
+    400:"#454D55",
+    500:"#B0B0B0"
   }
 
   export { red, white,black,orange,blue,yellow,gray }

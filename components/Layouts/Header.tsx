@@ -23,6 +23,8 @@ import DrawerContainer from "./components/DrawerContainer";
 import Link from "next/link";
 import { useAtom } from "jotai";
 import { cartAtom } from "@/lib/hooks/cart";
+import Login from "../Dialog/Login";
+import Register from "../Dialog/Register";
 
 const Header = () => {
   const theme = useTheme();
@@ -36,6 +38,26 @@ const Header = () => {
   };
   const [cart] = useAtom(cartAtom);
   const cartLength = cart?.length;
+  const [openLogin, setOpenLogin] = React.useState(false);
+  const [openRegister, setOpenRegister] = React.useState(false);
+
+  const handleOpenLogin = () => {
+    setOpenRegister(false);
+    setOpenLogin(true);
+  };
+
+  const handleCloseLogin = () => {
+    setOpenLogin(false);
+  };
+
+  const handleOpenRegister = () => {
+    setOpenLogin(false);
+    setOpenRegister(true);
+  };
+
+  const handleCloseRegister = () => {
+    setOpenRegister(false);
+  };
   return (
     <>
       <Box
@@ -159,7 +181,7 @@ const Header = () => {
                 <AccountCircleOutlinedIcon
                   sx={{ color: white[100], fontSize: 35 }}
                 />
-                <Box>
+                <Box onClick={handleOpenLogin} sx={{ cursor: "pointer" }}>
                   <TextHeader
                     sx={{
                       fontSize: isMobile
@@ -225,6 +247,16 @@ const Header = () => {
         <Menu />
       </Container>
       <DrawerContainer openMenu={openMenu} handleCloseMenu={handleCloseMenu} />
+      <Login
+        open={openLogin}
+        close={handleCloseLogin}
+        handleOpenRegister={handleOpenRegister}
+      />
+      <Register
+        open={openRegister}
+        close={handleCloseRegister}
+        handleOpenLogin={handleOpenLogin}
+      />
     </>
   );
 };

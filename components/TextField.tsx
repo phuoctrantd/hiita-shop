@@ -61,7 +61,7 @@ function TextField<T>({
     fieldState: { error },
     //@ts-ignore
   } = useController({ name, control });
-
+  const [hiddenPassword, setHiddenPassword] = useState<boolean>(true);
   return (
     <>
       <RawTextField
@@ -80,7 +80,21 @@ function TextField<T>({
           onChange(e);
         }}
         value={type === "number" ? value : value || ""}
+        type={!hiddenPassword ? "text" : type}
         inputRef={ref}
+        InputProps={{
+          endAdornment:
+            type === "password" ? (
+              <InputAdornment position="end">
+                <IconButton onClick={() => setHiddenPassword((pre) => !pre)}>
+                  {hiddenPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            ) : (
+              props?.InputProps?.endAdornment
+            ),
+          ...inputProps,
+        }}
         {...props}
       />
       {error && <div style={{ height: "5px" }} />}
