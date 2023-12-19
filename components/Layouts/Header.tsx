@@ -1,5 +1,6 @@
 import { black, red, white } from "@/styles";
 import {
+  Avatar,
   Badge,
   Box,
   Container,
@@ -22,9 +23,10 @@ import DragHandleOutlinedIcon from "@mui/icons-material/DragHandleOutlined";
 import DrawerContainer from "./components/DrawerContainer";
 import Link from "next/link";
 import { useAtom } from "jotai";
-import { cartAtom } from "@/lib/hooks/cart";
+import { cartAtom } from "@/lib/hooks/useCart";
 import Login from "../Dialog/Login";
 import Register from "../Dialog/Register";
+import { useAuth } from "@/lib/provider/AuthProvider";
 
 const Header = () => {
   const theme = useTheme();
@@ -58,6 +60,7 @@ const Header = () => {
   const handleCloseRegister = () => {
     setOpenRegister(false);
   };
+  const { user } = useAuth();
   return (
     <>
       <Box
@@ -178,9 +181,25 @@ const Header = () => {
                 sx={{ alignItems: "center" }}
                 spacing={0.6}
               >
-                <AccountCircleOutlinedIcon
-                  sx={{ color: white[100], fontSize: 35 }}
-                />
+                {user ? (
+                  <>
+                    <Avatar
+                      sx={{
+                        width: 29,
+                        height: 29,
+                        background: white[100],
+                        color: red[100],
+                        fontWeight: 600,
+                      }}
+                    >
+                      {user?.name[0]}
+                    </Avatar>
+                  </>
+                ) : (
+                  <AccountCircleOutlinedIcon
+                    sx={{ color: white[100], fontSize: 35 }}
+                  />
+                )}
                 <Box onClick={handleOpenLogin} sx={{ cursor: "pointer" }}>
                   <TextHeader
                     sx={{
@@ -199,7 +218,7 @@ const Header = () => {
                       fontWeight: 600,
                     }}
                   >
-                    Đăng nhập
+                    {user?.name || "Đăng nhập"}
                   </TextHeader>
                 </Box>
               </Stack>

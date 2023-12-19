@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast";
 import { QueryClientProvider, useIsFetching } from "react-query";
 import { queryClient } from "@/lib/react-query";
 import { CircularProgress } from "@mui/material";
+import AuthProvider from "@/lib/provider/AuthProvider";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const isFetching = useIsFetching();
@@ -55,9 +56,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 export default function App(props: AppProps) {
   return (
     <ThemeProvider theme={defaultTheme}>
-      <QueryClientProvider client={queryClient}>
-        <MyApp {...props} />
-      </QueryClientProvider>
+      <AuthProvider>
+        <QueryClientProvider client={queryClient}>
+          <MyApp {...props} />
+        </QueryClientProvider>
+      </AuthProvider>
     </ThemeProvider>
   );
 }
