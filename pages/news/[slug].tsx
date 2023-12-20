@@ -14,7 +14,8 @@ import {
 import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
 import { gray, red } from "@/styles";
 import NewsRelated from "@/components/News/NewsRelated";
-const News = () => {
+import { NextPage } from "next";
+const News: NextPage = () => {
   const dataNews = {
     id: 1,
     title: "Tin tức 1 ",

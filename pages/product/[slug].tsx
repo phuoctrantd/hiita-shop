@@ -14,8 +14,9 @@ import ProductPrice from "@/components/Product/ProductPrice";
 import News from "@/components/Home/News";
 import ProductDescription from "@/components/Product/ProductDescription";
 import ProductRelated from "@/components/Product/ProductRelated";
+import { NextPage } from "next";
 
-const Product = () => {
+const Product: NextPage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const dataProduct = {
