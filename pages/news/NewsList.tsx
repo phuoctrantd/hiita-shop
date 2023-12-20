@@ -22,6 +22,7 @@ import { gray, red, white } from "@/styles";
 import { usePagination } from "@/lib/hooks/pagination";
 import ProductRelated from "@/components/Product/ProductRelated";
 import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
+import { NextPage } from "next";
 export const dataNewsList = [
   {
     id: 1,
@@ -56,7 +57,7 @@ export const dataNewsList = [
     created_at: "2021-10-10 10:10:10",
   },
 ];
-const NewsList = () => {
+const NewsList: NextPage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const { page, handleChangePagination } = usePagination();

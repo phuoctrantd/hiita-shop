@@ -14,7 +14,8 @@ import ImageAbout1 from "@/public/images/about/about1.png";
 import ImageAbout2 from "@/public/images/about/about2.png";
 import IconVery from "@/public/images/icon_very.png";
 import { black, gray, red, white } from "@/styles";
-const About = () => {
+import { NextPage } from "next";
+const About: NextPage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   return (
