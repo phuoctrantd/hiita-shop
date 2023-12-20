@@ -56,6 +56,7 @@ const Login: React.FC<LoginProps> = ({ open, close, handleOpenRegister }) => {
       if (res.data.user) {
         setUser(res.data.user);
       }
+      toast.success("Đăng nhập thành công");
       handleClose();
     } catch (e) {
       toast.error("Tài khoản hoặc mật khẩu không đúng");
