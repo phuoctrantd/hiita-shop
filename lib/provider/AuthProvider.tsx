@@ -16,17 +16,20 @@ import {
   setJWTToStorage,
 } from "../utils/localStorage";
 import { UserType } from "../types/auth";
+import toast from "react-hot-toast";
 
 interface AuthContextType {
   setAccessToken: Dispatch<SetStateAction<string>>;
   user: UserType | null;
   setUser: Dispatch<SetStateAction<UserType | null>>;
+  handleLogout: () => void;
 }
 
 const defaultValues = {
   user: null,
   setUser: () => {},
   setAccessToken: () => {},
+  handleLogout: () => {},
 };
 
 type PropChildren = {
@@ -60,6 +63,17 @@ const AuthProvider: React.FC<PropChildren> = ({ children }) => {
   const handleSaveAccessToken = useCallback(async () => {
     await setAccessTokenToStorage(accessToken);
   }, [accessToken]);
+  const handleLogout = async () => {
+    try {
+      setUser(null);
+      setAccessToken("");
+      setAccessTokenToStorage("");
+      toast.success("Đăng xuất thành công");
+      router.push("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (!accessToken) return;
@@ -70,6 +84,7 @@ const AuthProvider: React.FC<PropChildren> = ({ children }) => {
     user,
     setUser,
     setAccessToken,
+    handleLogout,
   };
 
   useEffect(() => {

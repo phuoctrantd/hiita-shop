@@ -6,3 +6,4 @@ interface CheckoutProductType extends ProductType {
     variant: ProductsVariant | null;
   }
 export const checkoutAtom = atom<CheckoutProductType[]>([]);
+export const checkoutSourceAtom = atom<string | null>(null);

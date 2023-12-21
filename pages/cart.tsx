@@ -22,7 +22,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { useAtom } from "jotai";
 import { CartItem, cartAtom } from "@/lib/hooks/useCart";
 import Link from "next/link";
-import { checkoutAtom } from "@/lib/hooks/checkout";
+import { checkoutAtom, checkoutSourceAtom } from "@/lib/hooks/checkout";
 import { useRouter } from "next/navigation";
 import ProductFruit1 from "@/public/images/products/product1.png";
 export const price = (cartItem: CartItem) => {
@@ -163,9 +163,11 @@ const Cart = () => {
   };
 
   const [checkoutProducts, setCheckoutProducts] = useAtom(checkoutAtom);
+  const [, setCheckoutSource] = useAtom(checkoutSourceAtom);
   const { push } = useRouter();
   const handleCheckout = () => {
     setCheckoutProducts(cart);
+    setCheckoutSource("cart");
     push("/checkout");
   };
 

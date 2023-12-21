@@ -1,6 +1,6 @@
 import Page from "@/components/Page";
 import { TextField } from "@/components/TextField";
-import { checkoutAtom } from "@/lib/hooks/checkout";
+import { checkoutAtom, checkoutSourceAtom } from "@/lib/hooks/checkout";
 import { red, white } from "@/styles";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -30,6 +30,8 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { price } from "../cart";
 import { formatPrice } from "@/lib/contansts";
+import { useAuth } from "@/lib/provider/AuthProvider";
+import { cartAtom } from "@/lib/hooks/useCart";
 const CheckoutContainer = () => {
   const [checkoutProducts, setCheckoutProducts] = useAtom(checkoutAtom);
   const TypographyTitle = styled(Typography)(({ theme }) => ({
@@ -46,7 +48,7 @@ const CheckoutContainer = () => {
       .string()
       .min(2, { message: "Tên phải có ít nhất 2 ký tự" })
       .max(30, { message: "Tên không được quá 20 ký tự" }),
-    phone: z
+    phone_number: z
       .string()
       .min(1, "Số điện thoại là bắt buộc")
       .max(10, "Số điện thoại không được quá 10 số")
@@ -67,31 +69,43 @@ const CheckoutContainer = () => {
     defaultValues: {
       email: "",
       name: "",
-      phone: "",
+      phone_number: "",
       address: "",
       note: "",
     },
     resolver: zodResolver(validation),
   });
-  const order = async (value: any) => request.post("", value);
+  const { user } = useAuth();
+  const order = async (value: any) =>
+    request.post(user ? "/user/orders" : "/orders", value);
+  const [checkoutSource, setCheckoutSource] = useAtom(checkoutSourceAtom);
+  const [cart, setCart] = useAtom(cartAtom);
   const onSubmit: SubmitHandler<CheckoutForm> = async (value) => {
     try {
+      const product_variants = checkoutProducts.map((item) => ({
+        quantity: item.quantity,
+        product_id: item.id,
+        product_variant_id: item.variant?.id,
+      }));
       const data = {
         ...value,
-        products: checkoutProducts,
-        payment: payment,
+        product_variants: product_variants,
+        payment_type: payment,
       };
-      console.log(data);
-      // await order(data);
+      await order(data);
       toast.success("Đặt hàng thành công");
       push("/");
       reset();
+      if (checkoutSource === "cart") {
+        setCart([]);
+      }
       setCheckoutProducts([]);
+      setCheckoutSource(null);
     } catch (e) {
       return;
     }
   };
-  const [payment, setPayment] = React.useState<Number>(0);
+  const [payment, setPayment] = React.useState<Number>(1);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPayment(Number((event.target as HTMLInputElement).value));
@@ -125,10 +139,9 @@ const CheckoutContainer = () => {
                   control={control}
                 />
                 <TextField
-                  name="phone"
+                  name="phone_number"
                   placeholder="Số điện thoại"
                   control={control}
-                  type="number"
                 />
                 <TextField
                   name="address"
@@ -167,17 +180,17 @@ const CheckoutContainer = () => {
                     borderRadius: "10px",
                     mb: 2,
                   }}
-                  value={0}
+                  value={1}
                   control={<Radio />}
                   label="Thanh toán khi giao hàng ( COD )"
                 />
                 <FormControlLabel
                   sx={{ border: `1px solid ${red[100]}`, borderRadius: "10px" }}
-                  value={1}
+                  value={2}
                   control={<Radio />}
                   label="Chuyển khoản qua ngân hàng"
                 />
-                {payment === 1 && (
+                {payment === 2 && (
                   <Stack
                     direction={"column"}
                     spacing={2}
@@ -217,7 +230,7 @@ const CheckoutContainer = () => {
                   direction={"column"}
                   padding={"25px 20px"}
                   spacing={2}
-                  sx={{ height: "300px", overflowY: "auto" }}
+                  sx={{ height: "250px", overflowY: "auto" }}
                 >
                   {checkoutProducts.map((item, index) => (
                     <Stack
@@ -228,7 +241,9 @@ const CheckoutContainer = () => {
                     >
                       <Stack direction={"row"} spacing={2}>
                         <Image
-                          src={item.image_url[0]}
+                          src={
+                            item.image_url ? item.image_url[0] : ProductFruit1
+                          }
                           alt="product"
                           width="85"
                           height="100"
@@ -251,6 +266,15 @@ const CheckoutContainer = () => {
                             }}
                           >
                             {formatPrice(price(item))}
+                          </Typography>
+                          <Typography
+                            sx={{
+                              fontSize: 16,
+                              fontWeight: 500,
+                              color: white[100],
+                            }}
+                          >
+                            {item.variant?.name}
                           </Typography>
                         </Stack>
                       </Stack>

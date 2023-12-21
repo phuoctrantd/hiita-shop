@@ -27,7 +27,7 @@ export type ProductType = {
       id: number;
       name: string;
     };
-    product_variants?: ProductsVariant[];
+    product_variants: ProductsVariant[];
     };
     export type ProductsVariant = {
       id: number;

@@ -17,7 +17,7 @@ import { useAtom } from "jotai";
 import { cartAtom } from "../../lib/hooks/useCart";
 import { set } from "zod";
 import toast from "react-hot-toast";
-import { checkoutAtom } from "@/lib/hooks/checkout";
+import { checkoutAtom, checkoutSourceAtom } from "@/lib/hooks/checkout";
 import { useRouter } from "next/navigation";
 interface ProductPriceProps {
   dataProduct: ProductType;
@@ -83,11 +83,13 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
     toast.success("Thêm sản phẩm vào giỏ hàng thành công");
   };
   const [checkoutProducts, setCheckoutProducts] = useAtom(checkoutAtom);
+  const [, setCheckoutSource] = useAtom(checkoutSourceAtom);
   const { push } = useRouter();
   const handleCheckout = () => {
     setCheckoutProducts([
       { ...dataProduct, quantity, variant: selectedVariant },
     ]);
+    setCheckoutSource("buyNow");
     push("/checkout");
   };
   return (

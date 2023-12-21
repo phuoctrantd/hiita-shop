@@ -27,6 +27,7 @@ import { cartAtom } from "@/lib/hooks/useCart";
 import Login from "../Dialog/Login";
 import Register from "../Dialog/Register";
 import { useAuth } from "@/lib/provider/AuthProvider";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
   const theme = useTheme();
@@ -60,7 +61,8 @@ const Header = () => {
   const handleCloseRegister = () => {
     setOpenRegister(false);
   };
-  const { user } = useAuth();
+  const { user, handleLogout } = useAuth();
+  const router = useRouter();
   return (
     <>
       <Box
@@ -200,22 +202,38 @@ const Header = () => {
                     sx={{ color: white[100], fontSize: 35 }}
                   />
                 )}
-                <Box onClick={handleOpenLogin} sx={{ cursor: "pointer" }}>
+                <Box>
                   <TextHeader
+                    onClick={user ? handleLogout : () => {}}
                     sx={{
+                      cursor: user ? "pointer" : "unset",
                       fontSize: isMobile
                         ? "13px !important"
                         : "12px !important",
+                      "&:hover": {
+                        textDecoration: user ? "underline" : "unset",
+                        textShadow: user
+                          ? `0px 0px 5px ${white[100]}`
+                          : "unset",
+                      },
                     }}
                   >
-                    Xin chào
+                    {user ? "Đăng xuất" : "Xin chào"}
                   </TextHeader>
                   <TextHeader
+                    onClick={
+                      user ? () => router.push("/account") : handleOpenLogin
+                    }
                     sx={{
+                      cursor: "pointer",
                       fontSize: isMobile
                         ? "12px !important"
                         : "13px !important",
                       fontWeight: 600,
+                      "&:hover": {
+                        textDecoration: "underline",
+                        textShadow: `0px 0px 5px ${white[100]}`,
+                      },
                     }}
                   >
                     {user?.name || "Đăng nhập"}
