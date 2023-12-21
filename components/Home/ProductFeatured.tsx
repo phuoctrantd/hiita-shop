@@ -82,12 +82,14 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
                     textDecorationColor: black,
                   }}
                 >
-                  {item.promotional_price && formatPrice(item.price)}
+                  {item.product_variants[0].promotional_price &&
+                    formatPrice(item.product_variants[0].price)}
                 </Typography>
                 <Typography fontSize={14} fontWeight={800} color={red[100]}>
-                  {item.promotional_price
-                    ? formatPrice(item.promotional_price)
-                    : formatPrice(item.price)}
+                  {formatPrice(
+                    item.product_variants[0].promotional_price ||
+                      item.product_variants[0].price
+                  )}
                 </Typography>
               </Box>
             </Box>

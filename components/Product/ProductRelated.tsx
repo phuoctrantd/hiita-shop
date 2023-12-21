@@ -17,78 +17,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation, Autoplay } from "swiper/modules";
-const ProductRelated = () => {
-  const dataProductRelated = [
-    {
-      id: 1,
-      name: "Dâu tây Osaka",
-      price: 399000,
-      image: ProductFruit1,
-    },
-    {
-      id: 2,
-      name: "Kiwi",
-      price: 399000,
-      priceSale: 499000,
-      image: ProductFruit2,
-    },
-    {
-      id: 3,
-      name: "Cherry",
-      price: 399000,
-      priceSale: 499000,
-      image: ProductFruit3,
-    },
-    {
-      id: 4,
-      name: "Táo",
-      price: 399000,
-      priceSale: 499000,
-      image: ProductFruit4,
-    },
-    {
-      id: 5,
-      name: "Chuối Úc",
-      price: 399000,
-      priceSale: 499000,
-      image: ProductFruit5,
-    },
-    {
-      id: 6,
-      name: "Việt Quất Hà Lan",
-      price: 399000,
-      priceSale: 499000,
-      image: ProductFruit6,
-    },
-    {
-      id: 7,
-      name: "Dưa gang Osaka",
-      price: 399000,
-      priceSale: 499000,
-      image: ProductFruit7,
-    },
-    {
-      id: 8,
-      name: "Dâu tây Osaka",
-      price: 399000,
-      priceSale: 499000,
-      image: ProductFruit1,
-    },
-    {
-      id: 9,
-      name: "Cherry",
-      price: 399000,
-      priceSale: 499000,
-      image: ProductFruit3,
-    },
-    {
-      id: 10,
-      name: "Táo",
-      price: 399000,
-      priceSale: 499000,
-      image: ProductFruit4,
-    },
-  ];
+import { useCategoryProducts } from "@/lib/hooks/useCategoryProducts";
+interface ProductRelatedProps {
+  category_id: number;
+}
+const ProductRelated: React.FC<ProductRelatedProps> = ({ category_id }) => {
+  const { data } = useCategoryProducts(category_id, 1, 30);
+  const dataProductRelated = data?.data;
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   return (
@@ -106,54 +41,59 @@ const ProductRelated = () => {
               disableOnInteraction: true,
             }}
           >
-            {dataProductRelated.map((item, index) => (
-              <SwiperSlide key={index}>
-                <Link href={`/product/${generateSlug(item.name, item.id)}`}>
-                  <Box
-                    sx={{
-                      transition: "transform 0.3s",
-                      cursor: "pointer",
-                      "&:hover": {
-                        transform: "scale(1.02)",
-                      },
-                      width: "100%",
-                    }}
-                  >
-                    <Image
-                      src={item.image}
-                      alt="banner"
-                      style={{
+            {dataProductRelated?.length &&
+              dataProductRelated.map((item, index) => (
+                <SwiperSlide key={index}>
+                  <Link href={`/product/${generateSlug(item.name, item.id)}`}>
+                    <Box
+                      sx={{
+                        transition: "transform 0.3s",
+                        cursor: "pointer",
+                        "&:hover": {
+                          transform: "scale(1.02)",
+                        },
                         width: "100%",
-                        height: isMobile ? "320px" : "250px",
                       }}
-                    />
-                    <Box mt={1.6}>
-                      <Typography fontSize={14} fontWeight={700} mb={1}>
-                        {item.name}
-                      </Typography>
-                      <Typography
-                        fontSize={12}
-                        fontWeight={700}
-                        color={red[200]}
-                        sx={{
-                          textDecoration: "line-through",
-                          textDecorationColor: black,
+                    >
+                      <Image
+                        src={item.image_url ? item.image_url[0] : ProductFruit1}
+                        alt="banner"
+                        style={{
+                          width: "100%",
+                          height: isMobile ? "320px" : "250px",
                         }}
-                      >
-                        {formatPrice(item.price)}
-                      </Typography>
-                      <Typography
-                        fontSize={14}
-                        fontWeight={800}
-                        color={red[100]}
-                      >
-                        {item.priceSale && formatPrice(item.priceSale)}
-                      </Typography>
+                      />
+                      <Box mt={1.6}>
+                        <Typography fontSize={14} fontWeight={700} mb={1}>
+                          {item.name}
+                        </Typography>
+                        <Typography
+                          fontSize={12}
+                          fontWeight={700}
+                          color={red[200]}
+                          sx={{
+                            textDecoration: "line-through",
+                            textDecorationColor: black,
+                          }}
+                        >
+                          {item.product_variants[0].promotional_price &&
+                            formatPrice(item.product_variants[0].price)}
+                        </Typography>
+                        <Typography
+                          fontSize={14}
+                          fontWeight={800}
+                          color={red[100]}
+                        >
+                          {formatPrice(
+                            item.product_variants[0].promotional_price ||
+                              item.product_variants[0].price
+                          )}
+                        </Typography>
+                      </Box>
                     </Box>
-                  </Box>
-                </Link>
-              </SwiperSlide>
-            ))}
+                  </Link>
+                </SwiperSlide>
+              ))}
           </Swiper>
         </SwiperStyled>
       </Box>

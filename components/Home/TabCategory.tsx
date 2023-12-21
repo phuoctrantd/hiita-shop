@@ -31,7 +31,7 @@ const TabCategory = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [value, setValue] = React.useState(5);
-  const { data, isLoading } = useCategoryProducts(value, 1, 30);
+  const { data } = useCategoryProducts(value, 1, 30);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);

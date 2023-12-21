@@ -50,7 +50,7 @@ const Product: NextPage = () => {
               <ProductDescription description={data.description} />
             </Grid>
             <Grid item xs={12}>
-              <ProductRelated />
+              <ProductRelated category_id={data.category_id} />
             </Grid>
           </Grid>
           <News />

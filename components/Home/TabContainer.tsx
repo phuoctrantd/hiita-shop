@@ -21,7 +21,7 @@ import { ProductType } from "@/lib/types/product";
 
 interface TabProps {
   fruitTab?: boolean;
-  dataProductCategory: Array<ProductType>;
+  dataProductCategory: ProductType[];
 }
 const TabContainer: React.FC<TabProps> = ({
   fruitTab,
@@ -102,7 +102,10 @@ const TabContainer: React.FC<TabProps> = ({
                             textAlign: "center",
                           }}
                         >
-                          {formatPrice(item.price)}
+                          {formatPrice(
+                            item.product_variants[0].promotional_price ||
+                              item.product_variants[0].price
+                          )}
                         </Typography>
                       </Box>
                     </Box>

@@ -102,7 +102,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
         <Grid container spacing={isMobile ? 1 : 2} mb={isMobile ? 1 : 2}>
           <Grid
             item
-            xs={6}
+            xs={isMobile ? 12 : 6}
             sx={{ display: "flex", alignItems: "center", gap: 0.2 }}
           >
             <TypographyDes>Thương hiệu </TypographyDes>
@@ -139,7 +139,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
               {formatPrice(price)}
             </Typography>
           </Grid>
-          {dataProduct.promotional_price && (
+          {selectedVariant?.promotional_price && (
             <Grid
               item
               xs={isMobile ? 12 : 6}
@@ -176,7 +176,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
             <TypographyDes>Còn hàng</TypographyDes>
           </Grid>
         </Grid>
-        {dataProduct.promotional_price && (
+        {selectedVariant?.promotional_price && (
           <Grid container spacing={isMobile ? 1 : 2} mb={isMobile ? 1 : 2}>
             <Grid
               item
@@ -392,6 +392,9 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
           </ButtonStyled>
         </Stack>
         <ButtonStyled
+          onClick={() => {
+            window.open("tel:19006633", "_blank");
+          }}
           sx={{
             width: isMobile ? "100%" : "auto",
             backgroundColor: yellow,

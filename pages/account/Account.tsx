@@ -1,6 +1,7 @@
 import AccountTab from "@/components/Account/AccountTab";
 import OrderTab from "@/components/Account/OrderTab";
 import Page from "@/components/Page";
+import { useAuth } from "@/lib/provider/AuthProvider";
 import { red, white } from "@/styles";
 import {
   Avatar,
@@ -46,6 +47,7 @@ const Account: NextPage = () => {
   };
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const { user } = useAuth();
   return (
     <>
       <Page title="Thông tin cá nhân">
@@ -61,10 +63,10 @@ const Account: NextPage = () => {
                 mb={isMobile ? 2 : "unset"}
               >
                 <Avatar sx={{ backgroundColor: red[100], color: white[100] }}>
-                  H
+                  {user?.name?.charAt(0)}
                 </Avatar>
                 <Typography fontSize={16} fontWeight={500}>
-                  Huy
+                  {user?.name}
                 </Typography>
               </Stack>
               <Tabs
