@@ -17,10 +17,11 @@ import {
 import { white } from "@/styles";
 import Link from "next/link";
 import { formatPrice, generateSlug } from "@/lib/contansts";
+import { ProductType } from "@/lib/types/product";
 
 interface TabProps {
   fruitTab?: boolean;
-  dataProductCategory: Array<any>;
+  dataProductCategory: ProductType[];
 }
 const TabContainer: React.FC<TabProps> = ({
   fruitTab,
@@ -53,7 +54,7 @@ const TabContainer: React.FC<TabProps> = ({
                 disableOnInteraction: true,
               }}
             >
-              {dataProductCategory?.map((item, index) => (
+              {dataProductCategory.map((item, index) => (
                 <SwiperSlide key={index}>
                   <Link href={`/product/${generateSlug(item.name, item.id)}`}>
                     <Box
@@ -67,7 +68,7 @@ const TabContainer: React.FC<TabProps> = ({
                       }}
                     >
                       <Image
-                        src={item.image}
+                        src={item.image_url ? item.image_url[0] : fruit_demo}
                         alt={item.name}
                         style={{ width: "100%", height: "221px" }}
                       />
@@ -101,7 +102,10 @@ const TabContainer: React.FC<TabProps> = ({
                             textAlign: "center",
                           }}
                         >
-                          {formatPrice(item.price)}
+                          {formatPrice(
+                            item.product_variants[0].promotional_price ||
+                              item.product_variants[0].price
+                          )}
                         </Typography>
                       </Box>
                     </Box>

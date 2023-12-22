@@ -67,13 +67,9 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({
             aria-label="basic tabs example"
           >
             <TabCustom label="Mô tả" />
-            <TabCustom label="Hướng dẫn mua hàng" />
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
-          <Typography fontSize={14}> {description}</Typography>
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={1}>
           <Typography fontSize={14}> {description}</Typography>
         </CustomTabPanel>
       </Box>

@@ -14,10 +14,10 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useAtom } from "jotai";
-import { cartAtom } from "../../lib/hooks/cart";
+import { cartAtom } from "../../lib/hooks/useCart";
 import { set } from "zod";
 import toast from "react-hot-toast";
-import { checkoutAtom } from "@/lib/hooks/checkout";
+import { checkoutAtom, checkoutSourceAtom } from "@/lib/hooks/checkout";
 import { useRouter } from "next/navigation";
 interface ProductPriceProps {
   dataProduct: ProductType;
@@ -61,9 +61,10 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
     const existingItemIndex = cart.findIndex(
       (item) =>
         item.id === dataProduct.id &&
-        item.variant &&
-        selectedVariant &&
-        item.variant.id === selectedVariant.id
+        ((!item.variant && !selectedVariant) ||
+          (item.variant &&
+            selectedVariant &&
+            item.variant.id === selectedVariant.id))
     );
 
     if (existingItemIndex !== -1) {
@@ -82,11 +83,13 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
     toast.success("Thêm sản phẩm vào giỏ hàng thành công");
   };
   const [checkoutProducts, setCheckoutProducts] = useAtom(checkoutAtom);
+  const [, setCheckoutSource] = useAtom(checkoutSourceAtom);
   const { push } = useRouter();
   const handleCheckout = () => {
     setCheckoutProducts([
       { ...dataProduct, quantity, variant: selectedVariant },
     ]);
+    setCheckoutSource("buyNow");
     push("/checkout");
   };
   return (
@@ -99,7 +102,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
         <Grid container spacing={isMobile ? 1 : 2} mb={isMobile ? 1 : 2}>
           <Grid
             item
-            xs={6}
+            xs={isMobile ? 12 : 6}
             sx={{ display: "flex", alignItems: "center", gap: 0.2 }}
           >
             <TypographyDes>Thương hiệu </TypographyDes>
@@ -117,7 +120,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
 
             <span>:</span>
             <TypographyDes sx={{ fontWeight: 700, fontSize: 16 }}>
-              Xyzab182
+              {dataProduct.code}
             </TypographyDes>
           </Grid>
         </Grid>
@@ -136,29 +139,31 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
               {formatPrice(price)}
             </Typography>
           </Grid>
-          <Grid
-            item
-            xs={isMobile ? 12 : 6}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 0.2,
-              order: isMobile ? 2 : 1,
-            }}
-          >
-            <TypographyDes>Giá niêm yết </TypographyDes>
-            <span>:</span>
-            <TypographyDes
+          {selectedVariant?.promotional_price && (
+            <Grid
+              item
+              xs={isMobile ? 12 : 6}
               sx={{
-                fontWeight: 600,
-                fontSize: 14,
-                textDecoration: "line-through",
-                textDecorationColor: black,
+                display: "flex",
+                alignItems: "center",
+                gap: 0.2,
+                order: isMobile ? 2 : 1,
               }}
             >
-              {formatPrice(fixedPrice)}
-            </TypographyDes>
-          </Grid>
+              <TypographyDes>Giá niêm yết </TypographyDes>
+              <span>:</span>
+              <TypographyDes
+                sx={{
+                  fontWeight: 600,
+                  fontSize: 14,
+                  textDecoration: "line-through",
+                  textDecorationColor: black,
+                }}
+              >
+                {formatPrice(fixedPrice)}
+              </TypographyDes>
+            </Grid>
+          )}
         </Grid>
         <Grid container spacing={isMobile ? 1 : 2} mb={isMobile ? 1 : 2}>
           <Grid
@@ -171,35 +176,37 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
             <TypographyDes>Còn hàng</TypographyDes>
           </Grid>
         </Grid>
-        <Grid container spacing={isMobile ? 1 : 2} mb={isMobile ? 1 : 2}>
-          <Grid
-            item
-            xs={12}
-            sx={{ display: "flex", alignItems: "center", gap: 0.5 }}
-          >
-            <TypographyDes
-              sx={{
-                fontWeight: 500,
-              }}
+        {selectedVariant?.promotional_price && (
+          <Grid container spacing={isMobile ? 1 : 2} mb={isMobile ? 1 : 2}>
+            <Grid
+              item
+              xs={12}
+              sx={{ display: "flex", alignItems: "center", gap: 0.5 }}
             >
-              Tiết kiệm
-            </TypographyDes>
-            <TypographyDes
-              sx={{
-                fontWeight: 700,
-              }}
-            >
-              {formatPrice(savePrice)}
-            </TypographyDes>
-            <TypographyDes
-              sx={{
-                fontWeight: 500,
-              }}
-            >
-              so với giá thị trường
-            </TypographyDes>
+              <TypographyDes
+                sx={{
+                  fontWeight: 500,
+                }}
+              >
+                Tiết kiệm
+              </TypographyDes>
+              <TypographyDes
+                sx={{
+                  fontWeight: 700,
+                }}
+              >
+                {formatPrice(savePrice)}
+              </TypographyDes>
+              <TypographyDes
+                sx={{
+                  fontWeight: 500,
+                }}
+              >
+                so với giá thị trường
+              </TypographyDes>
+            </Grid>
           </Grid>
-        </Grid>
+        )}
         {dataProduct.product_variants &&
           dataProduct.product_variants.length > 0 && (
             <>
@@ -385,6 +392,9 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
           </ButtonStyled>
         </Stack>
         <ButtonStyled
+          onClick={() => {
+            window.open("tel:19006633", "_blank");
+          }}
           sx={{
             width: isMobile ? "100%" : "auto",
             backgroundColor: yellow,

@@ -14,6 +14,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { black, gray, red, white } from "@/styles";
+import toast from "react-hot-toast";
+import { useAtom } from "jotai";
+import { login } from "@/lib/routes/auth";
+import { useAuth } from "@/lib/provider/AuthProvider";
+
 interface LoginProps {
   open: boolean;
   close: () => void;
@@ -21,11 +26,10 @@ interface LoginProps {
 }
 const Login: React.FC<LoginProps> = ({ open, close, handleOpenRegister }) => {
   const validation = z.object({
-    email: z
+    user_name: z
       .string()
-      .min(1, "Email là bắt buộc")
-      .max(30, "Email không được quá 30 ký tự")
-      .email({ message: "Email không hợp lệ" }),
+      .min(1, "Tên đăng nhập là bắt buộc")
+      .max(30, "Tên đăng nhập không được quá 30 ký tự"),
     password: z
       .string()
       .min(1, "Mật khẩu là bắt buộc")
@@ -39,16 +43,23 @@ const Login: React.FC<LoginProps> = ({ open, close, handleOpenRegister }) => {
     formState: { errors },
   } = useForm<LoginForm>({
     defaultValues: {
-      email: "",
+      user_name: "",
       password: "",
     },
     resolver: zodResolver(validation),
   });
+  const { setAccessToken, setUser, user } = useAuth();
   const onSubmit: SubmitHandler<LoginForm> = async (value) => {
     try {
-      console.log(value);
-      reset();
+      const res = await login(value);
+      setAccessToken(res.data.token);
+      if (res.data.user) {
+        setUser(res.data.user);
+      }
+      toast.success("Đăng nhập thành công");
+      handleClose();
     } catch (e) {
+      toast.error("Tài khoản hoặc mật khẩu không đúng");
       return;
     }
   };
@@ -59,7 +70,6 @@ const Login: React.FC<LoginProps> = ({ open, close, handleOpenRegister }) => {
   React.useEffect(() => {
     reset();
   }, [open]);
-
   return (
     <DialogBase
       open={open}
@@ -77,7 +87,7 @@ const Login: React.FC<LoginProps> = ({ open, close, handleOpenRegister }) => {
           spacing={2}
           sx={{ marginBottom: "20px !important" }}
         >
-          <TextField name="email" placeholder="Email" control={control} />
+          <TextField name="user_name" placeholder="Email" control={control} />
           <TextField
             name="password"
             placeholder="Mật khẩu"

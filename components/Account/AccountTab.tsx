@@ -1,3 +1,4 @@
+import { useAuth } from "@/lib/provider/AuthProvider";
 import { red, white } from "@/styles";
 import {
   Box,
@@ -12,6 +13,7 @@ import React from "react";
 const AccountTab = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const { user } = useAuth();
   return (
     <>
       <Grid
@@ -30,50 +32,50 @@ const AccountTab = () => {
         </Grid>
         <Grid item xs={12} display={"flex"} flexDirection={"column"} gap={2.5}>
           <Grid container spacing={2}>
-            <Grid item xs={isMobile ? 4 : 3}>
+            <Grid item xs={isMobile ? 5 : 3}>
               <Typography fontSize={14} fontWeight={500}>
                 Tên đăng nhập
               </Typography>
             </Grid>
-            <Grid item xs={isMobile ? 8 : 9}>
+            <Grid item xs={isMobile ? 7 : 9}>
               <Typography fontSize={14} fontWeight={500}>
-                Nguyễn Văn Huy
+                {user?.user_name}
               </Typography>
             </Grid>
           </Grid>
           <Grid container spacing={2}>
-            <Grid item xs={isMobile ? 4 : 3}>
+            <Grid item xs={isMobile ? 5 : 3}>
               <Typography fontSize={14} fontWeight={500}>
                 Họ tên
               </Typography>
             </Grid>
-            <Grid item xs={isMobile ? 8 : 9}>
+            <Grid item xs={isMobile ? 7 : 9}>
               <Typography fontSize={14} fontWeight={500}>
-                Nguyễn Văn Huy
+                {user?.name}
               </Typography>
             </Grid>
           </Grid>
           <Grid container spacing={2}>
-            <Grid item xs={isMobile ? 4 : 3}>
+            <Grid item xs={isMobile ? 5 : 3}>
               <Typography fontSize={14} fontWeight={500}>
                 Email
               </Typography>
             </Grid>
-            <Grid item xs={isMobile ? 8 : 9}>
+            <Grid item xs={isMobile ? 7 : 9}>
               <Typography fontSize={14} fontWeight={500}>
-                Email
+                {user?.email}
               </Typography>
             </Grid>
           </Grid>
           <Grid container spacing={2}>
-            <Grid item xs={isMobile ? 4 : 3}>
+            <Grid item xs={isMobile ? 5 : 3}>
               <Typography fontSize={14} fontWeight={500}>
                 Số điện thoại
               </Typography>
             </Grid>
-            <Grid item xs={isMobile ? 8 : 9}>
+            <Grid item xs={isMobile ? 7 : 9}>
               <Typography fontSize={14} fontWeight={500}>
-                Số điện thoại
+                {user?.phone_number}
               </Typography>
             </Grid>
           </Grid>

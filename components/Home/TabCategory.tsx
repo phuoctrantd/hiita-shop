@@ -1,7 +1,14 @@
 import * as React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import { Box, styled, Stack, useTheme, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  styled,
+  Stack,
+  useTheme,
+  useMediaQuery,
+  Typography,
+} from "@mui/material";
 import { red, white } from "@/styles";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -11,6 +18,10 @@ import ProductFruit8 from "@/public/images/products/product8.png";
 import ProductFruit5 from "@/public/images/products/product5.png";
 import ProductFruit6 from "@/public/images/products/product6.png";
 import fruit_demo from "@/public/images/fruit_demo.png";
+import { ProductType } from "@/lib/types/product";
+import { useQuery } from "react-query";
+import { ProductResponse } from "@/lib/types/response";
+import { useCategoryProducts } from "@/lib/hooks/useCategoryProducts";
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -19,7 +30,8 @@ interface TabPanelProps {
 const TabCategory = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(5);
+  const { data } = useCategoryProducts(value, 1, 30);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -39,6 +51,7 @@ const TabCategory = () => {
           width: "100%",
         }}
         alignItems={"end"}
+        justifyContent={"center"}
       >
         {value === index && <>{children}</>}
       </Stack>
@@ -57,38 +70,23 @@ const TabCategory = () => {
       borderRadius: "20px 20px 0 0",
     },
   }));
-  const dataProductCategory = [
-    {
-      id: 1,
-      name: "Cam Osaka",
-      image: fruit_demo,
-      price: "1000000",
-    },
-    {
-      id: 2,
-      name: "Chuối Úc ",
-      image: ProductFruit5,
-      price: "1000000",
-    },
-    {
-      id: 3,
-      name: "Dâu tây Kyoto",
-      image: ProductFruit1,
-      price: "1000000",
-    },
-    {
-      id: 4,
-      name: "Nho sữa Hà Lan",
-      image: ProductFruit8,
-      price: "1000000",
-    },
-    {
-      id: 5,
-      name: "Việt Quất Hà Lan",
-      image: ProductFruit6,
-      price: "1000000",
-    },
-  ];
+
+  const EmptyData = () => {
+    return (
+      <Box
+        sx={{
+          height: "225px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Typography fontSize={18} fontWeight={500} color={white[100]}>
+          Không có sản phẩm
+        </Typography>
+      </Box>
+    );
+  };
 
   return (
     <>
@@ -103,25 +101,44 @@ const TabCategory = () => {
               ".MuiTabs-indicator": {
                 backgroundColor: "transparent",
               },
+              "& .MuiTabScrollButton-root": {
+                display: "none",
+              },
             }}
           >
-            <TabCustom label="Trái Cây nhập khẩu" />
-            <TabCustom label="Nhân sâm" />
-            <TabCustom label="Quà tặng" />
-            <TabCustom label="Danh mục khác" />
+            <TabCustom label="Trái Cây nhập khẩu" value={5} />
+            <TabCustom label="Nhân sâm" value={1} />
+            <TabCustom label="Quà tặng" value={9} />
+            <TabCustom label="Danh mục khác" value={10} />
           </Tabs>
         </Box>
-        <CustomTabPanel value={value} index={0}>
-          <TabContainer fruitTab dataProductCategory={dataProductCategory} />
+        <CustomTabPanel value={value} index={5}>
+          {!!data?.data.length ? (
+            <TabContainer fruitTab dataProductCategory={data.data} />
+          ) : (
+            <EmptyData />
+          )}
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          <TabContainer dataProductCategory={dataProductCategory} />
+          {!!data?.data.length ? (
+            <TabContainer dataProductCategory={data.data} />
+          ) : (
+            <EmptyData />
+          )}
         </CustomTabPanel>
-        <CustomTabPanel value={value} index={2}>
-          <TabContainer dataProductCategory={dataProductCategory} />
+        <CustomTabPanel value={value} index={9}>
+          {!!data?.data.length ? (
+            <TabContainer dataProductCategory={data.data} />
+          ) : (
+            <EmptyData />
+          )}
         </CustomTabPanel>
-        <CustomTabPanel value={value} index={3}>
-          <TabContainer dataProductCategory={dataProductCategory} />
+        <CustomTabPanel value={value} index={10}>
+          {!!data?.data.length ? (
+            <TabContainer dataProductCategory={data.data} />
+          ) : (
+            <EmptyData />
+          )}
         </CustomTabPanel>
       </Box>
     </>

@@ -171,26 +171,26 @@ return  price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " VND";
 export const generateSlug = (name:string,id:number) => {
 return name.replace(/\s+/g, '-').toLowerCase() + "-i." + id;
 }
-export const generateNameFromSlug = (slug:string) => {
+export const getInfoCategory = (slug:string) => {
   switch(slug){
     case "nhan-sam"
-    : return "Nhân sâm";
+    : return {id:1,name:"Nhân sâm"};
     case "nhan-sam-han-quoc"
-    : return "Nhân sâm Hàn Quốc";
+    : return {id:2,name:"Nhân sâm Hàn Quốc"};
     case "cao-ly"
-    : return "Cao ly";
+    : return {id:3,name:"Cao ly"};
     case "nhan-sam-viet-nam"
-    : return "Nhân sâm Việt Nam";
+    : return {id:4,name:"Nhân sâm Việt Nam"};
     case "trai-cay-nhap-khau"
-    : return "Trái cây nhập khẩu";
+    : return {id:5,name:"Trái cây nhập khẩu"};
     case "tao"
-    : return "Táo";
+    : return {id:6,name:"Táo"};
     case "nho"
-    : return "Nho";
+    : return {id:7,name:"Nho"};
     case "kiwi"
-    : return "Kiwi";
-    default: return "";
-}
+    : return {id:8,name:"Kiwi"};
+    default: return {id:0, name:""};
+  }
 }
 
 export const priceRange = [
@@ -231,3 +231,11 @@ export const priceRange = [
     max:1000000000
   },
 ]
+
+
+export const getIdFromSlug = (slug:string) => {
+return slug.split("-i.")[1];
+}
+
+
+  

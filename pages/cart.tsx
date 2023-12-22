@@ -20,10 +20,11 @@ import { formatPrice, generateSlug } from "@/lib/contansts";
 import { BoxStyled } from "@/components/Product/ProductPrice";
 import toast, { Toaster } from "react-hot-toast";
 import { useAtom } from "jotai";
-import { CartItem, cartAtom } from "@/lib/hooks/cart";
+import { CartItem, cartAtom } from "@/lib/hooks/useCart";
 import Link from "next/link";
-import { checkoutAtom } from "@/lib/hooks/checkout";
+import { checkoutAtom, checkoutSourceAtom } from "@/lib/hooks/checkout";
 import { useRouter } from "next/navigation";
+import ProductFruit1 from "@/public/images/products/product1.png";
 export const price = (cartItem: CartItem) => {
   if (cartItem.product_variants && cartItem.product_variants.length > 0) {
     if (cartItem.variant && cartItem.variant.promotional_price) {
@@ -38,6 +39,7 @@ export const price = (cartItem: CartItem) => {
   }
   return cartItem.price * cartItem.quantity;
 };
+
 const Cart = () => {
   const [cart, setCart] = useAtom(cartAtom);
 
@@ -161,9 +163,11 @@ const Cart = () => {
   };
 
   const [checkoutProducts, setCheckoutProducts] = useAtom(checkoutAtom);
+  const [, setCheckoutSource] = useAtom(checkoutSourceAtom);
   const { push } = useRouter();
   const handleCheckout = () => {
     setCheckoutProducts(cart);
+    setCheckoutSource("cart");
     push("/checkout");
   };
 
@@ -202,7 +206,7 @@ const Cart = () => {
                   <Link href={`/product/${generateSlug(item.name, item.id)}`}>
                     <Box>
                       <Image
-                        src={item.image_url[0]}
+                        src={item.image_url ? item.image_url[0] : ProductFruit1}
                         alt="product"
                         width="100"
                         height="100"
@@ -456,7 +460,7 @@ const Cart = () => {
             <Typography
               fontSize={20}
               textAlign={"center"}
-              fontWeight={800}
+              fontWeight={500}
               color={red[100]}
             >
               Giỏ hàng của bạn còn trống

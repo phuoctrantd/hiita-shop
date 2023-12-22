@@ -6,10 +6,11 @@ import BannerGinseng from "@/public/images/banners/banner_ginseng.png";
 import { black, red } from "@/styles";
 import Link from "next/link";
 import { formatPrice, generateSlug } from "@/lib/contansts";
-
+import { ProductType } from "@/lib/types/product";
+import ProductFruit1 from "@/public/images/products/product1.png";
 interface ProductFeaturedProps {
   fruit?: boolean;
-  dataProductFeatured: Array<dataProductFeaturedProps>;
+  dataProductFeatured: Array<ProductType>;
 }
 
 interface dataProductFeaturedProps {
@@ -58,7 +59,7 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
               }}
             >
               <Image
-                src={item.image}
+                src={item.image_url ? item.image_url[0] : ProductFruit1}
                 alt="product"
                 style={{
                   width: "100%",
@@ -81,10 +82,14 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
                     textDecorationColor: black,
                   }}
                 >
-                  {formatPrice(item.price)}
+                  {item.product_variants[0].promotional_price &&
+                    formatPrice(item.product_variants[0].price)}
                 </Typography>
                 <Typography fontSize={14} fontWeight={800} color={red[100]}>
-                  {formatPrice(item.priceSale)}
+                  {formatPrice(
+                    item.product_variants[0].promotional_price ||
+                      item.product_variants[0].price
+                  )}
                 </Typography>
               </Box>
             </Box>
@@ -116,7 +121,7 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
               }}
             >
               <Image
-                src={item.image}
+                src={item.image_url ? item.image_url[0] : ProductFruit1}
                 alt="product"
                 style={{
                   width: "100%",
@@ -139,10 +144,12 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
                     textDecorationColor: black,
                   }}
                 >
-                  {formatPrice(item.price)}
+                  {item.promotional_price && formatPrice(item.price)}
                 </Typography>
                 <Typography fontSize={14} fontWeight={800} color={red[100]}>
-                  {formatPrice(item.priceSale)}
+                  {item.promotional_price
+                    ? formatPrice(item.promotional_price)
+                    : formatPrice(item.price)}
                 </Typography>
               </Box>
             </Box>

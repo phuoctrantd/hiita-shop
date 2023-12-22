@@ -19,7 +19,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { generateSlug } from "@/lib/contansts";
 import { gray, red, white } from "@/styles";
-import { usePagination } from "@/lib/hooks/pagination";
+import { usePagination } from "@/lib/hooks/usePagination";
 import ProductRelated from "@/components/Product/ProductRelated";
 import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
 import { NextPage } from "next";

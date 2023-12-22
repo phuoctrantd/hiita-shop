@@ -1,5 +1,6 @@
 import { black, red, white } from "@/styles";
 import {
+  Avatar,
   Badge,
   Box,
   Container,
@@ -22,9 +23,11 @@ import DragHandleOutlinedIcon from "@mui/icons-material/DragHandleOutlined";
 import DrawerContainer from "./components/DrawerContainer";
 import Link from "next/link";
 import { useAtom } from "jotai";
-import { cartAtom } from "@/lib/hooks/cart";
+import { cartAtom } from "@/lib/hooks/useCart";
 import Login from "../Dialog/Login";
 import Register from "../Dialog/Register";
+import { useAuth } from "@/lib/provider/AuthProvider";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
   const theme = useTheme();
@@ -58,6 +61,8 @@ const Header = () => {
   const handleCloseRegister = () => {
     setOpenRegister(false);
   };
+  const { user, handleLogout } = useAuth();
+  const router = useRouter();
   return (
     <>
       <Box
@@ -178,28 +183,60 @@ const Header = () => {
                 sx={{ alignItems: "center" }}
                 spacing={0.6}
               >
-                <AccountCircleOutlinedIcon
-                  sx={{ color: white[100], fontSize: 35 }}
-                />
-                <Box onClick={handleOpenLogin} sx={{ cursor: "pointer" }}>
+                {user ? (
+                  <>
+                    <Avatar
+                      sx={{
+                        width: 29,
+                        height: 29,
+                        background: white[100],
+                        color: red[100],
+                        fontWeight: 600,
+                      }}
+                    >
+                      {user?.name[0]}
+                    </Avatar>
+                  </>
+                ) : (
+                  <AccountCircleOutlinedIcon
+                    sx={{ color: white[100], fontSize: 35 }}
+                  />
+                )}
+                <Box>
                   <TextHeader
+                    onClick={user ? handleLogout : () => {}}
                     sx={{
+                      cursor: user ? "pointer" : "unset",
                       fontSize: isMobile
                         ? "13px !important"
                         : "12px !important",
+                      "&:hover": {
+                        textDecoration: user ? "underline" : "unset",
+                        textShadow: user
+                          ? `0px 0px 5px ${white[100]}`
+                          : "unset",
+                      },
                     }}
                   >
-                    Xin chào
+                    {user ? "Đăng xuất" : "Xin chào"}
                   </TextHeader>
                   <TextHeader
+                    onClick={
+                      user ? () => router.push("/account") : handleOpenLogin
+                    }
                     sx={{
+                      cursor: "pointer",
                       fontSize: isMobile
                         ? "12px !important"
                         : "13px !important",
                       fontWeight: 600,
+                      "&:hover": {
+                        textDecoration: "underline",
+                        textShadow: `0px 0px 5px ${white[100]}`,
+                      },
                     }}
                   >
-                    Đăng nhập
+                    {user?.name || "Đăng nhập"}
                   </TextHeader>
                 </Box>
               </Stack>
