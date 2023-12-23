@@ -69,7 +69,7 @@ const Register: React.FC<RegisterProps> = ({
     >
       <form
         style={{ width: "100%", height: "100%" }}
-        autoComplete="off"
+        autoComplete="new rengister"
         onSubmit={handleSubmit(onSubmit)}
       >
         <Stack

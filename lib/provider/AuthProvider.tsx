@@ -1,4 +1,3 @@
-"use client";
 import { useRouter } from "next/navigation";
 import React, {
   createContext,
@@ -23,6 +22,7 @@ interface AuthContextType {
   user: UserType | null;
   setUser: Dispatch<SetStateAction<UserType | null>>;
   handleLogout: () => void;
+  accessToken: string;
 }
 
 const defaultValues = {
@@ -30,6 +30,7 @@ const defaultValues = {
   setUser: () => {},
   setAccessToken: () => {},
   handleLogout: () => {},
+  accessToken: "",
 };
 
 type PropChildren = {
@@ -85,14 +86,15 @@ const AuthProvider: React.FC<PropChildren> = ({ children }) => {
     setUser,
     setAccessToken,
     handleLogout,
+    accessToken,
   };
 
-  useEffect(() => {
-    getAccessTokenFromStorage().then((t) => {
-      if (!t) return router.push("/");
-      setAccessToken(t);
-    });
-  }, [router]);
+  // useEffect(() => {
+  //   getAccessTokenFromStorage().then((t) => {
+  //     if (!t) return router.push("/");
+  //     setAccessToken(t);
+  //   });
+  // }, [router]);
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 

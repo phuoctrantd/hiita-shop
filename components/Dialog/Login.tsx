@@ -79,7 +79,7 @@ const Login: React.FC<LoginProps> = ({ open, close, handleOpenRegister }) => {
     >
       <form
         style={{ width: "100%", height: "100%" }}
-        autoComplete="off"
+        autoComplete="new-login"
         onSubmit={handleSubmit(onSubmit)}
       >
         <Stack
@@ -87,7 +87,11 @@ const Login: React.FC<LoginProps> = ({ open, close, handleOpenRegister }) => {
           spacing={2}
           sx={{ marginBottom: "20px !important" }}
         >
-          <TextField name="user_name" placeholder="Email" control={control} />
+          <TextField
+            name="user_name"
+            placeholder="Tên đăng nhập"
+            control={control}
+          />
           <TextField
             name="password"
             placeholder="Mật khẩu"

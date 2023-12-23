@@ -21,7 +21,6 @@ import HoverPopover from "material-ui-popup-state/HoverPopover";
 const Menu = () => {
   const router = useRouter();
   const { pathname } = router;
-  console.log(pathname);
   return (
     <>
       <Grid container sx={{ textAlign: "center" }}>
@@ -31,7 +30,16 @@ const Menu = () => {
               {(popupState) => (
                 <div>
                   <Link href={item.link} {...bindHover(popupState)}>
-                    <TextMenu>{item.label}</TextMenu>
+                    <TextMenu
+                      sx={{
+                        textShadow:
+                          pathname === item.link && pathname !== "/"
+                            ? "0px 0px 5px #E51E41"
+                            : "none",
+                      }}
+                    >
+                      {item.label}
+                    </TextMenu>
                   </Link>
                   {item.subMenu && (
                     <HoverPopover

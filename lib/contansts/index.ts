@@ -69,12 +69,12 @@ interface MenuItem {
     {
         id: 6,
         label: "Câu hỏi thường gặp",
-        link: "/",
+        link: "/faq",
       },
     {
       id: 6,
       label: "Liên hệ",
-      link: "/",
+      link: "/contact",
     },
   ];
 

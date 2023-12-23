@@ -54,6 +54,7 @@ function TextField<T>({
   required,
   label,
   type,
+  multiline,
   ...props
 }: TextFieldProps<T>) {
   const {
@@ -68,6 +69,7 @@ function TextField<T>({
         error={!!error}
         fullWidth
         size={size}
+        multiline={multiline}
         required={required}
         label={label}
         helperText={error?.message}

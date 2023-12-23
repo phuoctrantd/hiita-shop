@@ -160,7 +160,12 @@ const Header = () => {
                     width="35"
                     height="35"
                   />
-                  <Box>
+                  <Box
+                    onClick={() => {
+                      window.open("tel:19006633", "_blank");
+                    }}
+                    sx={{ cursor: "pointer" }}
+                  >
                     <TextHeader>Tư vấn hỗ trợ</TextHeader>
                     <TextHeader sx={{ fontSize: 13, fontWeight: 700 }}>
                       19006633

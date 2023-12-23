@@ -80,7 +80,7 @@ const Footer = () => {
               spacing={2.5}
               display={isMobile ? "none" : "flex"}
             >
-              <Typography fontSize={17} fontWeight={800} color={white[100]}>
+              <Typography fontSize={15} fontWeight={700} color={red[100]}>
                 BẢN ĐỒ
               </Typography>
               <Divider

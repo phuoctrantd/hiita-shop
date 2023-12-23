@@ -127,7 +127,7 @@ const CheckoutContainer = () => {
             spacing={5}
             onSubmit={handleSubmit(onSubmit)}
             component="form"
-            autoComplete="off"
+            autoComplete="new-checkout"
           >
             <Grid item xs={isMobile ? 12 : 4} order={isMobile ? 2 : 1}>
               <TypographyTitle>Thông tin nhận hàng</TypographyTitle>

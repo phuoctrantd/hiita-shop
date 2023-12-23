@@ -15,6 +15,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { NextPage } from "next";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 interface TabPanelProps {
@@ -47,7 +48,13 @@ const Account: NextPage = () => {
   };
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const { user } = useAuth();
+  const { user, accessToken } = useAuth();
+  const router = useRouter();
+  React.useEffect(() => {
+    if (!accessToken) {
+      router.push("/");
+    }
+  }, [accessToken, router]);
   return (
     <>
       <Page title="Thông tin cá nhân">
