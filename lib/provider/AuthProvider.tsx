@@ -89,12 +89,12 @@ const AuthProvider: React.FC<PropChildren> = ({ children }) => {
     accessToken,
   };
 
-  // useEffect(() => {
-  //   getAccessTokenFromStorage().then((t) => {
-  //     if (!t) return router.push("/");
-  //     setAccessToken(t);
-  //   });
-  // }, [router]);
+  useEffect(() => {
+    getAccessTokenFromStorage().then((t) => {
+      if (!t) return setAccessToken("");
+      setAccessToken(t);
+    });
+  }, []);
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 

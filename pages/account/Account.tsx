@@ -2,6 +2,7 @@ import AccountTab from "@/components/Account/AccountTab";
 import OrderTab from "@/components/Account/OrderTab";
 import Page from "@/components/Page";
 import { useAuth } from "@/lib/provider/AuthProvider";
+import { getAccessTokenFromStorage } from "@/lib/utils/localStorage";
 import { red, white } from "@/styles";
 import {
   Avatar,
@@ -51,10 +52,14 @@ const Account: NextPage = () => {
   const { user, accessToken } = useAuth();
   const router = useRouter();
   React.useEffect(() => {
-    if (!accessToken) {
-      router.push("/");
-    }
-  }, [accessToken, router]);
+    const checkAuth = async () => {
+      const token = await getAccessTokenFromStorage();
+      if (!token) {
+        router.push("/");
+      }
+    };
+    checkAuth();
+  }, [router]);
   return (
     <>
       <Page title="Thông tin cá nhân">
