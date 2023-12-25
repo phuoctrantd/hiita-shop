@@ -63,6 +63,17 @@ const Header = () => {
   };
   const { user, handleLogout } = useAuth();
   const router = useRouter();
+  const [searchValue, setSearchValue] = React.useState("");
+
+  const handleKeyPress = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter" && searchValue.trim() !== "") {
+      handleSearch();
+    }
+  };
+  const handleSearch = () => {
+    router.push("/search?keyword=" + searchValue.trim().toLowerCase());
+    searchValue.trim() !== "" && setSearchValue("");
+  };
   return (
     <>
       <Box
@@ -111,6 +122,9 @@ const Header = () => {
                 />
               )}
               <TextField
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                onKeyPress={handleKeyPress}
                 sx={{
                   borderRadius: 26,
                   width: 360,

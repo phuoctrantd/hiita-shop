@@ -9,11 +9,22 @@ import { red, white } from "@/styles";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import BannerImage from "@/public/images/banners/banner.svg";
+import { useQuery } from "react-query";
+import { getImageUrl } from "@/lib/utils/ultil";
 
+interface Banner {
+  slides: [
+    {
+      url: string;
+    },
+  ];
+}
 const Banner = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
+  const { data } = useQuery<Banner>(`/settings`, {
+    keepPreviousData: true,
+  });
   return (
     <BannerStyled sx={{ mb: 3.6, mt: isMobile ? 3 : 0 }}>
       <Swiper
@@ -28,54 +39,24 @@ const Banner = () => {
           disableOnInteraction: false,
         }}
       >
-        <SwiperSlide>
-          <Box
-            sx={{
-              borderRadius: isMobile ? 0 : "30px",
-              maxWidth: "100%",
-              overflow: "hidden",
-              position: "relative",
-            }}
-          >
-            <img
-              src={BannerImage.src}
-              alt="banner"
-              style={{ width: "100%", height: "100%" }}
-            />
-          </Box>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Box
-            sx={{
-              borderRadius: isMobile ? 0 : "30px",
-              maxWidth: "100%",
-              overflow: "hidden",
-              position: "relative",
-            }}
-          >
-            <img
-              src={BannerImage.src}
-              alt="banner"
-              style={{ width: "100%", height: "100%" }}
-            />
-          </Box>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Box
-            sx={{
-              borderRadius: isMobile ? 0 : "30px",
-              maxWidth: "100%",
-              overflow: "hidden",
-              position: "relative",
-            }}
-          >
-            <img
-              src={BannerImage.src}
-              alt="banner"
-              style={{ width: "100%", height: "100%" }}
-            />
-          </Box>
-        </SwiperSlide>
+        {data?.slides.map((slide, index) => (
+          <SwiperSlide key={index}>
+            <Box
+              sx={{
+                borderRadius: isMobile ? 0 : "30px",
+                maxWidth: "100%",
+                overflow: "hidden",
+                position: "relative",
+              }}
+            >
+              <img
+                src={getImageUrl(slide.url)}
+                alt="banner"
+                style={{ width: "100%", height: "100%" }}
+              />
+            </Box>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </BannerStyled>
   );

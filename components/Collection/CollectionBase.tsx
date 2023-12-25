@@ -207,43 +207,57 @@ const CollectionBase = () => {
             <Grid container spacing={isMobile ? 2 : 3}>
               {dataProductFeatured?.length ? (
                 dataProductFeatured?.map((item, index) => (
-                  <Grid
-                    item
-                    xs={isMobile ? 6 : 4}
-                    key={index}
-                    sx={{
-                      "&:hover": {
-                        transform: "scale(1.02)",
-                      },
-                    }}
-                  >
+                  <Grid item xs={isMobile ? 6 : 4} key={index}>
                     <Link href={`/product/${generateSlug(item.name, item.id)}`}>
-                      <img
-                        src={getImageUrl(item.product_variants[0].image_url)}
-                        alt={item.name}
-                        style={{
-                          width: "100%",
-                          height: isMobile ? "200px" : "270px",
-                        }}
-                      />
-                      <TypoTitleProdStyled>{item.name}</TypoTitleProdStyled>
-                      <Typography
-                        fontSize={12}
-                        fontWeight={700}
-                        color={red[200]}
+                      <Box
                         sx={{
-                          textDecoration: "line-through",
-                          textDecorationColor: black,
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          height: "100%",
+                          cursor: "pointer",
+                          transition: "transform 0.3s",
+                          "&:hover": {
+                            transform: "scale(1.02)",
+                          },
                         }}
                       >
-                        {item.discount &&
-                          formatPrice(item.product_variants[0].price)}
-                      </Typography>
-                      <TypoPriceStyled>
-                        {formatPrice(
-                          item.product_variants[0].promotional_price
-                        )}
-                      </TypoPriceStyled>
+                        <img
+                          src={getImageUrl(item.product_variants[0].image_url)}
+                          alt={item.name}
+                          style={{
+                            width: "100%",
+                            height: isMobile ? "200px" : "270px",
+                          }}
+                        />
+                        <Box
+                          px={2}
+                          mt={1.8}
+                          textAlign={"center"}
+                          sx={{ flexGrow: 1 }}
+                        >
+                          <TypoTitleProdStyled>{item.name}</TypoTitleProdStyled>
+                        </Box>
+                        <Box textAlign={"center"}>
+                          <Typography
+                            fontSize={12}
+                            fontWeight={700}
+                            color={red[200]}
+                            sx={{
+                              textDecoration: "line-through",
+                              textDecorationColor: black,
+                            }}
+                          >
+                            {item.discount &&
+                              formatPrice(item.product_variants[0].price)}
+                          </Typography>
+                          <TypoPriceStyled>
+                            {formatPrice(
+                              item.product_variants[0].promotional_price
+                            )}
+                          </TypoPriceStyled>
+                        </Box>
+                      </Box>
                     </Link>
                   </Grid>
                 ))

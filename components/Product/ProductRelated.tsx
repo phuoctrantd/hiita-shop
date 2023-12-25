@@ -50,7 +50,7 @@ const ProductRelated: React.FC<ProductRelatedProps> = ({ category_id }) => {
                       sx={{
                         display: "flex",
                         flexDirection: "column",
-
+                        alignItems: "center",
                         height: "100%",
                         cursor: "pointer",
                         transition: "transform 0.3s",
@@ -70,8 +70,9 @@ const ProductRelated: React.FC<ProductRelatedProps> = ({ category_id }) => {
 
                       <Box
                         mb={isMobile ? 1.5 : 1}
+                        px={2}
                         mt={1.8}
-                        sx={{ flexGrow: 1 }}
+                        textAlign={"center"}
                       >
                         <Typography
                           fontSize={14}
@@ -81,7 +82,7 @@ const ProductRelated: React.FC<ProductRelatedProps> = ({ category_id }) => {
                           {item.name}
                         </Typography>
                       </Box>
-                      <Box>
+                      <Box textAlign={"center"}>
                         <Typography
                           fontSize={12}
                           fontWeight={700}
