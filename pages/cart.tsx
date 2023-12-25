@@ -25,6 +25,7 @@ import Link from "next/link";
 import { checkoutAtom, checkoutSourceAtom } from "@/lib/hooks/checkout";
 import { useRouter } from "next/navigation";
 import ProductFruit1 from "@/public/images/products/product1.png";
+import { getImageUrl } from "@/lib/utils/ultil";
 export const price = (cartItem: CartItem) => {
   if (cartItem.product_variants && cartItem.product_variants.length > 0) {
     if (cartItem.variant && cartItem.variant.promotional_price) {
@@ -206,9 +207,7 @@ const Cart = () => {
                   <Link href={`/product/${generateSlug(item.name, item.id)}`}>
                     <Box>
                       <img
-                        src={
-                          item.image_url ? item.image_url[0] : ProductFruit1.src
-                        }
+                        src={getImageUrl(item.product_variants[0].image_url)}
                         alt="product"
                         width="100"
                         height="100"

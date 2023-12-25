@@ -39,7 +39,7 @@ const Product: NextPage = () => {
         <Page title={data.name} category={data.category.name}>
           <Grid container spacing={isMobile ? 5 : 10} mb={5}>
             <Grid item xs={isMobile ? 12 : 6}>
-              <SlideImage images={data.image_url} />
+              <SlideImage productVariants={data.product_variants} />
             </Grid>
             <Grid item xs={isMobile ? 12 : 6}>
               <ProductPrice dataProduct={data} />

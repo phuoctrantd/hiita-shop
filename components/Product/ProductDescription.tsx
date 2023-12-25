@@ -70,7 +70,10 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
-          <Typography fontSize={14}> {description}</Typography>
+          <Typography
+            fontSize={14}
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
         </CustomTabPanel>
       </Box>
     </>

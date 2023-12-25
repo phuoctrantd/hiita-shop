@@ -8,6 +8,7 @@ import Link from "next/link";
 import { formatPrice, generateSlug } from "@/lib/contansts";
 import { ProductType } from "@/lib/types/product";
 import ProductFruit1 from "@/public/images/products/product1.png";
+import { getImageUrl } from "@/lib/utils/ultil";
 interface ProductFeaturedProps {
   fruit?: boolean;
   dataProductFeatured: Array<ProductType>;
@@ -59,7 +60,7 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
               }}
             >
               <img
-                src={item.image_url ? item.image_url[0] : ProductFruit1.src}
+                src={getImageUrl(item.product_variants[0].image_url)}
                 alt="product"
                 style={{
                   width: "100%",
@@ -121,7 +122,7 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
               }}
             >
               <img
-                src={item.image_url ? item.image_url[0] : ProductFruit1.src}
+                src={getImageUrl(item.product_variants[0].image_url)}
                 alt="product"
                 style={{
                   width: "100%",

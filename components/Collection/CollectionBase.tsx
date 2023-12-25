@@ -32,6 +32,7 @@ import FilterAltOutlinedIcon from "@mui/icons-material/FilterAltOutlined";
 import { usePagination } from "@/lib/hooks/usePagination";
 import { useCategoryProducts } from "@/lib/hooks/useCategoryProducts";
 import Ginseng1 from "@/public/images/products/ginseng1.png";
+import { getImageUrl } from "@/lib/utils/ultil";
 const CollectionBase = () => {
   const params = useParams();
 
@@ -218,7 +219,7 @@ const CollectionBase = () => {
                   >
                     <Link href={`/product/${generateSlug(item.name, item.id)}`}>
                       <img
-                        src={item.image_url ? item.image_url[0] : Ginseng1.src}
+                        src={getImageUrl(item.product_variants[0].image_url)}
                         alt={item.name}
                         style={{
                           width: "100%",

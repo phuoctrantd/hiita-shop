@@ -32,6 +32,7 @@ import { price } from "../cart";
 import { formatPrice } from "@/lib/contansts";
 import { useAuth } from "@/lib/provider/AuthProvider";
 import { cartAtom } from "@/lib/hooks/useCart";
+import { getImageUrl } from "@/lib/utils/ultil";
 const CheckoutContainer = () => {
   const [checkoutProducts, setCheckoutProducts] = useAtom(checkoutAtom);
   const TypographyTitle = styled(Typography)(({ theme }) => ({
@@ -241,11 +242,7 @@ const CheckoutContainer = () => {
                     >
                       <Stack direction={"row"} spacing={2}>
                         <img
-                          src={
-                            item.image_url
-                              ? item.image_url[0]
-                              : ProductFruit1.src
-                          }
+                          src={getImageUrl(item.product_variants[0].image_url)}
                           alt="product"
                           width="85"
                           height="100"

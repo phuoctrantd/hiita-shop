@@ -18,6 +18,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation, Autoplay } from "swiper/modules";
 import { useCategoryProducts } from "@/lib/hooks/useCategoryProducts";
+import { getImageUrl } from "@/lib/utils/ultil";
 interface ProductRelatedProps {
   category_id: number;
 }
@@ -56,9 +57,7 @@ const ProductRelated: React.FC<ProductRelatedProps> = ({ category_id }) => {
                       }}
                     >
                       <img
-                        src={
-                          item.image_url ? item.image_url[0] : ProductFruit1.src
-                        }
+                        src={getImageUrl(item.product_variants[0].image_url)}
                         alt="banner"
                         style={{
                           width: "100%",

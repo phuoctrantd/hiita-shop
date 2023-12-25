@@ -54,7 +54,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const allVariantsNull = dataProduct.product_variants?.every(
-    (variant) => variant.box_size === null
+    (variant) => variant.box_size === null || variant.box_size === ""
   );
   const [cart, setCart] = useAtom(cartAtom);
   const addToCart = () => {

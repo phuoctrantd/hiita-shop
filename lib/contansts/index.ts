@@ -86,17 +86,17 @@ export const MENU_DATA_FOOTER = [
         {
             id: 1,
             label: "Giới thiệu",
-            link: "/",
+            link: "/about",
         },
         {
             id: 2,
             label: "Tin tức",
-            link: "/",
+            link: "/news",
         },
         {
             id: 3,
             label: "Liên hệ",
-            link: "/",
+            link: "/contact",
         },
     ]
 },
@@ -106,12 +106,12 @@ export const MENU_DATA_FOOTER = [
       {
         id: 1,
         label: "Nhân sâm",
-        link: "/",
+        link: "/collections/nhan-sam",
       },
       {
         id: 2,
         label: "Trái cây nhập khẩu",
-        link: "/",
+        link: "/collections/trai-cay-nhap-khau",
       },
       {
         id: 3,
@@ -131,17 +131,17 @@ export const MENU_DATA_FOOTER = [
         {
             id: 1,
             label: "Chính sách giao hàng",
-            link: "/",
+            link: "/faq",
         },
         {
             id: 2,
             label: "Chính sách đổi trả",
-            link: "/",
+            link: "/faq",
         },
         {
             id: 3,
             label: "Chính sách bảo mật",
-            link: "/",
+            link: "/faq",
         },
     ]
     

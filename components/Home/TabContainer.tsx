@@ -18,6 +18,7 @@ import { white } from "@/styles";
 import Link from "next/link";
 import { formatPrice, generateSlug } from "@/lib/contansts";
 import { ProductType } from "@/lib/types/product";
+import { getImageUrl } from "@/lib/utils/ultil";
 
 interface TabProps {
   fruitTab?: boolean;
@@ -68,9 +69,7 @@ const TabContainer: React.FC<TabProps> = ({
                       }}
                     >
                       <img
-                        src={
-                          item.image_url ? item.image_url[0] : fruit_demo.src
-                        }
+                        src={getImageUrl(item.product_variants[0].image_url)}
                         alt={item.name}
                         style={{ width: "100%", height: "221px" }}
                       />

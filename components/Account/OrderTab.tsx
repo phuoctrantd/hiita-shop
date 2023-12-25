@@ -17,6 +17,7 @@ import { formatPrice } from "@/lib/contansts";
 import { useQuery } from "react-query";
 import { OrderResponse } from "@/lib/types/response";
 import { OrderType } from "@/lib/types/order";
+import { getImageUrl } from "@/lib/utils/ultil";
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -63,7 +64,7 @@ const OrderTab = () => {
                     <Grid container key={index} spacing={1}>
                       <Grid item xs={isMobile ? 3.5 : 2.5}>
                         <img
-                          src={ProductFruit1.src}
+                          src={getImageUrl(product.product_variant.image_url)}
                           alt="product"
                           height={isMobile ? 85 : 130}
                           width={isMobile ? 85 : 130}

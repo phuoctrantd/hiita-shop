@@ -38,5 +38,6 @@ export type ProductType = {
       status: number;
       box_size: string;
       code: string;
+      image_url: string;
     };
 

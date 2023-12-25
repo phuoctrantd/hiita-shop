@@ -12,11 +12,13 @@ import "swiper/css/thumbs";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import { SwiperStyled } from "../Home/TabContainer";
 import ProductFruit1 from "@/public/images/products/product1.png";
+import { getImageUrl } from "@/lib/utils/ultil";
+import { ProductsVariant } from "@/lib/types/product";
 interface SlideImageProps {
-  images: Array<string>;
+  productVariants: ProductsVariant[];
 }
 
-const SlideImage: React.FC<SlideImageProps> = ({ images }) => {
+const SlideImage: React.FC<SlideImageProps> = ({ productVariants }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -39,10 +41,10 @@ const SlideImage: React.FC<SlideImageProps> = ({ images }) => {
           className="mySwiper2"
           onSlideChange={handleSlideChange}
         >
-          {images?.map((item, index) => (
+          {productVariants.map((item, index) => (
             <SwiperSlide key={index}>
               <img
-                src={item ? item : ProductFruit1.src}
+                src={getImageUrl(item.image_url)}
                 alt="banner"
                 style={{
                   width: "100%",
@@ -61,10 +63,10 @@ const SlideImage: React.FC<SlideImageProps> = ({ images }) => {
           modules={[FreeMode, Navigation, Thumbs]}
           className="mySwiper"
         >
-          {images?.map((item, index) => (
+          {productVariants.map((item, index) => (
             <SwiperSlide key={index}>
               <img
-                src={item ? item : ProductFruit1.src}
+                src={getImageUrl(item.image_url)}
                 alt="banner"
                 style={{
                   width: "91px",
