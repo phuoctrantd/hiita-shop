@@ -48,26 +48,40 @@ const ProductRelated: React.FC<ProductRelatedProps> = ({ category_id }) => {
                   <Link href={`/product/${generateSlug(item.name, item.id)}`}>
                     <Box
                       sx={{
-                        transition: "transform 0.3s",
+                        display: "flex",
+                        flexDirection: "column",
+
+                        height: "100%",
                         cursor: "pointer",
+                        transition: "transform 0.3s",
                         "&:hover": {
                           transform: "scale(1.02)",
                         },
-                        width: "100%",
                       }}
                     >
                       <img
                         src={getImageUrl(item.product_variants[0].image_url)}
-                        alt="banner"
+                        alt="product"
                         style={{
                           width: "100%",
-                          height: isMobile ? "320px" : "250px",
                         }}
+                        height={200}
                       />
-                      <Box mt={1.6}>
-                        <Typography fontSize={14} fontWeight={700} mb={1}>
+
+                      <Box
+                        mb={isMobile ? 1.5 : 1}
+                        mt={1.8}
+                        sx={{ flexGrow: 1 }}
+                      >
+                        <Typography
+                          fontSize={14}
+                          fontWeight={700}
+                          color={black}
+                        >
                           {item.name}
                         </Typography>
+                      </Box>
+                      <Box>
                         <Typography
                           fontSize={12}
                           fontWeight={700}
@@ -77,7 +91,7 @@ const ProductRelated: React.FC<ProductRelatedProps> = ({ category_id }) => {
                             textDecorationColor: black,
                           }}
                         >
-                          {item.product_variants[0].promotional_price &&
+                          {item.discount &&
                             formatPrice(item.product_variants[0].price)}
                         </Typography>
                         <Typography
@@ -86,8 +100,7 @@ const ProductRelated: React.FC<ProductRelatedProps> = ({ category_id }) => {
                           color={red[100]}
                         >
                           {formatPrice(
-                            item.product_variants[0].promotional_price ||
-                              item.product_variants[0].price
+                            item.product_variants[0].promotional_price
                           )}
                         </Typography>
                       </Box>

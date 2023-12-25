@@ -81,6 +81,7 @@ const TabContainer: React.FC<TabProps> = ({
                           left: 0,
                           width: "100%",
                           height: "25%",
+                          padding: "0 0.5rem",
                         }}
                       >
                         <Typography
@@ -88,8 +89,10 @@ const TabContainer: React.FC<TabProps> = ({
                             color: white[100],
                             fontSize: 14,
                             fontWeight: 500,
-                            textAlign: "center",
                             pt: isMobile ? 0 : 0.6,
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
                           }}
                         >
                           {item.name}

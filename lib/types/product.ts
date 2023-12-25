@@ -15,6 +15,7 @@ export type ProductType = {
     description: string;
     created_at: string | null;
     updated_at: string | null;
+    discount: string | null;
     category: {
       id: number;
       name: string;
@@ -34,7 +35,7 @@ export type ProductType = {
       product_id: number;
       name: string;
       price: number;
-      promotional_price?: number;
+      promotional_price: number;
       status: number;
       box_size: string;
       code: string;

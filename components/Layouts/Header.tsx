@@ -88,8 +88,8 @@ const Header = () => {
                 <img
                   src={Logo.src}
                   alt="logo"
-                  width={isMobile ? "170" : "190"}
-                  height="60"
+                  width={isMobile ? "140" : "190"}
+                  height={isMobile ? "40" : "60"}
                 />
               </Link>
             </Grid>

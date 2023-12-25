@@ -51,6 +51,7 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
               sx={{
                 display: "flex",
                 flexDirection: "column",
+                alignItems: "center",
                 height: "100%",
                 cursor: "pointer",
                 transition: "transform 0.3s",
@@ -65,15 +66,21 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
                 style={{
                   width: "100%",
                 }}
-                height={isMobile ? 200 : 252}
+                height={200}
               />
 
-              <Box textAlign="center" mt={1.8} mb={1}>
-                <Box mb={isMobile ? 1.5 : 2.8} px={2}>
-                  <Typography fontSize={14} fontWeight={700} color={black}>
-                    {item.name}
-                  </Typography>
-                </Box>
+              <Box
+                mb={isMobile ? 1.5 : 1}
+                px={2}
+                mt={1.8}
+                sx={{ flexGrow: 1 }}
+                textAlign={"center"}
+              >
+                <Typography fontSize={14} fontWeight={700} color={black}>
+                  {item.name}
+                </Typography>
+              </Box>
+              <Box textAlign={"center"}>
                 <Typography
                   fontSize={12}
                   fontWeight={700}
@@ -83,14 +90,10 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
                     textDecorationColor: black,
                   }}
                 >
-                  {item.product_variants[0].promotional_price &&
-                    formatPrice(item.product_variants[0].price)}
+                  {item.discount && formatPrice(item.product_variants[0].price)}
                 </Typography>
                 <Typography fontSize={14} fontWeight={800} color={red[100]}>
-                  {formatPrice(
-                    item.product_variants[0].promotional_price ||
-                      item.product_variants[0].price
-                  )}
+                  {formatPrice(item.product_variants[0].promotional_price)}
                 </Typography>
               </Box>
             </Box>
@@ -113,6 +116,7 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
               sx={{
                 display: "flex",
                 flexDirection: "column",
+                alignItems: "center",
                 height: "100%",
                 cursor: "pointer",
                 transition: "transform 0.3s",
@@ -127,15 +131,21 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
                 style={{
                   width: "100%",
                 }}
-                height={isMobile ? 200 : 252}
+                height={200}
               />
 
-              <Box textAlign="center" mt={1.8} mb={1}>
-                <Box mb={isMobile ? 1.5 : 2.8} px={2}>
-                  <Typography fontSize={14} fontWeight={700} color={black}>
-                    {item.name}
-                  </Typography>
-                </Box>
+              <Box
+                mb={isMobile ? 1.5 : 1}
+                px={2}
+                textAlign={"center"}
+                mt={1.8}
+                sx={{ flexGrow: 1 }}
+              >
+                <Typography fontSize={14} fontWeight={700} color={black}>
+                  {item.name}
+                </Typography>
+              </Box>
+              <Box>
                 <Typography
                   fontSize={12}
                   fontWeight={700}
@@ -144,13 +154,12 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
                     textDecoration: "line-through",
                     textDecorationColor: black,
                   }}
+                  textAlign={"center"}
                 >
-                  {item.promotional_price && formatPrice(item.price)}
+                  {item.discount && formatPrice(item.product_variants[0].price)}
                 </Typography>
                 <Typography fontSize={14} fontWeight={800} color={red[100]}>
-                  {item.promotional_price
-                    ? formatPrice(item.promotional_price)
-                    : formatPrice(item.price)}
+                  {formatPrice(item.product_variants[0].promotional_price)}
                 </Typography>
               </Box>
             </Box>

@@ -14,6 +14,7 @@ import Image from "next/image";
 import React from "react";
 import Logo from "@/public/images/hiita-logo.png";
 import { MENU_DATA_FOOTER } from "@/lib/contansts";
+import Link from "next/link";
 const Footer = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -45,7 +46,9 @@ const Footer = () => {
                 {item.title}
               </TextTitle>
               {item.data.map((item, index) => (
-                <TextMenu key={index}>{item.label}</TextMenu>
+                <Link key={index} href={item.link}>
+                  <TextMenu>{item.label}</TextMenu>
+                </Link>
               ))}
             </Grid>
           ))}

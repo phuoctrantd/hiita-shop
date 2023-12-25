@@ -236,13 +236,12 @@ const CollectionBase = () => {
                           textDecorationColor: black,
                         }}
                       >
-                        {item.product_variants[0].promotional_price &&
+                        {item.discount &&
                           formatPrice(item.product_variants[0].price)}
                       </Typography>
                       <TypoPriceStyled>
                         {formatPrice(
-                          item.product_variants[0].promotional_price ||
-                            item.product_variants[0].price
+                          item.product_variants[0].promotional_price
                         )}
                       </TypoPriceStyled>
                     </Link>

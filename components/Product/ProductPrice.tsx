@@ -139,7 +139,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
               {formatPrice(price)}
             </Typography>
           </Grid>
-          {selectedVariant?.promotional_price && (
+          {dataProduct.discount && (
             <Grid
               item
               xs={isMobile ? 12 : 6}
@@ -176,7 +176,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
             <TypographyDes>Còn hàng</TypographyDes>
           </Grid>
         </Grid>
-        {selectedVariant?.promotional_price && (
+        {dataProduct.discount && (
           <Grid container spacing={isMobile ? 1 : 2} mb={isMobile ? 1 : 2}>
             <Grid
               item

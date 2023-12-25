@@ -57,7 +57,7 @@ const OrderTab = () => {
                   }}
                 >
                   <Typography fontSize={18} fontWeight={700} color={red[100]}>
-                    {getOrderStatus(order.status)}
+                    {getOrderStatus(Number(order.status))}
                   </Typography>
 
                   {order.product_variants.map((product, index) => (
@@ -70,7 +70,7 @@ const OrderTab = () => {
                           width={isMobile ? 85 : 130}
                         />
                       </Grid>
-                      <Grid item xs={isMobile ? 4 : 5.5}>
+                      <Grid item xs={isMobile ? 4 : 4.5}>
                         <Typography fontSize={16} fontWeight={600}>
                           {product.product.name}
                         </Typography>
@@ -91,7 +91,7 @@ const OrderTab = () => {
                       </Grid>
                       <Grid
                         item
-                        xs={isMobile ? 3.5 : 2}
+                        xs={isMobile ? 3.5 : 3}
                         display={"flex"}
                         alignItems={"end"}
                         justifyContent={"end"}

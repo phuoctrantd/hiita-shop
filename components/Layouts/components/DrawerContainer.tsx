@@ -82,9 +82,18 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({
                       minHeight: "0px !important",
                     }}
                   >
-                    <Typography fontSize={14} color={red[100]}>
-                      {item.label}
-                    </Typography>
+                    <Link href={item.link}>
+                      <Typography
+                        fontSize={14}
+                        color={red[100]}
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          handleCloseMenu();
+                        }}
+                      >
+                        {item.label}
+                      </Typography>
+                    </Link>
                   </AccordionSummary>
                   <AccordionDetails sx={{ p: 0 }}>
                     <Divider
