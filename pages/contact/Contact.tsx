@@ -136,8 +136,8 @@ const Contact = () => {
                   width: "36px",
                 }}
               >
-                <Image
-                  src={PhoneIcon}
+                <img
+                  src={PhoneIcon.src}
                   alt="icon_phone"
                   width="20"
                   height="20"

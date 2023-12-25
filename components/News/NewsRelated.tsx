@@ -54,8 +54,8 @@ const NewsRelated = () => {
                   width: isMobile ? "250px" : "100%",
                 }}
               >
-                <Image
-                  src={item.image}
+                <img
+                  src={item.image.src}
                   width={100}
                   height={100}
                   alt={item.title}

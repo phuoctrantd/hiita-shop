@@ -205,8 +205,10 @@ const Cart = () => {
                 >
                   <Link href={`/product/${generateSlug(item.name, item.id)}`}>
                     <Box>
-                      <Image
-                        src={item.image_url ? item.image_url[0] : ProductFruit1}
+                      <img
+                        src={
+                          item.image_url ? item.image_url[0] : ProductFruit1.src
+                        }
                         alt="product"
                         width="100"
                         height="100"

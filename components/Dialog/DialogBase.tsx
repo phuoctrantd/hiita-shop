@@ -54,7 +54,7 @@ const DialogBase: React.FC<Props> = ({
           spacing={2}
           p={"50px 64px 32px 64px"}
         >
-          <Image src={Logo} alt="logo" width={260} height={100} />
+          <img src={Logo.src} alt="logo" width={260} height={100} />
           <Typography
             fontSize={30}
             fontWeight={700}

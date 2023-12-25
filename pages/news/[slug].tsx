@@ -32,8 +32,8 @@ const News: NextPage = () => {
         <Grid container mb={10} spacing={isMobile ? 5 : 2}>
           <Grid item xs={isMobile ? 12 : 9}>
             <Stack direction={"column"} spacing={2}>
-              <Image
-                src={dataNews.image}
+              <img
+                src={dataNews.image.src}
                 alt={dataNews.title}
                 style={{ width: "100%", height: isMobile ? "300px" : "500px" }}
               />

@@ -85,8 +85,8 @@ const Header = () => {
               }}
             >
               <Link href="/">
-                <Image
-                  src={Logo}
+                <img
+                  src={Logo.src}
                   alt="logo"
                   width={isMobile ? "170" : "190"}
                   height="60"
@@ -154,8 +154,8 @@ const Header = () => {
                   sx={{ alignItems: "center" }}
                   spacing={0.6}
                 >
-                  <Image
-                    src={PhoneIcon}
+                  <img
+                    src={PhoneIcon.src}
                     alt="icon_phone"
                     width="35"
                     height="35"
@@ -267,7 +267,7 @@ const Header = () => {
                   }}
                   badgeContent={cartLength}
                 >
-                  <Image src={CartIcon} alt="logo" width="28" height="28" />
+                  <img src={CartIcon.src} alt="logo" width="28" height="28" />
                 </Badge>
               </Link>
             </Grid>

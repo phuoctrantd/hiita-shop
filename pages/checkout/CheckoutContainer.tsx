@@ -199,8 +199,8 @@ const CheckoutContainer = () => {
                     alignItems={"center"}
                   >
                     <Box>
-                      <Image
-                        src={QrDemo}
+                      <img
+                        src={QrDemo.src}
                         style={{ width: "150px", height: "150px" }}
                         alt="qr"
                       />
@@ -240,9 +240,11 @@ const CheckoutContainer = () => {
                       alignItems={"center"}
                     >
                       <Stack direction={"row"} spacing={2}>
-                        <Image
+                        <img
                           src={
-                            item.image_url ? item.image_url[0] : ProductFruit1
+                            item.image_url
+                              ? item.image_url[0]
+                              : ProductFruit1.src
                           }
                           alt="product"
                           width="85"

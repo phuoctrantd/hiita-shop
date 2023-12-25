@@ -40,7 +40,7 @@ const TabContainer: React.FC<TabProps> = ({
             alignItems: "end",
           }}
         >
-          <Image src={fruit_category} alt="fruit_category" width={270} />
+          <img src={fruit_category.src} alt="fruit_category" width={270} />
         </Grid>
         <Grid item xs={fruitTab && !isMobile ? 9 : 12} px={1}>
           <SwiperStyled>
@@ -67,8 +67,10 @@ const TabContainer: React.FC<TabProps> = ({
                         },
                       }}
                     >
-                      <Image
-                        src={item.image_url ? item.image_url[0] : fruit_demo}
+                      <img
+                        src={
+                          item.image_url ? item.image_url[0] : fruit_demo.src
+                        }
                         alt={item.name}
                         style={{ width: "100%", height: "221px" }}
                       />

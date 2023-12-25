@@ -62,8 +62,8 @@ const OrderTab = () => {
                   {order.product_variants.map((product, index) => (
                     <Grid container key={index} spacing={1}>
                       <Grid item xs={isMobile ? 3.5 : 2.5}>
-                        <Image
-                          src={ProductFruit1}
+                        <img
+                          src={ProductFruit1.src}
                           alt="product"
                           height={isMobile ? 85 : 130}
                           width={isMobile ? 85 : 130}

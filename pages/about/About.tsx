@@ -23,7 +23,7 @@ const About: NextPage = () => {
       <Page title="Giới thiệu" sx={{ mb: 10 }}>
         <Grid container spacing={isMobile ? 2 : 12} alignItems={"center"}>
           <Grid item xs={isMobile ? 12 : 6}>
-            <Image src={ImageAbout1} alt="about" layout={"fixed"} />
+            <img src={ImageAbout1.src} alt="about" />
           </Grid>
           <Grid item xs={isMobile ? 12 : 6}>
             <Stack direction={"row"} spacing={1}>
@@ -42,7 +42,7 @@ const About: NextPage = () => {
             <Stack direction={"column"} my={3.75} spacing={2.25}>
               <Stack direction={"row"} spacing={1}>
                 <Box>
-                  <Image src={IconVery} alt="about" layout={"fixed"} />
+                  <img src={IconVery.src} alt="about" />
                 </Box>
                 <Typography fontSize={18} fontWeight={500}>
                   Trái cây nhập khẩu
@@ -50,7 +50,7 @@ const About: NextPage = () => {
               </Stack>
               <Stack direction={"row"} spacing={1}>
                 <Box>
-                  <Image src={IconVery} alt="about" layout={"fixed"} />
+                  <img src={IconVery.src} alt="about" />
                 </Box>
                 <Typography fontSize={18} fontWeight={500}>
                   Sâm tươi thượng hạng Hàn Quốc
@@ -58,7 +58,7 @@ const About: NextPage = () => {
               </Stack>
               <Stack direction={"row"} spacing={1}>
                 <Box>
-                  <Image src={IconVery} alt="about" layout={"fixed"} />
+                  <img src={IconVery.src} alt="about" />
                 </Box>
                 <Typography fontSize={18} fontWeight={500}>
                   Siêu chợ, Siêu giá tốt
@@ -118,8 +118,8 @@ const About: NextPage = () => {
             </Stack>
           </Grid>
           <Grid item xs={isMobile ? 12 : 6}>
-            <Image
-              src={ImageAbout2}
+            <img
+              src={ImageAbout2.src}
               alt="about"
               style={{ width: "100%", height: "100%" }}
             />

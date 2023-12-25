@@ -36,8 +36,8 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
     <Grid container alignItems="stretch" spacing={2}>
       {!isMobile && (
         <Grid item xs={fruit ? 2 : 4}>
-          <Image
-            src={fruit ? BannerFruit1 : BannerGinseng}
+          <img
+            src={fruit ? BannerFruit1.src : BannerGinseng.src}
             alt="banner"
             style={{ width: "100%", height: "100%" }}
           />
@@ -58,8 +58,8 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
                 },
               }}
             >
-              <Image
-                src={item.image_url ? item.image_url[0] : ProductFruit1}
+              <img
+                src={item.image_url ? item.image_url[0] : ProductFruit1.src}
                 alt="product"
                 style={{
                   width: "100%",
@@ -98,8 +98,8 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
       ))}
       {fruit && !isMobile && (
         <Grid item xs={2}>
-          <Image
-            src={BannerFruit1}
+          <img
+            src={BannerFruit1.src}
             alt="banner"
             style={{ width: "100%", height: "100%" }}
           />
@@ -120,8 +120,8 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
                 },
               }}
             >
-              <Image
-                src={item.image_url ? item.image_url[0] : ProductFruit1}
+              <img
+                src={item.image_url ? item.image_url[0] : ProductFruit1.src}
                 alt="product"
                 style={{
                   width: "100%",

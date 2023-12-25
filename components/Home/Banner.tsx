@@ -37,8 +37,8 @@ const Banner = () => {
               position: "relative",
             }}
           >
-            <Image
-              src={BannerImage}
+            <img
+              src={BannerImage.src}
               alt="banner"
               style={{ width: "100%", height: "100%" }}
             />
@@ -53,8 +53,8 @@ const Banner = () => {
               position: "relative",
             }}
           >
-            <Image
-              src={BannerImage}
+            <img
+              src={BannerImage.src}
               alt="banner"
               style={{ width: "100%", height: "100%" }}
             />
@@ -69,8 +69,8 @@ const Banner = () => {
               position: "relative",
             }}
           >
-            <Image
-              src={BannerImage}
+            <img
+              src={BannerImage.src}
               alt="banner"
               style={{ width: "100%", height: "100%" }}
             />

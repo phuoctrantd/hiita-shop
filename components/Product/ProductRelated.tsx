@@ -55,8 +55,10 @@ const ProductRelated: React.FC<ProductRelatedProps> = ({ category_id }) => {
                         width: "100%",
                       }}
                     >
-                      <Image
-                        src={item.image_url ? item.image_url[0] : ProductFruit1}
+                      <img
+                        src={
+                          item.image_url ? item.image_url[0] : ProductFruit1.src
+                        }
                         alt="banner"
                         style={{
                           width: "100%",

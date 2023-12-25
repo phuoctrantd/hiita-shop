@@ -217,8 +217,8 @@ const CollectionBase = () => {
                     }}
                   >
                     <Link href={`/product/${generateSlug(item.name, item.id)}`}>
-                      <Image
-                        src={item.image_url ? item.image_url[0] : Ginseng1}
+                      <img
+                        src={item.image_url ? item.image_url[0] : Ginseng1.src}
                         alt={item.name}
                         style={{
                           width: "100%",

@@ -86,8 +86,8 @@ const News = () => {
                     width: "100%",
                   }}
                 >
-                  <Image
-                    src={item.image}
+                  <img
+                    src={item.image.src}
                     alt="banner"
                     style={{ width: "100%", height: "auto" }}
                   />

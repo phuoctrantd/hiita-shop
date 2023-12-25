@@ -26,8 +26,8 @@ const Footer = () => {
       }}
     >
       <Container maxWidth="xl" sx={{ padding: "34px 0 20px 0 !important" }}>
-        <Image
-          src={Logo}
+        <img
+          src={Logo.src}
           alt="logo"
           width="200"
           height="70"

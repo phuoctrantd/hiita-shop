@@ -82,8 +82,8 @@ const NewsList: NextPage = () => {
                       },
                     }}
                   >
-                    <Image
-                      src={item.image}
+                    <img
+                      src={item.image.src}
                       alt="news"
                       style={{
                         width: "100%",
@@ -152,13 +152,13 @@ const NewsList: NextPage = () => {
             {!isMobile && (
               <Grid item xs={3}>
                 <Stack direction={"column"} spacing={4}>
-                  <Image
-                    src={Banner3}
+                  <img
+                    src={Banner3.src}
                     alt="news"
                     style={{ width: "100%", height: "400px" }}
                   />
-                  <Image
-                    src={Banner3}
+                  <img
+                    src={Banner3.src}
                     alt="news"
                     style={{ width: "100%", height: "400px" }}
                   />
