@@ -33,6 +33,7 @@ const SlideImage: React.FC<SlideImageProps> = ({ productVariants }) => {
         <Swiper
           spaceBetween={10}
           navigation={true}
+          loop={true}
           thumbs={{
             swiper:
               thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,

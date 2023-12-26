@@ -26,7 +26,7 @@ const Banner = () => {
     keepPreviousData: true,
   });
   return (
-    <BannerStyled sx={{ mb: 3.6, mt: isMobile ? 3 : 0 }}>
+    <BannerStyled sx={{ mt: isMobile ? 3 : 0 }}>
       <Swiper
         slidesPerView={1}
         loop={true}

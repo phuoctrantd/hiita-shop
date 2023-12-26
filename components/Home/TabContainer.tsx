@@ -50,6 +50,7 @@ const TabContainer: React.FC<TabProps> = ({
               slidesPerView={fruitTab && !isMobile ? 4 : isMobile ? 2 : 5}
               modules={[Navigation, Autoplay]}
               spaceBetween={8}
+              loop={true}
               autoplay={{
                 delay: 2500,
                 disableOnInteraction: true,

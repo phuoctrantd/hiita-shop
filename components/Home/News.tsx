@@ -68,6 +68,7 @@ const News = () => {
           slidesPerView={isMobile ? 1 : 4}
           modules={[Navigation, Autoplay]}
           spaceBetween={20}
+          loop={true}
           autoplay={{
             delay: 2500,
             disableOnInteraction: true,

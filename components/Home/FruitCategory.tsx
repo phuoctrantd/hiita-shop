@@ -14,7 +14,7 @@ import { ProductResponse } from "@/lib/types/response";
 import { useCategoryProducts } from "@/lib/hooks/useCategoryProducts";
 
 const FruitCategory = () => {
-  const { data, isLoading } = useCategoryProducts(5);
+  const { data, isLoading } = useCategoryProducts(5, 1, 30);
   return (
     <Box my={5.6}>
       <Title

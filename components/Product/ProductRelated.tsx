@@ -34,9 +34,10 @@ const ProductRelated: React.FC<ProductRelatedProps> = ({ category_id }) => {
         <SwiperStyled>
           <Swiper
             navigation={true}
-            slidesPerView={isMobile ? 1 : 4}
+            slidesPerView={isMobile ? 2 : 4}
             modules={[Navigation, Autoplay]}
             spaceBetween={20}
+            loop={true}
             autoplay={{
               delay: 2500,
               disableOnInteraction: true,
