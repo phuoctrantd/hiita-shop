@@ -25,17 +25,16 @@ interface ProductPriceProps {
 
 const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
   const [selectedVariant, setSelectedVariant] = React.useState(
-    dataProduct.product_variants ? dataProduct.product_variants[0] : null
+    dataProduct.product_variants[0]
   );
-  const price = selectedVariant
-    ? selectedVariant.promotional_price || selectedVariant.price
-    : dataProduct.promotional_price || dataProduct.price;
-  const savePrice = selectedVariant
-    ? selectedVariant.price - price
-    : dataProduct.price - price;
-  const fixedPrice = selectedVariant
-    ? selectedVariant.price
-    : dataProduct.price;
+  const price =
+    selectedVariant.flash_sale &&
+    selectedVariant.flash_sale.quantity >
+      selectedVariant.flash_sale.sold_quantity
+      ? selectedVariant.flash_sale.price
+      : selectedVariant.promotional_price;
+  const savePrice = selectedVariant.price - price;
+  const fixedPrice = selectedVariant.price;
   const handleVariantClick = (variant: ProductsVariant) => {
     setSelectedVariant(variant);
     setQuantity(1);
@@ -92,6 +91,9 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
     setCheckoutSource("buyNow");
     push("/checkout");
   };
+  React.useEffect(() => {
+    setSelectedVariant(dataProduct.product_variants[0]);
+  }, [dataProduct]);
   return (
     <>
       <Typography variant="h4" sx={{ fontWeight: 600 }} mb={3}>
@@ -139,7 +141,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
               {formatPrice(price)}
             </Typography>
           </Grid>
-          {dataProduct.discount && (
+          {(selectedVariant.flash_sale || dataProduct.discount) && (
             <Grid
               item
               xs={isMobile ? 12 : 6}
@@ -176,7 +178,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
             <TypographyDes>Còn hàng</TypographyDes>
           </Grid>
         </Grid>
-        {dataProduct.discount && (
+        {(selectedVariant.flash_sale || dataProduct.discount) && (
           <Grid container spacing={isMobile ? 1 : 2} mb={isMobile ? 1 : 2}>
             <Grid
               item

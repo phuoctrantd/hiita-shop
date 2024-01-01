@@ -40,5 +40,12 @@ export type ProductType = {
       box_size: string;
       code: string;
       image_url: string;
+      flash_sale?: {
+        id: number;
+        discount: number;
+        price: number;
+        quantity: number;
+        sold_quantity: number;
+    };
     };
 

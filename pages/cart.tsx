@@ -27,18 +27,10 @@ import { useRouter } from "next/navigation";
 import ProductFruit1 from "@/public/images/products/product1.png";
 import { getImageUrl } from "@/lib/utils/ultil";
 export const price = (cartItem: CartItem) => {
-  if (cartItem.product_variants && cartItem.product_variants.length > 0) {
-    if (cartItem.variant && cartItem.variant.promotional_price) {
-      return cartItem.variant.promotional_price * cartItem.quantity;
-    } else if (cartItem.variant && cartItem.variant.price) {
-      return cartItem.variant.price * cartItem.quantity;
-    }
-  } else {
-    if (cartItem.promotional_price) {
-      return cartItem.promotional_price * cartItem.quantity;
-    }
-  }
-  return cartItem.price * cartItem.quantity;
+  return (
+    cartItem.quantity *
+    (cartItem.variant.flash_sale?.price || cartItem.variant?.promotional_price)
+  );
 };
 
 const Cart = () => {
@@ -135,32 +127,11 @@ const Cart = () => {
   const totalCart = () => {
     return cart.reduce((acc, item) => acc + price(item), 0);
   };
-  const totalPromotionalCart = () => {
-    return cart.reduce((acc, item) => {
-      let promotionalPrice = 0;
-      if (item.variant && item.variant.promotional_price) {
-        promotionalPrice =
-          (item.variant.price - item.variant.promotional_price) * item.quantity;
-      } else if (item.promotional_price) {
-        promotionalPrice =
-          (item.price - item.promotional_price) * item.quantity;
-      }
-      return acc + promotionalPrice;
-    }, 0);
-  };
+
   const priceProduct = (cartItem: CartItem) => {
-    if (cartItem.product_variants && cartItem.product_variants.length > 0) {
-      if (cartItem.variant && cartItem.variant.promotional_price) {
-        return cartItem.variant.promotional_price;
-      } else if (cartItem.variant && cartItem.variant.price) {
-        return cartItem.variant.price;
-      }
-    } else {
-      if (cartItem.promotional_price) {
-        return cartItem.promotional_price;
-      }
-    }
-    return cartItem.price;
+    return (
+      cartItem.variant.flash_sale?.price || cartItem.variant?.promotional_price
+    );
   };
 
   const [checkoutProducts, setCheckoutProducts] = useAtom(checkoutAtom);
