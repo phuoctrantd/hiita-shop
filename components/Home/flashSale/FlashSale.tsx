@@ -74,134 +74,141 @@ const FlashSale: React.FC<FlashSaleProps> = ({ dataFlashSale }) => {
     };
   }, [dataFlashSale]);
   return (
-    <Stack
-      my={3.75}
-      direction="column"
-      py={4.5}
-      px={isMobile ? 2 : 8}
-      sx={{
-        backgroundImage: `url(${BgFlashSale.src})`,
-        backgroundSize: "cover",
-      }}
-      alignItems={"center"}
-    >
-      <Box>
-        <Typography
-          fontSize={58}
-          fontWeight={800}
-          color={red[100]}
-          sx={{
-            fontStyle: "italic",
-            textShadow:
-              "2px 2px 0 white, -2px -2px 0 white, 2px -2px 0 white, -2px 2px 0 white",
-            textTransform: "uppercase",
-          }}
-        >
-          Flash sale
-        </Typography>
-      </Box>
-      <Box
-        sx={{
-          padding: "10px 25px",
-          backgroundColor: "#FFDF31",
-          borderRadius: "8px",
-        }}
-      >
-        <Typography fontSize={18} fontWeight={500} sx={{ color: red[100] }}>
-          {dataFlashSale &&
-            formatFlashSaleTime(dataFlashSale.start_at, dataFlashSale.end_at)}
-        </Typography>
-      </Box>
-      <Stack mt={1} mb={4.75} direction={"row"} alignItems={"center"}>
-        <Typography fontSize={13} fontWeight={700} color={white[100]}>
-          Kết thúc trong
-        </Typography>
+    <>
+      {dataFlashSale.products.length > 0 && (
         <Stack
-          direction={"row"}
-          alignItems={"center"}
-          spacing={0.5}
-          sx={{ marginLeft: "10px" }}
-        >
-          <Box
-            sx={{
-              backgroundColor: black,
-              padding: "5px 5px 5px 7px",
-              borderRadius: "4px",
-              width: "30px",
-            }}
-          >
-            <Typography fontSize={13} fontWeight={700} color={white[100]}>
-              {addZero(countDownFs().days)}
-            </Typography>
-          </Box>
-          <Typography fontSize={14} fontWeight={700} color={white[100]}>
-            :
-          </Typography>
-          <Box
-            sx={{
-              backgroundColor: black,
-              padding: "5px 5px 5px 7px",
-              borderRadius: "4px",
-              width: "30px",
-            }}
-          >
-            <Typography fontSize={13} fontWeight={700} color={white[100]}>
-              {addZero(countDownFs().hours)}
-            </Typography>
-          </Box>
-          <Typography fontSize={14} fontWeight={700} color={white[100]}>
-            :
-          </Typography>
-          <Box
-            sx={{
-              backgroundColor: black,
-              padding: "5px 5px 5px 7px",
-              borderRadius: "4px",
-              width: "30px",
-            }}
-          >
-            <Typography fontSize={13} fontWeight={700} color={white[100]}>
-              {addZero(countDownFs().minutes)}
-            </Typography>
-          </Box>
-          <Typography fontSize={14} fontWeight={700} color={white[100]}>
-            :
-          </Typography>
-          <Box
-            sx={{
-              backgroundColor: black,
-              padding: "5px 5px 5px 7px",
-              borderRadius: "4px",
-              width: "30px",
-            }}
-          >
-            <Typography fontSize={13} fontWeight={700} color={white[100]}>
-              {addZero(countDownFs().seconds)}
-            </Typography>
-          </Box>
-        </Stack>
-      </Stack>
-
-      <SwiperStyled style={{ width: "100%" }}>
-        <Swiper
-          navigation={true}
-          slidesPerView={isMobile ? 2 : 5}
-          modules={[Navigation, Autoplay]}
-          spaceBetween={15}
-          loop={true}
-          autoplay={{
-            delay: 2500,
-            disableOnInteraction: true,
+          my={3.75}
+          direction="column"
+          py={4.5}
+          px={isMobile ? 2 : 8}
+          sx={{
+            backgroundImage: `url(${BgFlashSale.src})`,
+            backgroundSize: "cover",
           }}
+          alignItems={"center"}
         >
-          {dataFlashSale?.products.map((product) => (
-            <SwiperSlide key={product.id} style={{ height: "auto" }}>
-              <ItemProductFs product={product} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </SwiperStyled>
-    </Stack>
+          <Box>
+            <Typography
+              fontSize={58}
+              fontWeight={800}
+              color={red[100]}
+              sx={{
+                fontStyle: "italic",
+                textShadow:
+                  "2px 2px 0 white, -2px -2px 0 white, 2px -2px 0 white, -2px 2px 0 white",
+                textTransform: "uppercase",
+              }}
+            >
+              Flash sale
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              padding: "10px 25px",
+              backgroundColor: "#FFDF31",
+              borderRadius: "8px",
+            }}
+          >
+            <Typography fontSize={18} fontWeight={500} sx={{ color: red[100] }}>
+              {dataFlashSale &&
+                formatFlashSaleTime(
+                  dataFlashSale.start_at,
+                  dataFlashSale.end_at
+                )}
+            </Typography>
+          </Box>
+          <Stack mt={1} mb={4.75} direction={"row"} alignItems={"center"}>
+            <Typography fontSize={13} fontWeight={700} color={white[100]}>
+              Kết thúc trong
+            </Typography>
+            <Stack
+              direction={"row"}
+              alignItems={"center"}
+              spacing={0.5}
+              sx={{ marginLeft: "10px" }}
+            >
+              <Box
+                sx={{
+                  backgroundColor: black,
+                  padding: "5px 5px 5px 7px",
+                  borderRadius: "4px",
+                  width: "30px",
+                }}
+              >
+                <Typography fontSize={13} fontWeight={700} color={white[100]}>
+                  {addZero(countDownFs().days)}
+                </Typography>
+              </Box>
+              <Typography fontSize={14} fontWeight={700} color={white[100]}>
+                :
+              </Typography>
+              <Box
+                sx={{
+                  backgroundColor: black,
+                  padding: "5px 5px 5px 7px",
+                  borderRadius: "4px",
+                  width: "30px",
+                }}
+              >
+                <Typography fontSize={13} fontWeight={700} color={white[100]}>
+                  {addZero(countDownFs().hours)}
+                </Typography>
+              </Box>
+              <Typography fontSize={14} fontWeight={700} color={white[100]}>
+                :
+              </Typography>
+              <Box
+                sx={{
+                  backgroundColor: black,
+                  padding: "5px 5px 5px 7px",
+                  borderRadius: "4px",
+                  width: "30px",
+                }}
+              >
+                <Typography fontSize={13} fontWeight={700} color={white[100]}>
+                  {addZero(countDownFs().minutes)}
+                </Typography>
+              </Box>
+              <Typography fontSize={14} fontWeight={700} color={white[100]}>
+                :
+              </Typography>
+              <Box
+                sx={{
+                  backgroundColor: black,
+                  padding: "5px 5px 5px 7px",
+                  borderRadius: "4px",
+                  width: "30px",
+                }}
+              >
+                <Typography fontSize={13} fontWeight={700} color={white[100]}>
+                  {addZero(countDownFs().seconds)}
+                </Typography>
+              </Box>
+            </Stack>
+          </Stack>
+
+          <SwiperStyled style={{ width: "100%" }}>
+            <Swiper
+              navigation={true}
+              slidesPerView={isMobile ? 2 : 5}
+              modules={[Navigation, Autoplay]}
+              spaceBetween={15}
+              loop={true}
+              autoplay={{
+                delay: 2500,
+                disableOnInteraction: true,
+              }}
+            >
+              {dataFlashSale?.products.map((product) => (
+                <SwiperSlide key={product.id} style={{ height: "auto" }}>
+                  <ItemProductFs product={product} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </SwiperStyled>
+        </Stack>
+      )}
+    </>
   );
 };
 

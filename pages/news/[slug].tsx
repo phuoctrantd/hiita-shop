@@ -15,53 +15,59 @@ import DateRangeOutlinedIcon from "@mui/icons-material/DateRangeOutlined";
 import { gray, red } from "@/styles";
 import NewsRelated from "@/components/News/NewsRelated";
 import { NextPage } from "next";
+import { useParams, useRouter } from "next/navigation";
+import { useQuery } from "react-query";
+import { NewsType } from "@/lib/types/news";
+import { getIdFromSlug } from "@/lib/contansts";
+import { getImageUrl } from "@/lib/utils/ultil";
 const News: NextPage = () => {
-  const dataNews = {
-    id: 1,
-    title: "Tin tức 1 ",
-    description: "Mô tả tin tức 1",
-    image: ImageNews1,
-    content: "Nội dung tin tức 1",
-    created_at: "2021-10-10 10:10:10",
-  };
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const params = useParams();
+  const slug = params?.slug;
+  const { data } = useQuery<NewsType>(`posts/${getIdFromSlug(String(slug))}`, {
+    enabled: !!slug,
+  });
   return (
     <>
-      <Page title={dataNews.title} category="Tin tức">
-        <Grid container mb={10} spacing={isMobile ? 5 : 2}>
-          <Grid item xs={isMobile ? 12 : 9}>
-            <Stack direction={"column"} spacing={2}>
-              <img
-                src={dataNews.image.src}
-                alt={dataNews.title}
-                style={{ width: "100%", height: isMobile ? "300px" : "500px" }}
-              />
-              <Box>
-                <Typography fontSize={24} fontWeight={700}>
-                  {dataNews.title}
-                </Typography>
-                <Stack direction={"row"} spacing={1} alignItems={"center"}>
-                  <DateRangeOutlinedIcon
-                    fontSize={"small"}
-                    sx={{ color: red[100] }}
-                  />
-                  <Typography fontSize={14} fontWeight={400}>
-                    {new Date(dataNews.created_at).toLocaleDateString()}
+      {data && (
+        <Page title={data.name} category="Tin tức">
+          <Grid container mb={10} spacing={isMobile ? 5 : 2}>
+            <Grid item xs={isMobile ? 12 : 9}>
+              <Stack direction={"column"} spacing={2}>
+                <img
+                  src={getImageUrl(data.image_url)}
+                  alt={data.name}
+                  style={{
+                    width: "100%",
+                    height: isMobile ? "300px" : "500px",
+                    objectFit: "cover",
+                  }}
+                />
+                <Box>
+                  <Typography fontSize={24} fontWeight={700}>
+                    {data.name}
                   </Typography>
-                </Stack>
-              </Box>
-              <Divider />
-              <Typography fontSize={16} fontWeight={400} color={gray[300]}>
-                {dataNews.description}
-              </Typography>
-            </Stack>
+                  <Stack direction={"row"} spacing={1} alignItems={"center"}>
+                    <DateRangeOutlinedIcon
+                      fontSize={"small"}
+                      sx={{ color: red[100] }}
+                    />
+                    <Typography fontSize={14} fontWeight={400}>
+                      {new Date(data.created_at).toLocaleDateString()}
+                    </Typography>
+                  </Stack>
+                </Box>
+                <Divider />
+                <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
+              </Stack>
+            </Grid>
+            <Grid item xs={isMobile ? 12 : 3}>
+              <NewsRelated />
+            </Grid>
           </Grid>
-          <Grid item xs={isMobile ? 12 : 3}>
-            <NewsRelated />
-          </Grid>
-        </Grid>
-      </Page>
+        </Page>
+      )}
     </>
   );
 };

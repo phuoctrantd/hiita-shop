@@ -3,7 +3,7 @@ import { Box, Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Image, { StaticImageData } from "next/image";
 import BannerFruit1 from "@/public/images/banners/banner1.png";
 import BannerGinseng from "@/public/images/banners/banner_ginseng.png";
-import { black, red } from "@/styles";
+import { black, gray, red } from "@/styles";
 import Link from "next/link";
 import { formatPrice, generateSlug } from "@/lib/contansts";
 import { ProductType } from "@/lib/types/product";
@@ -46,7 +46,7 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
       )}
       {firstRow?.map((item, index) => (
         <Grid item xs={isMobile ? 6 : 2} key={index}>
-          <Link href={`/product/${generateSlug(item.name, item.id)}`}>
+          <Link href={`/san-pham/${generateSlug(item.name, item.id)}`}>
             <Box
               sx={{
                 display: "flex",
@@ -58,6 +58,7 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
                 "&:hover": {
                   transform: "scale(1.02)",
                 },
+                border: `1px solid ${gray[300]}`,
               }}
             >
               <img
@@ -111,7 +112,7 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
       )}
       {secondRow?.map((item, index) => (
         <Grid item xs={isMobile ? 6 : 2} key={index}>
-          <Link href={`/product/${generateSlug(item.name, item.id)}`}>
+          <Link href={`/san-pham/${generateSlug(item.name, item.id)}`}>
             <Box
               sx={{
                 display: "flex",
@@ -123,6 +124,7 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
                 "&:hover": {
                   transform: "scale(1.02)",
                 },
+                border: `1px solid ${gray[300]}`,
               }}
             >
               <img

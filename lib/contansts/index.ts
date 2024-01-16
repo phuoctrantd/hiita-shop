@@ -2,7 +2,7 @@ interface MenuItem {
     id: number;
     label: string;
     link: string;
-    subMenu?: readonly MenuItem[]; // Use readonly here
+    subMenu?: boolean;
   }
   
   export const MENU_DATA: MenuItem[] = [
@@ -16,49 +16,12 @@ interface MenuItem {
       label: "Giới thiệu ",
       link: "/about",
     },
-    {
-      id: 3,
-      label: "Nhân sâm",
-      link: "/collections/nhan-sam",
-      subMenu: [
-        {
-          id: 1,
-          label: "Nhân sâm Hàn Quốc",
-          link: "/collections/nhan-sam-han-quoc",
-        },
-        {
-          id: 2,
-          label: "Cao ly",
-          link: "/collections/cao-ly",
-        },
-        {
-          id: 3,
-          label: "Nhân sâm Việt Nam",
-          link: "/collections/nhan-sam-viet-nam",
-        },
-      ] as const, // Use as const to mark the array as readonly
-    },
+
     {
       id: 4,
       label: "Trái cây nhập khẩu",
-      link: "/collections/trai-cay-nhap-khau",
-      subMenu: [
-        {
-          id: 1,
-          label: "Táo",
-          link: "/collections/tao",
-        },
-        {
-          id: 2,
-          label: "Nho",
-          link: "/collections/nho",
-        },
-        {
-          id: 3,
-          label: "Kiwi",
-          link: "/collections/kiwi",
-        },
-      ] as const, // Use as const to mark the array as readonly
+      link: "/",
+      subMenu: true
     },
 
     {
@@ -146,21 +109,7 @@ export const MENU_DATA_FOOTER = [
     ]
     
 },
-{
-    title:"Theo dõi chúng tôi",
-    data:[
-        {
-            id: 1,
-            label: "Facebook",
-            link: "/",
-        },
-        {
-            id: 2,
-            label: "Instagram",
-            link: "/",
-        },
-    ]
-}
+
 
     
 ] as const;
@@ -168,8 +117,14 @@ export const MENU_DATA_FOOTER = [
 export const formatPrice = (price: number) => {
 return  price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " VND";
 }
-export const generateSlug = (name:string,id:number) => {
-return name.replace(/\s+/g, '-').toLowerCase() + "-i." + id;
+export const generateSlug = (name: string, id: number) => {
+  const from = "àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ";
+  const to = "aaaaaaaaaaaaaaaaaeeeeeeeeeeeiiiiiooooooooooooooooouuuuuuuuuuuyyyyyd";
+  for (let i = 0; i < from.length; i++) {
+    name = name.replace(new RegExp(from[i], "gi"), to[i]);
+  }
+  name = name.replace(/\s+/g, '-').toLowerCase();
+  return name + "-i." + id;
 }
 export const getInfoCategory = (slug:string) => {
   switch(slug){

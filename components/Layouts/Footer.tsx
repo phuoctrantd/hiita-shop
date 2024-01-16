@@ -18,6 +18,37 @@ import Link from "next/link";
 const Footer = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  React.useEffect(() => {
+    // Ensure window.FB is available before trying to use the SDK
+    if ((window as any).FB) {
+      (window as any).FB.XFBML.parse();
+    } else {
+      // Asynchronously load the SDK
+      (window as any).fbAsyncInit = function () {
+        (window as any).FB.init({
+          appId: "your-app-id",
+          autoLogAppEvents: true,
+          xfbml: true,
+          version: "v18.0",
+        });
+        (window as any).FB.XFBML.parse();
+      };
+
+      (function (d, s, id) {
+        var js: HTMLScriptElement,
+          fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+          return;
+        }
+        js = d.createElement(s) as HTMLScriptElement;
+        js.id = id;
+        js.src = "https://connect.facebook.net/vi_VN/sdk.js";
+        if (fjs && fjs.parentNode) {
+          fjs.parentNode.insertBefore(js, fjs);
+        }
+      })(document, "script", "facebook-jssdk");
+    }
+  }, []);
   return (
     <Box
       style={{
@@ -52,6 +83,34 @@ const Footer = () => {
               ))}
             </Grid>
           ))}
+          <Grid item xs={isMobile ? 12 : 3}>
+            <TextTitle
+              sx={{
+                marginBottom: isMobile ? 2 : 5.6,
+                marginTop: isMobile ? 3 : 0,
+              }}
+            >
+              Theo dõi chúng tôi
+            </TextTitle>
+            <div
+              className="fb-page"
+              data-href="https://www.facebook.com/hiita.vn"
+              data-tabs="timeline"
+              data-width={337}
+              data-height={180}
+              data-small-header="false"
+              data-adapt-container-width="true"
+              data-hide-cover="false"
+              data-show-facepile="true"
+            >
+              <blockquote
+                cite="https://www.facebook.com/hiita.vn"
+                className="fb-xfbml-parse-ignore"
+              >
+                <a href="https://www.facebook.com/hiita.vn">Hiita.vn</a>
+              </blockquote>
+            </div>
+          </Grid>
         </Grid>
 
         <Divider sx={{ backgroundColor: white[200], my: 5 }} />
@@ -66,7 +125,9 @@ const Footer = () => {
                 Chứng nhận ĐKKD số: 0388282939 do sở KH & ĐT TP.Hà Nội cấp{" "}
               </TextTitle>
               <TextTitle>Địa chỉ: Tòa nhà ABCD Hà Nội</TextTitle>
-              <TextTitle>Điện thoại: 19003366 - Email: support@hh.vn</TextTitle>
+              <TextTitle>
+                Điện thoại: 0818836383 - Email: support@hh.vn
+              </TextTitle>
             </Box>
           </Grid>
           <Grid

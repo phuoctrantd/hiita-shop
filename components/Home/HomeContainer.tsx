@@ -24,7 +24,7 @@ const HomeContainer = () => {
       <Box px={isMobile ? 2 : 8}>
         <TabCategory />
         <FruitCategory />
-        <GinsengCategory />
+        {/* <GinsengCategory /> */}
         <News />
       </Box>
     </Container>

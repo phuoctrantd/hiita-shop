@@ -13,7 +13,7 @@ export const faq = [
     },
     {
         question: "Hiita bán những sản phẩm gì?",
-        answer: "Hiita là website thương mại điện tử cung cấp các sản phẩm thuộc ngành hàng như sau: hoa quả nhập khẩu các nước,nhân sâm ..."
+        answer: "Hiita là website thương mại điện tử cung cấp các sản phẩm thuộc ngành hàng như sau: hoa quả nhập khẩu các nước ..."
     },
     {
         question: "Tôi có thể kiểm tra đơn hàng ở đâu ?",

@@ -22,27 +22,43 @@ import { ProductType } from "@/lib/types/product";
 import { useQuery } from "react-query";
 import { ProductResponse } from "@/lib/types/response";
 import { useCategoryProducts } from "@/lib/hooks/useCategoryProducts";
+import { useAtom } from "jotai";
+import { categoriesState } from "@/lib/hooks/categoriesState";
 interface TabPanelProps {
   children?: React.ReactNode;
-  index: number;
   value: number;
+  categoryId: number;
 }
 const TabCategory = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const [value, setValue] = React.useState(5);
+  const [value, setValue] = React.useState(0);
+  const [categories, setCategories] = useAtom(categoriesState);
+  React.useEffect(() => {
+    if (categories && categories.length > 0) {
+      setValue(categories[0].id);
+    }
+  }, [categories]);
   const { data } = useCategoryProducts(value, 1, 30);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+    const category = categories.find((c) => c.id === newValue);
+    if (category) {
+      setValue(category.id);
+    }
   };
 
   function CustomTabPanel(props: TabPanelProps) {
-    const { children, value, index, ...other } = props;
+    const { children, value, categoryId, ...other } = props;
 
     return (
       <Stack
-        display={value === index ? "flex" : "none"}
+        role="tabpanel"
+        hidden={value !== categoryId}
+        id={`tabpanel-${categoryId}`}
+        aria-labelledby={`tab-${categoryId}`}
+        {...other}
+        display={value === categoryId ? "flex" : "none"}
         direction="row"
         sx={{
           py: 1.6,
@@ -53,14 +69,13 @@ const TabCategory = () => {
         alignItems={"end"}
         justifyContent={"center"}
       >
-        {value === index && <>{children}</>}
+        {value === categoryId && <>{children}</>}
       </Stack>
     );
   }
-
   const TabCustom = styled(Tab)(({ theme }) => ({
     color: red[100],
-    width: isMobile ? "auto" : "25%",
+    width: isMobile ? "auto" : `${100 / categories.length}%`,
     fontWeight: 700,
     py: 1.25,
     fontSize: 14,
@@ -106,40 +121,31 @@ const TabCategory = () => {
               },
             }}
           >
-            <TabCustom label="Trái Cây nhập khẩu" value={5} />
-            <TabCustom label="Nhân sâm" value={1} />
-            <TabCustom label="Quà tặng" value={9} />
-            <TabCustom label="Danh mục khác" value={10} />
+            {categories?.map((category) => (
+              <TabCustom
+                key={category.id}
+                label={category.name}
+                value={category.id}
+              />
+            ))}
           </Tabs>
         </Box>
-        <CustomTabPanel value={value} index={5}>
-          {!!data?.data.length ? (
-            <TabContainer fruitTab dataProductCategory={data.data} />
-          ) : (
-            <EmptyData />
-          )}
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={1}>
-          {!!data?.data.length ? (
-            <TabContainer dataProductCategory={data.data} />
-          ) : (
-            <EmptyData />
-          )}
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={9}>
-          {!!data?.data.length ? (
-            <TabContainer dataProductCategory={data.data} />
-          ) : (
-            <EmptyData />
-          )}
-        </CustomTabPanel>
-        <CustomTabPanel value={value} index={10}>
-          {!!data?.data.length ? (
-            <TabContainer dataProductCategory={data.data} />
-          ) : (
-            <EmptyData />
-          )}
-        </CustomTabPanel>
+        {categories?.map((category) => (
+          <CustomTabPanel
+            value={value}
+            categoryId={category.id}
+            key={category.id}
+          >
+            {value === category.id && !!data?.data.length ? (
+              <TabContainer
+                fruitTab={category.id === categories[0].id}
+                dataProductCategory={data.data}
+              />
+            ) : (
+              <EmptyData />
+            )}
+          </CustomTabPanel>
+        ))}
       </Box>
     </>
   );

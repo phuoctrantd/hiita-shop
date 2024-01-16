@@ -19,46 +19,13 @@ import { Navigation, Autoplay } from "swiper/modules";
 import { red, white } from "@/styles";
 import Link from "next/link";
 import { generateSlug } from "@/lib/contansts";
+import { getImageUrl } from "@/lib/utils/ultil";
+import { useNews } from "@/lib/hooks/useNews";
 const News = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const dataNews = [
-    {
-      id: 1,
-      title: "Lorem ipsum dolor sit amet",
-      description:
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim ",
-      image: ImageNews1,
-    },
-    {
-      id: 2,
-      title: "Lorem ipsum dolor sit amet",
-      description:
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat ",
-      image: ImageNews2,
-    },
-    {
-      id: 3,
-      title: "Lorem ipsum dolor sit amet",
-      description:
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna ",
-      image: ImageNews3,
-    },
-    {
-      id: 4,
-      title: "Lorem ipsum dolor sit amet",
-      description:
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut ",
-      image: ImageNews4,
-    },
-    {
-      id: 5,
-      title: "Lorem ipsum dolor sit amet",
-      description:
-        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut ",
-      image: ImageNews4,
-    },
-  ];
+  const { data } = useNews();
+
   return (
     <Box my={5.6}>
       <Title title="Tin tức" link="/news" />
@@ -74,37 +41,46 @@ const News = () => {
             disableOnInteraction: true,
           }}
         >
-          {dataNews.map((item, index) => (
-            <SwiperSlide key={index}>
-              <Link href={`/news/${generateSlug(item.title, item.id)}`}>
-                <Box
-                  sx={{
-                    transition: "transform 0.3s",
-                    cursor: "pointer",
-                    "&:hover": {
-                      transform: "scale(1.02)",
-                    },
-                    width: "100%",
-                  }}
-                >
-                  <img
-                    src={item.image.src}
-                    alt="banner"
-                    style={{ width: "100%", height: "auto" }}
-                  />
-                  <Box mt={1.6}>
-                    <Typography fontSize={14} fontWeight={700} mb={1}>
-                      {item.title}
-                    </Typography>
-                    <Typography fontSize={11} fontWeight={500}>
-                      {item.description &&
-                        item.description.slice(0, 200) + "..."}
-                    </Typography>
+          {data &&
+            data.data &&
+            data.data.length > 0 &&
+            data.data.map((item, index) => (
+              <SwiperSlide key={index}>
+                <Link href={`/news/${generateSlug(item.name, item.id)}`}>
+                  <Box
+                    sx={{
+                      transition: "transform 0.3s",
+                      cursor: "pointer",
+                      "&:hover": {
+                        transform: "scale(1.02)",
+                      },
+                      width: "100%",
+                    }}
+                  >
+                    <img
+                      src={getImageUrl(item.image_url)}
+                      alt="banner"
+                      style={{
+                        width: "100%",
+                        height: "180px",
+                        objectFit: "cover",
+                      }}
+                    />
+                    <Box mt={1.6}>
+                      <Typography fontSize={14} fontWeight={700} mb={1}>
+                        {item.name}
+                      </Typography>
+                      <Typography fontSize={11} fontWeight={500}>
+                        {item.content &&
+                          new DOMParser()
+                            .parseFromString(item.content, "text/html")
+                            .body.innerText.slice(0, 200) + "..."}
+                      </Typography>
+                    </Box>
                   </Box>
-                </Box>
-              </Link>
-            </SwiperSlide>
-          ))}
+                </Link>
+              </SwiperSlide>
+            ))}
         </Swiper>
       </SwiperStyled>
     </Box>

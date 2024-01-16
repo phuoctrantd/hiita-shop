@@ -27,8 +27,15 @@ function CustomTabPanel(props: TabPanelProps) {
   return (
     <>
       {value === index && (
-        <Box sx={{ p: "23px 20px", border: `1px solid rgba(0, 0, 0, 0.12)` }}>
-          <Typography>{children}</Typography>
+        <Box
+          sx={{
+            p: "23px 20px",
+            border: `1px solid rgba(0, 0, 0, 0.12)`,
+            overflow: "auto",
+            maxHeight: "700px",
+          }}
+        >
+          <Typography fontSize={14}>{children}</Typography>
         </Box>
       )}
     </>
@@ -49,7 +56,7 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({
   const TabCustom = styled(Tab)(({ theme }) => ({
     color: red[100],
     width: "auto",
-    fontWeight: 700,
+    fontWeight: isMobile ? 500 : 700,
     py: 1.25,
     fontSize: 14,
     "&.Mui-selected": {
@@ -70,10 +77,15 @@ const ProductDescription: React.FC<ProductDescriptionProps> = ({
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>
-          <Typography
-            fontSize={14}
+          <Box
+            sx={{
+              "&.MuiBox-root img": {
+                width: isMobile ? "100%" : "50%",
+                height: isMobile ? "auto" : "500px",
+              },
+            }}
             dangerouslySetInnerHTML={{ __html: description }}
-          />
+          ></Box>
         </CustomTabPanel>
       </Box>
     </>

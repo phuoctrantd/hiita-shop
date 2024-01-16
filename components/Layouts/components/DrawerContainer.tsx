@@ -13,9 +13,11 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 import DragHandleOutlinedIcon from "@mui/icons-material/DragHandleOutlined";
 import { red } from "@/styles";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
-import { MENU_DATA } from "@/lib/contansts";
+import { MENU_DATA, generateSlug } from "@/lib/contansts";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Link from "next/link";
+import { useAtom } from "jotai";
+import { categoriesState } from "@/lib/hooks/categoriesState";
 interface DrawerContainerProps {
   openMenu: boolean;
   handleCloseMenu: () => void;
@@ -25,6 +27,7 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({
   openMenu,
   handleCloseMenu,
 }) => {
+  const [categories, setCategories] = useAtom(categoriesState);
   return (
     <Drawer
       anchor={"left"}
@@ -103,11 +106,16 @@ const DrawerContainer: React.FC<DrawerContainerProps> = ({
                         height: "1px",
                       }}
                     />
-                    {item.subMenu.map((item, index) => (
+                    {categories.map((item, index) => (
                       <Box key={index} pl={2} onClick={handleCloseMenu}>
-                        <Link href={item.link}>
+                        <Link
+                          href={`/collections/${generateSlug(
+                            item.name,
+                            item.id
+                          )}`}
+                        >
                           <Typography fontSize={13} color={red[100]}>
-                            {item.label}
+                            {item.name}
                           </Typography>
                           <Divider
                             sx={{

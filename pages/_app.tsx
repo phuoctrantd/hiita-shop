@@ -9,6 +9,7 @@ import { QueryClientProvider, useIsFetching } from "react-query";
 import { queryClient } from "@/lib/react-query";
 import { CircularProgress } from "@mui/material";
 import AuthProvider from "@/lib/provider/AuthProvider";
+import ButtonContact from "@/components/ButtonContact";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const isFetching = useIsFetching();
@@ -49,18 +50,30 @@ function MyApp({ Component, pageProps }: AppProps) {
       ) : null}
       <Component {...pageProps} />
       <Footer />
+      <div
+        style={{
+          position: "fixed",
+          bottom: "20px",
+          right: "20px",
+          zIndex: 1000,
+        }}
+      >
+        <ButtonContact />
+      </div>
     </>
   );
 }
 
 export default function App(props: AppProps) {
   return (
-    <ThemeProvider theme={defaultTheme}>
-      <AuthProvider>
-        <QueryClientProvider client={queryClient}>
-          <MyApp {...props} />
-        </QueryClientProvider>
-      </AuthProvider>
-    </ThemeProvider>
+    <>
+      <ThemeProvider theme={defaultTheme}>
+        <AuthProvider>
+          <QueryClientProvider client={queryClient}>
+            <MyApp {...props} />
+          </QueryClientProvider>
+        </AuthProvider>
+      </ThemeProvider>
+    </>
   );
 }

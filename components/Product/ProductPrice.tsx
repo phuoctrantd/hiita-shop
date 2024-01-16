@@ -395,7 +395,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
         </Stack>
         <ButtonStyled
           onClick={() => {
-            window.open("tel:19006633", "_blank");
+            window.open("tel:0818836383", "_blank");
           }}
           sx={{
             width: isMobile ? "100%" : "auto",
@@ -406,7 +406,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
             },
           }}
         >
-          Gọi 19006633 để được tư vấn mua hàng
+          Gọi 0818836383 để được tư vấn mua hàng
         </ButtonStyled>
       </Box>
     </>

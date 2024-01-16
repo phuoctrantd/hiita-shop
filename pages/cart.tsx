@@ -175,7 +175,7 @@ const Cart = () => {
                   xs={isMobile ? 7 : 3}
                   sx={{ display: "flex", gap: 2 }}
                 >
-                  <Link href={`/product/${generateSlug(item.name, item.id)}`}>
+                  <Link href={`/san-pham/${generateSlug(item.name, item.id)}`}>
                     <Box>
                       <img
                         src={getImageUrl(item.product_variants[0].image_url)}
@@ -187,7 +187,9 @@ const Cart = () => {
                   </Link>
 
                   <Stack direction={"column"} justifyContent={"space-between"}>
-                    <Link href={`/product/${generateSlug(item.name, item.id)}`}>
+                    <Link
+                      href={`/san-pham/${generateSlug(item.name, item.id)}`}
+                    >
                       <Typography
                         fontSize={16}
                         fontWeight={700}

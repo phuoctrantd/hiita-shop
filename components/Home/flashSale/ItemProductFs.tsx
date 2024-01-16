@@ -46,7 +46,7 @@ const ItemProductFs: React.FC<ItemProductFsProps> = ({ product }) => {
   return (
     <>
       <Link
-        href={`/product/${generateSlug(product.name, product.id)}`}
+        href={`/san-pham/${generateSlug(product.name, product.id)}`}
         style={{
           pointerEvents: allVariantsSoldOut ? "none" : "auto",
         }}

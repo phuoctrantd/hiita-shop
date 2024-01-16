@@ -58,7 +58,7 @@ const TabContainer: React.FC<TabProps> = ({
             >
               {dataProductCategory.map((item, index) => (
                 <SwiperSlide key={index}>
-                  <Link href={`/product/${generateSlug(item.name, item.id)}`}>
+                  <Link href={`/san-pham/${generateSlug(item.name, item.id)}`}>
                     <Box
                       position="relative"
                       sx={{

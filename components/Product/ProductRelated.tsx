@@ -46,7 +46,7 @@ const ProductRelated: React.FC<ProductRelatedProps> = ({ category_id }) => {
             {dataProductRelated?.length &&
               dataProductRelated.map((item, index) => (
                 <SwiperSlide key={index}>
-                  <Link href={`/product/${generateSlug(item.name, item.id)}`}>
+                  <Link href={`/san-pham/${generateSlug(item.name, item.id)}`}>
                     <Box
                       sx={{
                         display: "flex",

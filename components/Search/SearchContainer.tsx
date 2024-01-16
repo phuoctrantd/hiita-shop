@@ -84,7 +84,7 @@ const SearchContainer = () => {
           <Grid container spacing={2}>
             {data?.data?.map((item: ProductType, index: number) => (
               <Grid item xs={isMobile ? 6 : 3} key={index}>
-                <Link href={`/product/${generateSlug(item.name, item.id)}`}>
+                <Link href={`/san-pham/${generateSlug(item.name, item.id)}`}>
                   <Box
                     sx={{
                       display: "flex",
@@ -96,6 +96,7 @@ const SearchContainer = () => {
                       "&:hover": {
                         transform: "scale(1.02)",
                       },
+                      border: `1px solid ${gray[300]}`,
                     }}
                   >
                     <img

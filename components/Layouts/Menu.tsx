@@ -11,19 +11,32 @@ import {
   makeStyles,
 } from "@mui/material";
 import { red, white } from "@/styles";
-import { MENU_DATA } from "@/lib/contansts";
+import { MENU_DATA, generateSlug } from "@/lib/contansts";
 import Link from "next/link";
 
 import { useRouter } from "next/router";
 import PopupState, { bindHover, bindPopover } from "material-ui-popup-state";
 import HoverPopover from "material-ui-popup-state/HoverPopover";
+import { useAtom } from "jotai";
+import { useQuery } from "react-query";
+import { categoriesState } from "@/lib/hooks/categoriesState";
+import { CategoryResponse } from "@/lib/types/response";
 
 const Menu = () => {
   const router = useRouter();
   const { pathname } = router;
+  const { data } = useQuery<CategoryResponse>(`/categories`, {
+    keepPreviousData: true,
+  });
+  const [categories, setCategories] = useAtom(categoriesState);
+  React.useEffect(() => {
+    if (data) {
+      setCategories(data.data);
+    }
+  }, [data]);
   return (
     <>
-      <Grid container sx={{ textAlign: "center" }}>
+      <Grid container sx={{ textAlign: "center", justifyContent: "center" }}>
         {MENU_DATA.map((item, index) => (
           <Grid item xs={1.7} key={index}>
             <PopupState variant="popover" popupId="demo-popup-popover">
@@ -54,9 +67,14 @@ const Menu = () => {
                       }}
                     >
                       <Box p={1.25}>
-                        {item.subMenu.map((item, indexSubitem) => (
+                        {categories.map((item, indexSubitem) => (
                           <React.Fragment key={indexSubitem}>
-                            <Link href={item.link}>
+                            <Link
+                              href={`/collections/${generateSlug(
+                                item.name,
+                                item.id
+                              )}`}
+                            >
                               <Box
                                 sx={{
                                   cursor: "pointer",
@@ -85,7 +103,7 @@ const Menu = () => {
                                 p={0.8}
                               >
                                 <Typography fontSize={15} fontWeight={600}>
-                                  {item.label}
+                                  {item.name}
                                 </Typography>
                               </Box>
                             </Link>

@@ -7,6 +7,7 @@ import {
   getInfoCategory,
   generateSlug,
   priceRange,
+  getIdFromSlug,
 } from "@/lib/contansts";
 import {
   Box,
@@ -33,9 +34,10 @@ import { usePagination } from "@/lib/hooks/usePagination";
 import { useCategoryProducts } from "@/lib/hooks/useCategoryProducts";
 import Ginseng1 from "@/public/images/products/ginseng1.png";
 import { getImageUrl } from "@/lib/utils/ultil";
+import { useAtom } from "jotai";
+import { categoriesState } from "@/lib/hooks/categoriesState";
 const CollectionBase = () => {
   const params = useParams();
-
   const [openFilter, setOpenFilter] = React.useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -58,12 +60,12 @@ const CollectionBase = () => {
         sortType = "asc";
         break;
       case "price_max":
-        sortField = "promotional_price";
-        sortType = "desc";
+        sortField = "min_price";
+        sortType = "asc";
         break;
       case "price_min":
-        sortField = "promotional_price";
-        sortType = "asc";
+        sortField = "min_price";
+        sortType = "desc";
         break;
     }
 
@@ -144,7 +146,7 @@ const CollectionBase = () => {
     return { min, max };
   }, [selectedItems]);
   const categoryId =
-    params && params.slug ? getInfoCategory(String(params.slug)).id : null;
+    params && params.slug ? getIdFromSlug(String(params.slug)) : null;
   const { data, isLoading } = useCategoryProducts(
     Number(categoryId),
     page,
@@ -159,8 +161,10 @@ const CollectionBase = () => {
   React.useEffect(() => {
     setSelectedItems({});
   }, [categoryId]);
+  const [categories, setCategories] = useAtom(categoriesState);
+  const title = categories.find((item) => item.id === Number(categoryId))?.name;
   return (
-    <Page title={params ? getInfoCategory(params.slug as string).name : ""}>
+    <Page title={title}>
       <>
         <Stack
           direction={"row"}
@@ -208,7 +212,9 @@ const CollectionBase = () => {
               {dataProductFeatured?.length ? (
                 dataProductFeatured?.map((item, index) => (
                   <Grid item xs={isMobile ? 6 : 4} key={index}>
-                    <Link href={`/product/${generateSlug(item.name, item.id)}`}>
+                    <Link
+                      href={`/san-pham/${generateSlug(item.name, item.id)}`}
+                    >
                       <Box
                         sx={{
                           display: "flex",
@@ -220,6 +226,7 @@ const CollectionBase = () => {
                           "&:hover": {
                             transform: "scale(1.02)",
                           },
+                          border: `1px solid ${gray[300]}`,
                         }}
                       >
                         <img
@@ -367,34 +374,20 @@ const CollectionBase = () => {
                         Danh mục sản phẩm
                       </TypoTitleFilterStyled>
                       <Stack direction={"column"} spacing={0.5}>
-                        {MENU_DATA.map((item, index) => (
+                        {categories.map((item, index) => (
                           <React.Fragment key={index}>
-                            {item.subMenu && (
-                              <>
-                                <Link
-                                  href={item.link}
-                                  key={index}
-                                  onClick={handleCloseFilter}
-                                >
-                                  <TypoLinkCategory>
-                                    {item.label}
-                                  </TypoLinkCategory>
-                                </Link>
-                                {item.subMenu.map(
-                                  (itemSubmenu, indexSubmenu) => (
-                                    <Link
-                                      href={itemSubmenu.link}
-                                      key={indexSubmenu}
-                                      onClick={handleCloseFilter}
-                                    >
-                                      <TypoLinkCategory>
-                                        {itemSubmenu.label}
-                                      </TypoLinkCategory>
-                                    </Link>
-                                  )
-                                )}
-                              </>
-                            )}
+                            <>
+                              <Link
+                                href={`/collections/${generateSlug(
+                                  item.name,
+                                  item.id
+                                )}`}
+                                key={index}
+                                onClick={handleCloseFilter}
+                              >
+                                <TypoLinkCategory>{item.name}</TypoLinkCategory>
+                              </Link>
+                            </>
                           </React.Fragment>
                         ))}
                       </Stack>
@@ -447,22 +440,19 @@ const CollectionBase = () => {
                     Danh mục sản phẩm
                   </TypoTitleFilterStyled>
                   <Stack direction={"column"} spacing={0.5}>
-                    {MENU_DATA.map((item, index) => (
+                    {categories.map((item, index) => (
                       <React.Fragment key={index}>
-                        {item.subMenu && (
-                          <>
-                            <Link href={item.link} key={index}>
-                              <TypoLinkCategory>{item.label}</TypoLinkCategory>
-                            </Link>
-                            {item.subMenu.map((itemSubmenu, indexSubmenu) => (
-                              <Link href={itemSubmenu.link} key={indexSubmenu}>
-                                <TypoLinkCategory>
-                                  {itemSubmenu.label}
-                                </TypoLinkCategory>
-                              </Link>
-                            ))}
-                          </>
-                        )}
+                        <>
+                          <Link
+                            href={`/collections/${generateSlug(
+                              item.name,
+                              item.id
+                            )}`}
+                            key={index}
+                          >
+                            <TypoLinkCategory>{item.name}</TypoLinkCategory>
+                          </Link>
+                        </>
                       </React.Fragment>
                     ))}
                   </Stack>
