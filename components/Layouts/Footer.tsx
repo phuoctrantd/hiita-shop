@@ -13,8 +13,10 @@ import {
 import Image from "next/image";
 import React from "react";
 import Logo from "@/public/images/hiita-logo.png";
-import { MENU_DATA_FOOTER } from "@/lib/contansts";
+import { MENU_DATA_FOOTER, generateSlug } from "@/lib/contansts";
 import Link from "next/link";
+import { categoriesState } from "@/lib/hooks/categoriesState";
+import { useAtom } from "jotai";
 const Footer = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -49,6 +51,7 @@ const Footer = () => {
       })(document, "script", "facebook-jssdk");
     }
   }, []);
+  const [categories, setCategories] = useAtom(categoriesState);
   return (
     <Box
       style={{
@@ -76,11 +79,20 @@ const Footer = () => {
               >
                 {item.title}
               </TextTitle>
-              {item.data.map((item, index) => (
-                <Link key={index} href={item.link}>
-                  <TextMenu>{item.label}</TextMenu>
-                </Link>
-              ))}
+              {item.data
+                ? item.data.map((item, index) => (
+                    <Link href={item.link} key={index}>
+                      <TextMenu>{item.label}</TextMenu>
+                    </Link>
+                  ))
+                : categories.map((item, index) => (
+                    <Link
+                      href={`/collections/${generateSlug(item.name, item.id)}`}
+                      key={index}
+                    >
+                      <TextMenu>{item.name}</TextMenu>
+                    </Link>
+                  ))}
             </Grid>
           ))}
           <Grid item xs={isMobile ? 12 : 3}>
@@ -92,24 +104,26 @@ const Footer = () => {
             >
               Theo dõi chúng tôi
             </TextTitle>
-            <div
-              className="fb-page"
-              data-href="https://www.facebook.com/hiita.vn"
-              data-tabs="timeline"
-              data-width={337}
-              data-height={180}
-              data-small-header="false"
-              data-adapt-container-width="true"
-              data-hide-cover="false"
-              data-show-facepile="true"
-            >
-              <blockquote
-                cite="https://www.facebook.com/hiita.vn"
-                className="fb-xfbml-parse-ignore"
+            <Box sx={{ width: "100%" }}>
+              <div
+                className="fb-page"
+                data-href="https://www.facebook.com/hiita.vn"
+                data-tabs="timeline"
+                data-width={337}
+                data-height={180}
+                data-small-header="false"
+                data-adapt-container-width="true"
+                data-hide-cover="false"
+                data-show-facepile="true"
               >
-                <a href="https://www.facebook.com/hiita.vn">Hiita.vn</a>
-              </blockquote>
-            </div>
+                <blockquote
+                  cite="https://www.facebook.com/hiita.vn"
+                  className="fb-xfbml-parse-ignore"
+                >
+                  <a href="https://www.facebook.com/hiita.vn">Hiita.vn</a>
+                </blockquote>
+              </div>
+            </Box>
           </Grid>
         </Grid>
 

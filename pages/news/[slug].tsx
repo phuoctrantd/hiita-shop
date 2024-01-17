@@ -59,7 +59,15 @@ const News: NextPage = () => {
                   </Stack>
                 </Box>
                 <Divider />
-                <div dangerouslySetInnerHTML={{ __html: data.content }}></div>
+                <Box
+                  sx={{
+                    "&.MuiBox-root img": {
+                      width: isMobile ? "100%" : "50%",
+                      height: isMobile ? "auto" : "500px",
+                    },
+                  }}
+                  dangerouslySetInnerHTML={{ __html: data.content }}
+                ></Box>
               </Stack>
             </Grid>
             <Grid item xs={isMobile ? 12 : 3}>

@@ -12,16 +12,24 @@ import ProductFruit7 from "@/public/images/products/product7.png";
 import { useQuery } from "react-query";
 import { ProductResponse } from "@/lib/types/response";
 import { useCategoryProducts } from "@/lib/hooks/useCategoryProducts";
+import { generateSlug } from "@/lib/contansts";
 
-const FruitCategory = () => {
-  const { data, isLoading } = useCategoryProducts(5, 1, 30);
+interface fruitCategoryProps {
+  category_id: number;
+  name: string;
+}
+const FruitCategory: React.FC<fruitCategoryProps> = ({ category_id, name }) => {
+  const { data, isLoading } = useCategoryProducts(category_id, 1, 30);
+  if (isLoading || !data || data.data.length === 0) {
+    return null;
+  }
   return (
     <Box my={5.6}>
       <Title
-        title="TRÁI CÂY NHẬP KHẨU"
-        link="/collections/trai-cay-nhap-khau"
+        title={name}
+        link={`/collections/${generateSlug(name, category_id)}`}
       />
-      <ProductFeatured dataProductFeatured={data?.data || []} fruit />
+      <ProductFeatured dataProductFeatured={data.data || []} fruit />
     </Box>
   );
 };

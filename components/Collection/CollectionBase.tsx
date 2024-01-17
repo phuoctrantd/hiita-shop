@@ -36,6 +36,7 @@ import Ginseng1 from "@/public/images/products/ginseng1.png";
 import { getImageUrl } from "@/lib/utils/ultil";
 import { useAtom } from "jotai";
 import { categoriesState } from "@/lib/hooks/categoriesState";
+import ItemProduct from "../Product/ItemProduct";
 const CollectionBase = () => {
   const params = useParams();
   const [openFilter, setOpenFilter] = React.useState(false);
@@ -212,60 +213,7 @@ const CollectionBase = () => {
               {dataProductFeatured?.length ? (
                 dataProductFeatured?.map((item, index) => (
                   <Grid item xs={isMobile ? 6 : 4} key={index}>
-                    <Link
-                      href={`/san-pham/${generateSlug(item.name, item.id)}`}
-                    >
-                      <Box
-                        sx={{
-                          display: "flex",
-                          flexDirection: "column",
-                          alignItems: "center",
-                          height: "100%",
-                          cursor: "pointer",
-                          transition: "transform 0.3s",
-                          "&:hover": {
-                            transform: "scale(1.02)",
-                          },
-                          border: `1px solid ${gray[300]}`,
-                        }}
-                      >
-                        <img
-                          src={getImageUrl(item.product_variants[0].image_url)}
-                          alt={item.name}
-                          style={{
-                            width: "100%",
-                            height: isMobile ? "200px" : "270px",
-                          }}
-                        />
-                        <Box
-                          px={2}
-                          mt={1.8}
-                          textAlign={"center"}
-                          sx={{ flexGrow: 1 }}
-                        >
-                          <TypoTitleProdStyled>{item.name}</TypoTitleProdStyled>
-                        </Box>
-                        <Box textAlign={"center"}>
-                          <Typography
-                            fontSize={12}
-                            fontWeight={700}
-                            color={red[200]}
-                            sx={{
-                              textDecoration: "line-through",
-                              textDecorationColor: black,
-                            }}
-                          >
-                            {item.discount &&
-                              formatPrice(item.product_variants[0].price)}
-                          </Typography>
-                          <TypoPriceStyled>
-                            {formatPrice(
-                              item.product_variants[0].promotional_price
-                            )}
-                          </TypoPriceStyled>
-                        </Box>
-                      </Box>
-                    </Link>
+                    <ItemProduct item={item} />
                   </Grid>
                 ))
               ) : (

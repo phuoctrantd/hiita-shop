@@ -95,6 +95,7 @@ const SearchContainer = () => {
                       transition: "transform 0.3s",
                       "&:hover": {
                         transform: "scale(1.02)",
+                        margin: "-2px",
                       },
                       border: `1px solid ${gray[300]}`,
                     }}

@@ -50,11 +50,28 @@ const setExpiredToStorage = async (locale: string) => {
   }
 }
 
+const setPopupStatusToStorage = async (status: boolean) => {
+  try {
+    await localStorage.setItem('popupStatus', status ? 'true' : 'false');
+  } catch (e) {
+    console.log("Failed to save popup status to the storage");
+  }
+ }
+ const getPopupStatusFromStorage = async () => {
+  try {
+    const status = await localStorage.getItem('popupStatus');
+    return status === 'true';
+  } catch (e) {
+    console.log("Failed to get popup status from storage");
+  }
+ }
 export {
   getAccessTokenFromStorage,
   getExpiredAtFromStorage,
   getJWTFromStorage,
   setAccessTokenToStorage,
   setExpiredToStorage,
-  setJWTToStorage
+  setJWTToStorage,
+  setPopupStatusToStorage,
+  getPopupStatusFromStorage
 }

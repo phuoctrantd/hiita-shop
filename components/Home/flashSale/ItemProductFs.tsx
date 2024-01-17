@@ -43,6 +43,11 @@ const ItemProductFs: React.FC<ItemProductFsProps> = ({ product }) => {
   const availableVariant = getAvailableVariant(product);
   const allVariantsSoldOut = areAllVariantsSoldOut(product);
 
+  const percentDiscount = () => {
+    const price = Number(availableVariant.price);
+    const salePrice = Number(availableVariant.flash_sale?.price);
+    return Math.round(((price - salePrice) / price) * 100);
+  };
   return (
     <>
       <Link
@@ -94,13 +99,30 @@ const ItemProductFs: React.FC<ItemProductFsProps> = ({ product }) => {
               Hết hàng
             </Typography>
           </Box>
-          <Box mb={0.5}>
+          <Box mb={0.5} sx={{ position: "relative" }}>
             <img
               src={getImageUrl(availableVariant.image_url)}
               alt=""
               width={"100%"}
               height={isMobile ? "200px" : "230px"}
             />
+            {percentDiscount() > 1 && (
+              <Box
+                sx={{
+                  backgroundColor: red[100],
+                  position: "absolute",
+                  top: 0,
+                  p: "2px 5px",
+                  zIndex: 2,
+                  right: 0,
+                  color: white[100],
+                }}
+              >
+                <Typography fontSize={12} fontWeight={500}>
+                  -{percentDiscount()}%
+                </Typography>
+              </Box>
+            )}
           </Box>
           <Box px={isMobile ? 2 : 4} sx={{ flexGrow: 1 }}>
             <Typography fontSize={14} fontWeight={700}>

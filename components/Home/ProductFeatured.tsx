@@ -9,6 +9,12 @@ import { formatPrice, generateSlug } from "@/lib/contansts";
 import { ProductType } from "@/lib/types/product";
 import ProductFruit1 from "@/public/images/products/product1.png";
 import { getImageUrl } from "@/lib/utils/ultil";
+import { SwiperStyled } from "./TabContainer";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Navigation, Autoplay } from "swiper/modules";
+import ItemProduct from "../Product/ItemProduct";
 interface ProductFeaturedProps {
   fruit?: boolean;
   dataProductFeatured: Array<ProductType>;
@@ -34,141 +40,27 @@ const ProductFeatured: React.FC<ProductFeaturedProps> = ({
     dataProductFeatured && dataProductFeatured.slice(fruit ? 5 : 3, 10);
 
   return (
-    <Grid container alignItems="stretch" spacing={2}>
-      {!isMobile && (
-        <Grid item xs={fruit ? 2 : 4}>
-          <img
-            src={fruit ? BannerFruit1.src : BannerGinseng.src}
-            alt="banner"
-            style={{ width: "100%", height: "100%" }}
-          />
-        </Grid>
-      )}
-      {firstRow?.map((item, index) => (
-        <Grid item xs={isMobile ? 6 : 2} key={index}>
-          <Link href={`/san-pham/${generateSlug(item.name, item.id)}`}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                height: "100%",
-                cursor: "pointer",
-                transition: "transform 0.3s",
-                "&:hover": {
-                  transform: "scale(1.02)",
-                },
-                border: `1px solid ${gray[300]}`,
-              }}
-            >
-              <img
-                src={getImageUrl(item.product_variants[0].image_url)}
-                alt="product"
-                style={{
-                  width: "100%",
-                }}
-                height={200}
-              />
-
-              <Box
-                mb={isMobile ? 1.5 : 1}
-                px={2}
-                mt={1.8}
-                sx={{ flexGrow: 1 }}
-                textAlign={"center"}
-              >
-                <Typography fontSize={14} fontWeight={700} color={black}>
-                  {item.name}
-                </Typography>
-              </Box>
-              <Box textAlign={"center"}>
-                <Typography
-                  fontSize={12}
-                  fontWeight={700}
-                  color={red[200]}
-                  sx={{
-                    textDecoration: "line-through",
-                    textDecorationColor: black,
-                  }}
-                >
-                  {item.discount && formatPrice(item.product_variants[0].price)}
-                </Typography>
-                <Typography fontSize={14} fontWeight={800} color={red[100]}>
-                  {formatPrice(item.product_variants[0].promotional_price)}
-                </Typography>
-              </Box>
-            </Box>
-          </Link>
-        </Grid>
-      ))}
-      {fruit && !isMobile && (
-        <Grid item xs={2}>
-          <img
-            src={BannerFruit1.src}
-            alt="banner"
-            style={{ width: "100%", height: "100%" }}
-          />
-        </Grid>
-      )}
-      {secondRow?.map((item, index) => (
-        <Grid item xs={isMobile ? 6 : 2} key={index}>
-          <Link href={`/san-pham/${generateSlug(item.name, item.id)}`}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                height: "100%",
-                cursor: "pointer",
-                transition: "transform 0.3s",
-                "&:hover": {
-                  transform: "scale(1.02)",
-                },
-                border: `1px solid ${gray[300]}`,
-              }}
-            >
-              <img
-                src={getImageUrl(item.product_variants[0].image_url)}
-                alt="product"
-                style={{
-                  width: "100%",
-                }}
-                height={200}
-              />
-
-              <Box
-                mb={isMobile ? 1.5 : 1}
-                px={2}
-                textAlign={"center"}
-                mt={1.8}
-                sx={{ flexGrow: 1 }}
-              >
-                <Typography fontSize={14} fontWeight={700} color={black}>
-                  {item.name}
-                </Typography>
-              </Box>
-              <Box>
-                <Typography
-                  fontSize={12}
-                  fontWeight={700}
-                  color={red[200]}
-                  sx={{
-                    textDecoration: "line-through",
-                    textDecorationColor: black,
-                  }}
-                  textAlign={"center"}
-                >
-                  {item.discount && formatPrice(item.product_variants[0].price)}
-                </Typography>
-                <Typography fontSize={14} fontWeight={800} color={red[100]}>
-                  {formatPrice(item.product_variants[0].promotional_price)}
-                </Typography>
-              </Box>
-            </Box>
-          </Link>
-        </Grid>
-      ))}
-    </Grid>
+    <>
+      <SwiperStyled style={{ width: "100%" }}>
+        <Swiper
+          navigation={true}
+          slidesPerView={isMobile ? 2 : 5}
+          modules={[Navigation, Autoplay]}
+          spaceBetween={15}
+          loop={true}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: true,
+          }}
+        >
+          {dataProductFeatured?.map((item) => (
+            <SwiperSlide key={item.id} style={{ height: "auto" }}>
+              <ItemProduct item={item} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </SwiperStyled>
+    </>
   );
 };
 

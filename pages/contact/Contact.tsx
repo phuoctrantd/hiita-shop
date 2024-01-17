@@ -145,7 +145,7 @@ const Contact = () => {
               </Box>
               <Box>
                 <TextTitle>Điện thoại:</TextTitle>
-                <TextContent>19003366 </TextContent>
+                <TextContent>0818836383 </TextContent>
               </Box>
             </Stack>
           </Stack>

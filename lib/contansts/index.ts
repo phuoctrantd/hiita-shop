@@ -19,7 +19,7 @@ interface MenuItem {
 
     {
       id: 4,
-      label: "Trái cây nhập khẩu",
+      label: "Sản phẩm",
       link: "/",
       subMenu: true
     },
@@ -40,9 +40,16 @@ interface MenuItem {
       link: "/contact",
     },
   ];
+  type MenuDataFooterItem = {
+    title: string;
+    data?: {
+      id: number;
+      label: string;
+      link: string;
+    }[];
+   };
 
-
-export const MENU_DATA_FOOTER = [
+   export const MENU_DATA_FOOTER: MenuDataFooterItem[] = [
 {
     title:"VỀ CHÚNG TÔI",
     data:[
@@ -65,28 +72,6 @@ export const MENU_DATA_FOOTER = [
 },
 {
     title:"sản phẩm",
-    data:[
-      {
-        id: 1,
-        label: "Nhân sâm",
-        link: "/collections/nhan-sam",
-      },
-      {
-        id: 2,
-        label: "Trái cây nhập khẩu",
-        link: "/collections/trai-cay-nhap-khau",
-      },
-      {
-        id: 3,
-        label: "Set quà tặng cao cấp",
-        link: "/",
-      },
-      {
-        id: 4,
-        label: "Set quà tết",
-        link: "/",
-      },
-    ]
 },
 {
     title:"Chính sách bán hàng",
@@ -110,9 +95,7 @@ export const MENU_DATA_FOOTER = [
     
 },
 
-
-    
-] as const;
+] ;
 
 export const formatPrice = (price: number) => {
 return  price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " VND";

@@ -21,30 +21,30 @@ interface TabPanelProps {
 interface ProductDescriptionProps {
   description: string;
 }
-function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <>
-      {value === index && (
-        <Box
-          sx={{
-            p: "23px 20px",
-            border: `1px solid rgba(0, 0, 0, 0.12)`,
-            overflow: "auto",
-            maxHeight: "700px",
-          }}
-        >
-          <Typography fontSize={14}>{children}</Typography>
-        </Box>
-      )}
-    </>
-  );
-}
 
 const ProductDescription: React.FC<ProductDescriptionProps> = ({
   description,
 }) => {
+  function CustomTabPanel(props: TabPanelProps) {
+    const { children, value, index, ...other } = props;
+
+    return (
+      <>
+        {value === index && (
+          <Box
+            sx={{
+              p: "23px 20px",
+              border: `1px solid rgba(0, 0, 0, 0.12)`,
+              overflow: "auto",
+              maxHeight: isMobile ? "400px" : "700px",
+            }}
+          >
+            <Typography fontSize={14}>{children}</Typography>
+          </Box>
+        )}
+      </>
+    );
+  }
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [value, setValue] = React.useState(0);

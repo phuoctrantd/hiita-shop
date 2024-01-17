@@ -10,6 +10,7 @@ import { queryClient } from "@/lib/react-query";
 import { CircularProgress } from "@mui/material";
 import AuthProvider from "@/lib/provider/AuthProvider";
 import ButtonContact from "@/components/ButtonContact";
+import WelcomePopup from "@/components/Modal/WelcomePopup";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const isFetching = useIsFetching();
@@ -48,6 +49,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <CircularProgress />
         </Box>
       ) : null}
+      <WelcomePopup />
       <Component {...pageProps} />
       <Footer />
       <div
