@@ -55,8 +55,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       <div
         style={{
           position: "fixed",
-          bottom: "20px",
-          right: "20px",
+          bottom: "83px",
+          right: "25px",
           zIndex: 1000,
         }}
       >
