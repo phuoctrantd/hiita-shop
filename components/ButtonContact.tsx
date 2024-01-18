@@ -14,8 +14,8 @@ const ButtonContact = () => {
             src={ZaloIcon.src}
             alt="zalo-icon"
             className={`zalo-icon ${styles.hithere}`}
-            width={45}
-            height={45}
+            width={47}
+            height={47}
           />
         </Link>
         <img
