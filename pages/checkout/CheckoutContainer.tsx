@@ -185,7 +185,7 @@ const CheckoutContainer = () => {
                   control={<Radio />}
                   label="Thanh toán khi giao hàng ( COD )"
                 />
-                <FormControlLabel
+                {/* <FormControlLabel
                   sx={{ border: `1px solid ${red[100]}`, borderRadius: "10px" }}
                   value={2}
                   control={<Radio />}
@@ -210,7 +210,7 @@ const CheckoutContainer = () => {
                       Quét mã QR trên để thanh toán
                     </Typography>
                   </Stack>
-                )}
+                )} */}
               </RadioGroup>
             </Grid>
             <Grid item xs={isMobile ? 12 : 4} order={isMobile ? 0 : 2}>

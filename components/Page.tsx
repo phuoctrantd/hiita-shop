@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import Head from "next/head";
 import React, { Children } from "react";
-import Logo from "@/public/images/hiita-logo.png";
+import Logo from "@/public/images/logo-social.png";
 import { ReactNode } from "react";
 import Link from "next/link";
 import { black, red } from "@/styles";
@@ -28,11 +28,11 @@ const Page: React.FC<PageProps> = ({ children, title, category, sx }) => {
     <>
       <Head>
         <title>
-          {title ? title : "Hiita - Trái cây nhập khẩu giá tốt nhất"}
+          {`${title} Siêu chợ Hiita - Siêu giá tốt Hiita.vn - Săn deal 0Đ - Miễn phí giao hàng`}
         </title>
         <meta
           name="description"
-          content="Hiita - Trái cây nhập khẩu giá tốt nhất"
+          content="Siêu chợ Hiita - Siêu giá tốt Hiita.vn - Săn deal 0Đ - Miễn phí giao hàng"
         />
         <meta name="keywords" content="trai cay" />
         <meta property="og:image" content={Logo.src} />

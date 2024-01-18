@@ -49,7 +49,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <CircularProgress />
         </Box>
       ) : null}
-      <WelcomePopup />
+      {/* <WelcomePopup /> */}
       <Component {...pageProps} />
       <Footer />
       <div

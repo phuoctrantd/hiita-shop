@@ -53,7 +53,7 @@ const About: NextPage = () => {
                   <img src={IconVery.src} alt="about" />
                 </Box>
                 <Typography fontSize={18} fontWeight={500}>
-                  Sâm tươi thượng hạng Hàn Quốc
+                  Siêu deal 0 đồng
                 </Typography>
               </Stack>
               <Stack direction={"row"} spacing={1}>

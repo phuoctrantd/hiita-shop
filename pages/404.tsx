@@ -7,10 +7,13 @@ const Custom404 = () => {
   return (
     <>
       <Head>
-        <title>Hiita - Trái cây nhập khẩu giá tốt nhất</title>
+        <title>
+          Siêu chợ Hiita - Siêu giá tốt Hiita.vn - Săn deal 0Đ - Miễn phí giao
+          hàng
+        </title>
         <meta
           name="description"
-          content="Hiita - Trái cây nhập khẩu giá tốt nhất"
+          content="Siêu chợ Hiita - Siêu giá tốt Hiita.vn - Săn deal 0Đ - Miễn phí giao hàng"
         />
         <meta name="keywords" content="trai cay" />
         <meta property="og:image" content={Logo.src} />

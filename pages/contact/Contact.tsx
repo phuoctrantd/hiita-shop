@@ -58,7 +58,7 @@ const Contact = () => {
     <Page title="Liên hệ">
       <Box mb={5}>
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.509228182785!2d105.8467269758722!3d21.012301088342685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab8b9b67add5%3A0xa1025680426f517d!2zMTgzIFAuIELDoCBUcmnhu4d1LCBCw7lpIFRo4buLIFh1w6JuLCBIYWkgQsOgIFRyxrBuZywgSMOgIE7hu5lpLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1700591572986!5m2!1svi!2s"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.5968388002093!2d105.84495187597095!3d21.048811580605523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135abb41a570d9f%3A0x18ab156fcca86b51!2zNTIgUC4gVMOibiDhuqRwLCBQaMO6YyB4w6EsIEJhIMSQw6xuaCwgSMOgIE7hu5lpIDExMTE2LCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1705556361059!5m2!1svi!2s"
           style={{ border: "0", width: "100%", height: "500px" }}
           allowFullScreen={true}
           loading="lazy"
@@ -90,7 +90,7 @@ const Contact = () => {
               </Box>
               <Box>
                 <TextTitle>Địa chỉ:</TextTitle>
-                <TextContent>183 Lê Đại Hành, Hai Bà Trưng, Hà Nội</TextContent>
+                <TextContent>52 Tân Ấp, Q. Ba Đình, Hà Nội</TextContent>
               </Box>
             </Stack>
             <Stack
@@ -115,7 +115,7 @@ const Contact = () => {
               </Box>
               <Box>
                 <TextTitle>Gửi thắc mắc:</TextTitle>
-                <TextContent>sale@hiita.vn</TextContent>
+                <TextContent>hiita.vn@gmail.com</TextContent>
               </Box>
             </Stack>
             <Stack
@@ -145,7 +145,7 @@ const Contact = () => {
               </Box>
               <Box>
                 <TextTitle>Điện thoại:</TextTitle>
-                <TextContent>0818836383 </TextContent>
+                <TextContent>0818836383 - 0389606663 </TextContent>
               </Box>
             </Stack>
           </Stack>

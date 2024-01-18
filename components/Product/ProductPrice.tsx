@@ -395,7 +395,7 @@ const ProductPrice: React.FC<ProductPriceProps> = ({ dataProduct }) => {
         </Stack>
         <ButtonStyled
           onClick={() => {
-            window.open("tel:0818836383", "_blank");
+            window.open("tel:0818836383");
           }}
           sx={{
             width: isMobile ? "100%" : "auto",

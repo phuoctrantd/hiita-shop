@@ -9,7 +9,7 @@ const ButtonContact = () => {
   return (
     <>
       <Stack gap={2}>
-        <Link href="https://zalo.me/0818836383" target="_blank">
+        <Link href="https://zalo.me/0389606663" target="_blank">
           <img
             src={ZaloIcon.src}
             alt="zalo-icon"
@@ -20,7 +20,7 @@ const ButtonContact = () => {
         </Link>
         <img
           style={{ cursor: "pointer" }}
-          onClick={() => window.open("tel:0818836383", "_blank")}
+          onClick={() => window.open("tel:0818836383")}
           src={TelephoneIcon.src}
           alt="telephone-icon"
           className={`zalo-icon ${styles.hithere}`}
