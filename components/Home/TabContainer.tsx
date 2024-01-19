@@ -72,7 +72,11 @@ const TabContainer: React.FC<TabProps> = ({
                       <img
                         src={getImageUrl(item.product_variants[0].image_url)}
                         alt={item.name}
-                        style={{ width: "100%", height: "221px" }}
+                        style={{
+                          width: "100%",
+                          height: "221px",
+                          objectFit: "cover",
+                        }}
                       />
                       <Box
                         sx={{

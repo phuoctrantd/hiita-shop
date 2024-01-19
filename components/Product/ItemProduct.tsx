@@ -34,8 +34,9 @@ const ItemProduct: React.FC<ItemProductProps> = ({ item }) => {
             alt="product"
             style={{
               width: "100%",
+              objectFit: "cover",
             }}
-            height={200}
+            height={isMobile ? 180 : 200}
           />
 
           {item.discount && (

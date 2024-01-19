@@ -109,6 +109,9 @@ const ItemProductFs: React.FC<ItemProductFsProps> = ({ product }) => {
                 alt=""
                 width={"100%"}
                 height={isMobile ? "200px" : "230px"}
+                style={{
+                  objectFit: "cover",
+                }}
               />
               {percentDiscount() > 1 && (
                 <Box

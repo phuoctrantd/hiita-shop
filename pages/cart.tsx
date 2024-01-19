@@ -182,6 +182,9 @@ const Cart = () => {
                         alt="product"
                         width="100"
                         height="100"
+                        style={{
+                          objectFit: "cover",
+                        }}
                       />
                     </Box>
                   </Link>

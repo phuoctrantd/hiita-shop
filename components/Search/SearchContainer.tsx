@@ -106,6 +106,7 @@ const SearchContainer = () => {
                       style={{
                         width: "100%",
                         height: isMobile ? "200px" : "270px",
+                        objectFit: "cover",
                       }}
                     />
                     <Box

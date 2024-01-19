@@ -52,6 +52,7 @@ const AuthProvider: React.FC<PropChildren> = ({ children }) => {
     } catch (e) {
       setUser(null);
       setAccessToken("");
+      setAccessTokenToStorage("");
       router.push("/");
     }
   }, [router]);

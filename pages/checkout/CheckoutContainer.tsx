@@ -41,10 +41,6 @@ const CheckoutContainer = () => {
   }));
   const { push } = useRouter();
   const validation = z.object({
-    email: z
-      .string()
-      .min(1, "Email là bắt buộc")
-      .email({ message: "Email không hợp lệ" }),
     name: z
       .string()
       .min(2, { message: "Tên phải có ít nhất 2 ký tự" })
@@ -68,7 +64,6 @@ const CheckoutContainer = () => {
     formState: { errors },
   } = useForm<CheckoutForm>({
     defaultValues: {
-      email: "",
       name: "",
       phone_number: "",
       address: "",
@@ -133,7 +128,6 @@ const CheckoutContainer = () => {
             <Grid item xs={isMobile ? 12 : 4} order={isMobile ? 2 : 1}>
               <TypographyTitle>Thông tin nhận hàng</TypographyTitle>
               <Stack direction="column" spacing={2} mt={2}>
-                <TextField name="email" placeholder="Email" control={control} />
                 <TextField
                   name="name"
                   placeholder="Họ và tên"
@@ -185,6 +179,21 @@ const CheckoutContainer = () => {
                   control={<Radio />}
                   label="Thanh toán khi giao hàng ( COD )"
                 />
+                {payment === 1 && (
+                  <Stack
+                    direction={"column"}
+                    spacing={2}
+                    justifyContent={"center"}
+                  >
+                    <Typography sx={{ fontSize: 14, fontWeight: 500 }}>
+                      Chủ tài khoản: Nguyễn Thùy Linh
+                      <br />
+                      Số tài khoản: 3181868688
+                      <br />
+                      Ngân hàng Techcombank
+                    </Typography>
+                  </Stack>
+                )}
                 {/* <FormControlLabel
                   sx={{ border: `1px solid ${red[100]}`, borderRadius: "10px" }}
                   value={2}
@@ -246,6 +255,9 @@ const CheckoutContainer = () => {
                           alt="product"
                           width="85"
                           height="100"
+                          style={{
+                            objectFit: "cover",
+                          }}
                         />
                         <Stack direction={"column"} spacing={2}>
                           <Typography

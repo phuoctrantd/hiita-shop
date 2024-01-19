@@ -68,6 +68,9 @@ const OrderTab = () => {
                           alt="product"
                           height={isMobile ? 85 : 130}
                           width={isMobile ? 85 : 130}
+                          style={{
+                            objectFit: "cover",
+                          }}
                         />
                       </Grid>
                       <Grid item xs={isMobile ? 4 : 4.5}>
