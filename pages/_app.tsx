@@ -11,6 +11,7 @@ import { CircularProgress } from "@mui/material";
 import AuthProvider from "@/lib/provider/AuthProvider";
 import ButtonContact from "@/components/ButtonContact";
 import WelcomePopup from "@/components/Modal/WelcomePopup";
+import FacebookChatPlugin from "@/components/FacebookChatPlugin";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const isFetching = useIsFetching();
@@ -52,8 +53,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       {/* <WelcomePopup /> */}
       <Component {...pageProps} />
       <Footer />
-      <div
-        style={{
+      <Box
+        sx={{
           position: "fixed",
           bottom: "100px",
           right: "29px",
@@ -61,7 +62,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         }}
       >
         <ButtonContact />
-      </div>
+        <FacebookChatPlugin />
+      </Box>
     </>
   );
 }
