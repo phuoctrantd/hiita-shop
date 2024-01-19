@@ -11,13 +11,7 @@ import { CircularProgress } from "@mui/material";
 import AuthProvider from "@/lib/provider/AuthProvider";
 import ButtonContact from "@/components/ButtonContact";
 import WelcomePopup from "@/components/Modal/WelcomePopup";
-import FacebookChatPlugin from "@/components/FacebookChatPlugin";
-import dynamic from "next/dynamic";
-
-const FacebookChatPluginNoSSR = dynamic(
-  () => import("@/components/FacebookChatPlugin"),
-  { ssr: false }
-);
+import { FacebookChatPlugin } from "@/components/FacebookChatPlugin";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const isFetching = useIsFetching();
@@ -57,6 +51,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </Box>
       ) : null}
       {/* <WelcomePopup /> */}
+      <FacebookChatPlugin />
       <Component {...pageProps} />
       <Footer />
       <Box
@@ -68,7 +63,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         }}
       >
         <ButtonContact />
-        <FacebookChatPluginNoSSR />
       </Box>
     </>
   );
