@@ -12,6 +12,12 @@ import AuthProvider from "@/lib/provider/AuthProvider";
 import ButtonContact from "@/components/ButtonContact";
 import WelcomePopup from "@/components/Modal/WelcomePopup";
 import FacebookChatPlugin from "@/components/FacebookChatPlugin";
+import dynamic from "next/dynamic";
+
+const FacebookChatPluginNoSSR = dynamic(
+  () => import("@/components/FacebookChatPlugin"),
+  { ssr: false }
+);
 
 function MyApp({ Component, pageProps }: AppProps) {
   const isFetching = useIsFetching();
@@ -54,7 +60,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Component {...pageProps} />
       <Footer />
       <Box
-        sx={{
+        style={{
           position: "fixed",
           bottom: "100px",
           right: "29px",
@@ -62,7 +68,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         }}
       >
         <ButtonContact />
-        <FacebookChatPlugin />
+        <FacebookChatPluginNoSSR />
       </Box>
     </>
   );
