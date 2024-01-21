@@ -14,7 +14,7 @@ const staticPaths = [
   { url: '/', changeFrequency: 'daily', priority: 1.0 },
   { url: '/about', changeFrequency: 'monthly', priority: 0.8 },
   { url: '/contact', changeFrequency: 'monthly', priority: 0.8 },
-  { url: '/products', changeFrequency: 'weekly', priority: 0.8 },
+  { url: '/san-pham', changeFrequency: 'weekly', priority: 0.8 },
   { url: '/news', changeFrequency: 'weekly', priority: 0.6 },
   { url: '/account', changeFrequency: 'weekly', priority: 0.6},
   { url: '/faq', changeFrequency: 'weekly', priority: 0.6},

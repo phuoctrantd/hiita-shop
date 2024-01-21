@@ -35,8 +35,8 @@ const Banner = () => {
         }}
         modules={[Pagination, Autoplay]}
         autoplay={{
-          delay: 2500,
-          disableOnInteraction: false,
+          delay: 6000,
+          disableOnInteraction: true,
         }}
       >
         {data?.slides.map((slide, index) => (

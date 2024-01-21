@@ -44,7 +44,7 @@ const CheckoutContainer = () => {
     name: z
       .string()
       .min(2, { message: "Tên phải có ít nhất 2 ký tự" })
-      .max(30, { message: "Tên không được quá 20 ký tự" }),
+      .max(30, { message: "Tên không được quá 30 ký tự" }),
     phone_number: z
       .string()
       .min(1, "Số điện thoại là bắt buộc")
@@ -53,7 +53,7 @@ const CheckoutContainer = () => {
     address: z
       .string()
       .min(1, { message: "Địa chỉ là bắt buộc" })
-      .max(50, { message: "Địa chỉ được quá 50 ký tự" }),
+      .max(255, { message: "Địa chỉ không được quá 255 ký tự" }),
     note: z.string().optional(),
   });
   type CheckoutForm = z.infer<typeof validation>;

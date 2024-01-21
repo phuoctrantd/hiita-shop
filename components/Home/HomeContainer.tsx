@@ -32,7 +32,6 @@ const HomeContainer = () => {
   const { data: dataProduct } = useQuery<ProductResponse>(`/products`, {
     keepPreviousData: true,
   });
-  console.log(111111111, dataProduct);
   const [categories, setCategories] = useAtom(categoriesState);
   return (
     <Container maxWidth="xl" sx={{ padding: "0 !important" }}>
