@@ -50,7 +50,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <CircularProgress />
         </Box>
       ) : null}
-      {/* <WelcomePopup /> */}
+      <WelcomePopup />
       <FacebookChatPlugin />
       <Component {...pageProps} />
       <Footer />

@@ -7,8 +7,10 @@ import {
   getPopupStatusFromStorage,
 } from "../../lib/utils/localStorage";
 import Link from "next/link";
-import PopupImg from "@/public/images/fruit_demo.png";
 import { useMediaQuery, useTheme } from "@mui/material";
+import { useQuery } from "react-query";
+import { PopupType } from "@/lib/types/popup";
+import { getImageUrl } from "@/lib/utils/ultil";
 
 export default function WelcomePopup() {
   const [open, setOpen] = React.useState(false);
@@ -19,10 +21,7 @@ export default function WelcomePopup() {
       const status = await getPopupStatusFromStorage();
       if (!status) {
         setOpen(true);
-
-        // setTimeout(() => {
-        //   handleClose();
-        // }, 5000);
+        setPopupStatusToStorage(false);
       } else {
         setOpen(false);
       }
@@ -39,25 +38,37 @@ export default function WelcomePopup() {
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: isMobile ? "90%" : "40%",
-    height: "30%",
+    height: "35%",
     bgcolor: "background.paper",
     boxShadow: 24,
     p: 1,
+    outline: "none",
+    objectFit: "cover",
   };
+  const { data } = useQuery<PopupType>(`/pop-up`, {
+    keepPreviousData: true,
+  });
   return (
-    <div>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Link href="/">
-            <img src={PopupImg.src} alt="popup" width="100%" height="100%" />
-          </Link>
-        </Box>
-      </Modal>
-    </div>
+    <>
+      {!!data && !!data.status && (
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Link href={data.url}>
+              <img
+                src={getImageUrl(data.image_url)}
+                alt="popup"
+                width="100%"
+                height="100%"
+              />
+            </Link>
+          </Box>
+        </Modal>
+      )}
+    </>
   );
 }

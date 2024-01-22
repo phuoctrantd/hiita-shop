@@ -33,7 +33,7 @@ export const FacebookChatPlugin = () => {
         js.id = id;
 
         (js as any).src =
-          "https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
+          "https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js";
 
         (fjs as any).parentNode.insertBefore(js, fjs);
       })(document, "script", "facebook-jssdk");
