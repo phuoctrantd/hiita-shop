@@ -43,16 +43,7 @@ const Menu = () => {
               {(popupState) => (
                 <div>
                   <Link href={item.link} {...bindHover(popupState)}>
-                    <TextMenu
-                      sx={{
-                        textShadow:
-                          pathname === item.link && pathname !== "/"
-                            ? "0px 0px 5px #E51E41"
-                            : "none",
-                      }}
-                    >
-                      {item.label}
-                    </TextMenu>
+                    <TextMenu>{item.label}</TextMenu>
                   </Link>
                   {item.subMenu && (
                     <HoverPopover

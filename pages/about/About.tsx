@@ -15,6 +15,7 @@ import ImageAbout2 from "@/public/images/about/about2.png";
 import IconVery from "@/public/images/icon_very.png";
 import { black, gray, red, white } from "@/styles";
 import { NextPage } from "next";
+import Link from "next/link";
 const About: NextPage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -74,9 +75,11 @@ const About: NextPage = () => {
                 textTransform: "none",
               }}
             >
-              <Typography fontSize={20} fontWeight={600} color={black}>
-                Liên hệ với chúng tôi!
-              </Typography>
+              <Link href="/contact">
+                <Typography fontSize={20} fontWeight={600} color={black}>
+                  Liên hệ với chúng tôi!
+                </Typography>
+              </Link>
             </Button>
           </Grid>
         </Grid>

@@ -28,7 +28,10 @@ const Page: React.FC<PageProps> = ({ children, title, category, sx }) => {
     <>
       <Head>
         <title>
-          {`${title} Siêu chợ Hiita - Siêu giá tốt Hiita.vn - Săn deal 0Đ - Miễn phí giao hàng`}
+          {title
+            ? title +
+              " - Siêu chợ Hiita - Siêu giá tốt Hiita.vn - Săn deal 0Đ - Miễn phí giao hàng"
+            : "Siêu chợ Hiita - Siêu giá tốt Hiita.vn - Săn deal 0Đ - Miễn phí giao hàng"}
         </title>
         <meta
           name="description"
